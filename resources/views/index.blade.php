@@ -33,23 +33,17 @@
   </div>
   <div class="container" style="margin-top: 10vh;">
       <h4 class="center-align" style="font-weight: 600;">Categories</h4>
-      <div class="flexcontainer">
+      <div class="flexcontainer">      
+          @foreach ($sector as $item)
           <div class="center-flex hoverable">
-              <div class="">
-                  <img src="{{asset('assets/svgs/salesman.svg')}}" height="140" alt="">
-              </div>
-              <div>
-                  <span style="font-weight: 600; font-size: 25px;">Sales</span>
-              </div>
-          </div>
-          <div class="center-flex hoverable">
-              <div class="">
-                  <img src="{{asset('assets/svgs/developer.svg')}}" height="140" alt="">
-              </div>
-              <div>
-                  <span style="font-weight: 600; font-size: 25px;">Developer</span>
-              </div>
-          </div>
+            <div class="">
+                <img src="{{asset('sector/'.$item->sectorimage)}}" height="140" alt="">
+            </div>
+            <div>
+                <span style="font-weight: 600; font-size: 20px;" class="center-align">{{$item->sector}}</span>
+            </div>
+            </div>
+          @endforeach
       </div>
       <div class="center" style="margin-top: 5vh;">
           <button class="waves-effect btn-flat" style="font-size: 20px; font-weight: 600; color: #006994;">View Internships <i class="material-icons right">arrow_forward</i></button>
@@ -87,18 +81,22 @@
         
       </div>
   </div>
+  @if(session()->has('ADMIN_LOGIN'))
+  @else
   <div class="container" style="margin-top: 10vh;">
-      <div class="cardbox z-depth-2 hoverable">
-          <h3 class="center-align" style="font-weight: 600;">Wanna explore More?</h3>
-          <div class="row" style="margin-top: 10vh;">
-              <div class="col s6 right-align">
-                  <button class="waves-effect theme btn-large modal-trigger" style=" border-radius: 20px;" href="#modal3">Login</button>
-              </div>
-              <div class="col s6 left-align">
-                  <button class="waves-effect theme btn-large dropdown-trigger" style="border-radius: 20px;" href="#dropdown2">Register Now</button>
-              </div>
-          </div>
-      </div>
-      
-  </div>
+    <div class="cardbox z-depth-2 hoverable">
+        <h3 class="center-align" style="font-weight: 600;">Wanna explore More?</h3>
+        <div class="row" style="margin-top: 10vh;">
+            <div class="col s6 right-align">
+                <button class="waves-effect theme btn-large modal-trigger" style=" border-radius: 20px;" href="#modal3">Login</button>
+            </div>
+            <div class="col s6 left-align">
+                <button class="waves-effect theme btn-large dropdown-trigger" style="border-radius: 20px;" href="#dropdown2">Register Now</button>
+            </div>
+        </div>
+    </div>
+    
+</div>
+  @endif
+ 
 @endsection

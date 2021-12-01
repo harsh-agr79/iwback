@@ -14,6 +14,11 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
+  @if(session()->has('ADMIN_LOGIN'))
+    <span class="hide">{{$user = 'admin'}}</span>  
+  @else
+    <span class="hide">{{$user = 'guest'}}</span> 
+@endif
 <body>
   <header>
     <ul id='dropdown1' class='dropdown-content'>
@@ -33,18 +38,24 @@
           <div class="nav-wrapper">
             <a href="{{url('/')}}" class="brand-logo hide-on-med-and-down" style="margin-left: 10px; margin-top: 5px;"><img src="{{asset('assets/images/iwmain.png')}}" height="40" alt=""></a>
             <a href="{{url('/')}}" class="brand-logo hide-on-large-only"><img src="{{asset('assets/images/iw.png')}}" height="50" alt=""></a>
-            <span class="right">
-              <a class="hide-on-large-only btn theme white-text" style="margin-right:10px;" href="{{url('login')}}">Login</a>
-            </span>
+            
+              @if($user == 'admin')
+              <a class="hide-on-large-only black-text right" style="margin-right:10px;" href="{{url('admin/logout')}}"><i class="material-icons">exit_to_app</i></a>
+              @else
+              <a class="hide-on-large-only btn theme white-text right" style="margin-right:10px;" href="{{url('login')}}">Login</a>
+              @endif
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons black-text">menu</i></a>
             <ul class="right hide-on-med-and-down">
               <li><a class="black-text" href="jobs.html">Internships</a></li>
               <li><a class="black-text" href="jobs.html">Freshers Jobs</a></li>
               <li><a class="black-text" href="jobs.html">Jobs</a></li>
               <li><a class="black-text" href="mobile.html">Contact Us</a></li>
+              @if($user == 'admin')
+              <li><a class="btn-small theme-text white loginbtn" href="{{url('admin/logout')}}"><i class="material-icons">exit_to_app</i></a></li>
+              @else
               <li><a class="btn-small theme-text white loginbtn" href="{{url('login')}}">Login</a></li>
               <li><a class="white-text btn-small waves-effect theme dropdown-trigger" style="border-radius: 20px;" data-target="dropdown1">register<i class="material-icons right">expand_more</i></a></li>
-  
+              @endif
             </ul>
           </div>
         </nav>

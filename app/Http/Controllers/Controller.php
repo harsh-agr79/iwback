@@ -7,14 +7,20 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Models\Sector;
+use Illuminate\Support\Facades\View;
+
 use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+
+
     public function index(Request $request){
         $result['title'] = 'Internwheel';
+        $result['sector'] = Sector::where('sectorshow', 'on')->get();
         return view('index', $result);
     }
     

@@ -39,7 +39,6 @@
         <li><a href="#!" class="white-text">Contact Messages</a></li>
       </ul>
         <main>
-       
             @yield('main')
         </main>
       {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> --}}
