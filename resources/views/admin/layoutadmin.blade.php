@@ -34,6 +34,7 @@
         @if($user['0']->username == 'harshagr')
         <li><a href="{{url('admin/sectors')}}" class="white-text">Sector</a></li>
         <li><a href="{{url('admin/admins')}}" class="white-text">Admins</a></li>
+        <li><a href="{{url('admin/skills')}}" class="white-text">Skills</a></li>
         @endif
         <li><a href="#!" class="white-text">Contact Messages</a></li>
       </ul>
