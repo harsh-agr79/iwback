@@ -6,22 +6,12 @@
           <!-- <div class="carousel-fixed-item center">
             <a class="btn waves-effect white grey-text darken-text-2">button</a>
           </div> -->
-          <div class="carousel-item " style="background-image: url('./assets/slider/mp.png');  background-position: center;  background-size: cover; height: 100%;">
-                  <h2 class="black-text">First Panel</h2>
-                  <p class="black-text">This is your first panel</p>
-          </div>
-          <div class="carousel-item " style="background-image: url('./assets/slider/plane.png'); background-position: center;  background-size: cover; height: 100%;">
-                  <h2 class="white-text">second Panel</h2>
-                  <p class="white-text">This is your first panel</p>
-          </div>
-          <div class="carousel-item " style="background-image: url('./assets/slider/plane.png'); background-position: center;  background-size: cover; height: 100%;">
-              <h2 class="white-text">Third Panel</h2>
-              <p class="white-text">This is your first panel</p>
-          </div>
-          <div class="carousel-item " style="background-image: url('./assets/slider/plane.png'); background-position: center;  background-size: cover; height: 100%;">
-              <h2 class="white-text">Fourth Panel</h2>
-              <p class="white-text">This is your first panel</p>
-          </div>
+          @foreach ($sliders as $item)
+          <div class="carousel-item " style="background-image: url('./assets/slider/{{$item->image}}');  background-position: center;  background-size: cover; height: 100%;">
+            <h2 class="black-text">{{$item->text1}}</h2>
+            <p class="black-text">{{$item->text2}}</p>
+        </div>
+        @endforeach
         </div>
     </div>
   <div class="container" style="margin-top: 10vh;">

@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SectorController;
 use App\Http\Controllers\SkillController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,26 +25,35 @@ Route::group(['middleware'=>'admin_auth'], function(){
     Route::get('/admin',[AdminController::class, 'index']);
     Route::get('/admin/logout', [AdminController::class, 'logout']);
 
+    //RETURN VIEWS
     Route::get('/admin/admins',[AdminController::class, 'admin']);
     Route::get('/admin/sectors',[SectorController::class, 'index']);
     Route::get('/admin/skills',[SkillController::class, 'index']);
+    Route::get('/admin/edithome',[HomeController::class, 'index']);
 
-
+    //ADMIN AJAX CRUD
     Route::post('/adminadd',[AdminController::class, 'addadmin']);
     Route::post('/adminupdate',[AdminController::class, 'updateadmin']);
     Route::post('/deleteadmin',[AdminController::class, 'deleteadmin']);
     Route::get('/adminget',[AdminController::class, 'getadmin']);
     Route::get('/editadmin/{id}',[AdminController::class, 'editadmin']);
-
+    //ADMIN SIDE SECTOR AJAX CRUD
     Route::post('/sectoradd',[SectorController::class, 'addsector']);
     Route::post('/sectorupdate',[SectorController::class, 'updatesector']);
     Route::post('/deletesector',[SectorController::class, 'deletesector']);
     Route::get('/sectorget',[SectorController::class, 'getsector']);
     Route::get('/editsector/{id}',[SectorController::class, 'editsector']);
-
+    //ADMIN SIDE SKILL AJAX CLRUD
     Route::post('/skilladd',[SkillController::class, 'addskill']);
     Route::get('/skillget',[SkillController::class, 'getskill']);
     Route::get('/editskill/{id}',[SkillController::class, 'editskill']);
     Route::post('/skillupdate',[SkillController::class, 'updateskill']);
     Route::post('/deleteskill',[SkillController::class, 'deleteskill']);
+    //ADMIN SIDE SLIDER AJAX CRUD
+    Route::post('/slideradd',[HomeController::class, 'addslider']);
+    Route::get('/sliderget',[HomeController::class, 'getslider']);
+    Route::get('/editslider/{id}',[HomeController::class, 'editslider']);
+    Route::post('/sliderupdate',[HomeController::class, 'updateslider']);
+    Route::post('/deleteslider',[HomeController::class, 'deleteslider']);
+
 });

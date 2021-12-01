@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\Sector;
+use App\Models\Home;
 use Illuminate\Support\Facades\View;
 
 use Illuminate\Routing\Controller as BaseController;
@@ -21,6 +22,7 @@ class Controller extends BaseController
     public function index(Request $request){
         $result['title'] = 'Internwheel';
         $result['sector'] = Sector::where('sectorshow', 'on')->get();
+        $result['sliders'] = Home::where('section','slider')->orderBy('contorder','ASC')->get();
         return view('index', $result);
     }
     

@@ -35,6 +35,7 @@
         <li><a href="{{url('admin/sectors')}}" class="white-text">Sector</a></li>
         <li><a href="{{url('admin/admins')}}" class="white-text">Admins</a></li>
         <li><a href="{{url('admin/skills')}}" class="white-text">Skills</a></li>
+        <li><a href="{{url('admin/edithome')}}" class="white-text">Edit Home page</a></li>
         @endif
         <li><a href="#!" class="white-text">Contact Messages</a></li>
       </ul>
