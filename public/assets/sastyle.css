@@ -1,0 +1,18 @@
+
+    header, main, footer {
+        padding-left: 300px;
+      }
+  
+      @media only screen and (max-width : 992px) {
+        header, main, footer {
+          padding-left: 0;
+        }
+      }
+      
+      .theme{
+        background: #006994;
+      }
+
+      td{
+        font-size: 12px;
+      }

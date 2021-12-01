@@ -1,0 +1,327 @@
+:root{
+    --skin-color: #006994;
+    --mainBgColor: rgb(238, 238, 238);
+    --boxShadow: 7px 10px 12px #f0f0f000;
+    --insetShadow: inset 2px 2px 4px rgba(0,0,0,0.1);
+    --mainGrey: #666666;
+}
+body{
+    font-family: sans-serif;
+    background:var(--mainBgColor);
+}
+.section-card{
+    width:100%;
+    background:#fff;
+    box-shadow:var(--boxShadow);
+    border-radius:10px;
+}
+/* navbar start */
+.notif{
+    color:var(--skin-color);
+}
+.theme{
+    background: var(--skin-color);
+}
+/* navbar end */
+
+/* main content start */
+.main-content{
+    width:85vw;
+    margin:3rem auto;
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    grid-column-gap:0.7rem;
+    grid-row-gap:0.7rem;
+}
+.profile-dashboard{
+    display:grid;
+    grid-column: 1 / 4;
+    grid-row-gap:0.7rem;
+}
+@media(max-width:768px){
+    .main-content{
+        width:90vw;
+        grid-template-columns: 1fr;
+        margin:1.4rem auto;
+    }
+    .profile-sidebar{
+        grid-column: span 3;
+    }
+}
+/* profile info start */
+.img-container{
+    height:60%;
+}
+.cover-pic{
+    width:100%;
+    background:url("../assets/slider/PORT.png") center / cover no-repeat;
+    height:200px;
+    border-radius:10px 10px 0 0;
+    position:relative;
+}
+.cover-edit-btn,
+.avatar-edit-btn{
+    cursor: pointer;
+    color:var(--skin-color);
+    transition:0.3s;
+}
+.cover-edit-btn i{
+    position:absolute;
+    top:10px;
+    right:20px;
+    background:#fff;
+    width:40px;
+    height:40px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:50%;
+}
+.avatar-edit-btn i{
+    position:absolute;
+    right:20px;
+    bottom:40px;
+}
+.avatar{
+    position:relative;
+}
+.cover-edit-btn:hover{
+    box-shadow:var(--boxShadow);
+}
+.avatar-pic{
+    position:relative;
+    display:inline-block;
+    margin:-6rem 1rem 1rem;
+}
+.avatar-img{
+    width:150px;
+    height:150px;
+    border:3px solid rgb(219, 219, 219);
+    border-radius:50%;
+    background:#fff;
+    box-shadow:var(--insetShadow);
+}
+.avatar-title{
+    margin-top:-1rem;
+}
+.avatar-title h4{
+    font-size:1.5rem;
+    text-transform:capitalize;
+    text-align:left;
+    font-weight:700;
+}
+.avatar-title .location{
+    color:var(--mainGrey);
+    display:inline;
+}
+.avatar-title div{
+    width:2px;
+    height:2px;
+    background-color:var(--skin-color);
+    display:inline-block;
+    transform:translateY(-4px);
+}
+.avatar-title .contact-toggle{
+    color:var(--skin-color);
+    cursor:pointer;
+}
+.avatar-title .contact-toggle:hover{
+    text-decoration:underline;
+}
+.modal{
+    margin:10% auto;
+    border-radius:10px;
+    width:30%;
+}
+.modal-content h4{
+    font-size:2rem;
+    text-transform: capitalize;
+}
+div.divider{
+    height:2px;
+    width:98%;
+    background:var(--skin-color);
+    margin:0 auto;
+}
+.modal-content h6{
+    font-size:1.2rem;
+    text-transform: capitalize;
+}
+.modal-content i{
+    color:var(--skin-color);
+    cursor:pointer;
+}
+.modal-content .contact-edit{
+    display:flex;
+    justify-content: space-between;
+    padding:0.2rem 1rem 0 0;
+}
+.contact-list li{
+    display:flex;
+    align-items: flex-start;
+    column-gap: 1.4rem;
+    line-height:1.4;
+}
+.contact-list .contact-detail{
+    margin:-1.1rem 0 0 -1.1rem;
+}
+.contact-list .contact-detail h5{
+    font-size:1.4rem;
+}
+.contact-list .contact-detail p{
+    margin-top:-10px;
+}
+.about-user{
+    margin-top:-2rem;
+    padding:1rem;
+}
+.about-user h4{
+    font-size:1.2rem;
+}
+.about-user p{
+    color:var(--mainGrey);
+}
+@media (max-width:768px){
+    .modal{
+        width:80%;
+    }
+}
+/* profile info end */
+
+/* your dashboard section start */
+.user-dashboard-section{
+    background:var(--skin-color);
+    color:#fff;
+    padding: 1rem;
+}
+.user-dashboard-section h1{
+    font-size:2rem;
+    display:inline;
+}
+.user-dashboard-section p{
+    margin:-0.5rem 0.5rem;
+    font-style:italic;
+}
+.article-count{
+    color:black;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    margin:1rem;
+    transform:translateX(-10px);
+}
+.article-count .article-col{
+    display:inline-block;
+    padding:10px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column;
+}
+.article-count .article-col.col-1{
+    border-right: 1px solid var(--skin-color);
+}
+.article-count .article-col.col-2{
+    border-right: 1px solid var(--skin-color);
+}
+.article-count .article-col span{
+    font-size:2.2rem;
+    color:var(--skin-color);
+}
+.article-count .article-col h6{
+    text-transform: capitalize;
+    cursor: pointer;
+}
+.article-count .article-col h6:hover{
+    color:var(--skin-color);
+    text-decoration: underline;
+}
+/* your dashboard section end */
+
+/* profile sidebar start */
+.profile-sidebar{
+    display:block;
+}
+.profile-editor{
+    display:block;
+    padding:0.5rem 0.7rem;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor:pointer;    
+}
+.profile-editor h5{
+    font-size:1rem;
+    text-align:left;
+    color: var(--mainGrey);
+}
+.profile-editor i{
+    color:var(--mainGrey);
+}
+.featured-employers{
+    padding-bottom:1rem;
+}
+.featured-employers h5{
+    font-size:1.1rem;
+    padding:1rem;
+    font-weight:500;
+}
+.company-connect{
+    display:flex;
+    align-items: flex-start;
+    column-gap: 1.4rem;
+    margin:1rem 1.2rem;
+}
+.company-connect .company-logo{
+    width:50px;
+    height:50px;
+    border-radius: 50%;
+}
+.company-connect .company-connect-data{
+    margin:-1.1rem 0 0 -1.1rem;
+}
+.company-connect .company-connect-data h6{
+    font-size:1.1rem;
+    font-weight:600;
+    text-transform: capitalize;
+}
+.company-connect .company-connect-data .connect-location{
+    margin-top:-10px;
+    color:var(--mainGrey);
+}
+.company-connect .company-connect-data .connect-btn{
+    background: transparent;
+    border:1px solid var(--mainGrey);
+    border-radius:100px;
+    padding:0.3rem 0.6rem;
+    outline:none;
+    cursor:pointer;
+    transition:0.3s;
+}
+.company-connect .company-connect-data .connect-btn:hover{
+    border:2px solid var(--mainGrey);
+}
+.featured-employers .divider{
+    width:90%;
+}
+@media (max-width:768px){
+    .company-connect{
+        column-gap: 3rem;
+    }
+    .company-connect .company-connect-data{
+        display:grid;
+        grid-template-columns: repeat(3, 1fr);
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0 0;
+        position:relative;
+        right:0;
+    }
+    .company-connect .company-connect-data .detail-container{
+        grid-column: 1 / 3;
+    }
+    .company-connect .company-connect-data .connect-btn{
+        height:50%;
+    }
+}
+/* profile sidebar end */
+/* main content end */
