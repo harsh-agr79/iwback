@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SectorController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CompanyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +22,13 @@ Route::get('/', [FirstController::class, 'index']);
 Route::get('/login', [FirstController::class, 'login']);
 Route::get('/registeremployer', [FirstController::class, 'registeremployer']);
 Route::post('/auth',[FirstController::class, 'auth'])->name('auth');
+Route::post('/addemployer',[CompanyController::class, 'register']);
+Route::get('company/loginregister/{id}', [CompanyController::class, 'registerlogin']);
 
+Route::group(['middleware'=>'company_auth'], function(){
+    Route::get('/company/profile', [CompanyController::class, 'index']);
+    Route::get('/company/logout', [CompanyController::class, 'logout']);
+});
 Route::group(['middleware'=>'admin_auth'], function(){
     Route::get('/admin',[AdminController::class, 'index']);
     Route::get('/admin/logout', [AdminController::class, 'logout']);

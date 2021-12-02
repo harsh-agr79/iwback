@@ -1,4 +1,5 @@
 @extends('layout')
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 @section('main')
 <div style="padding: 20px; margin-top: 10vh; border-radius:10px;" class="white container z-depth-1">
     <div class="center">
@@ -6,40 +7,50 @@
             <img src="./assets/images/iwmain.png" height="90" class="responsive-img" alt="">
         </div>
     </div>
-      <h4 class="center-align">Register as a Employer</h4>
-      <form action="" class="row container">
+      <h4 class="center-align" id="emailmsg">Register as a Employer</h4>
+      <form id="regemployer" enctype="multipart/form-data" method="POST" class="row container">
+          @csrf
           <div class="input-field col s12 m6">
-              <input placeholder="First Name" id="first_name" type="text" class="validate">
+              <input placeholder="First Name" name="firstname" id="first_name" type="text" class="validate">
             </div>
             <div class="input-field col s12 m6">
-              <input placeholder="Last Name" type="text" required class="validate">
+              <input placeholder="Last Name" type="text" name="lastname" required class="validate">
             </div>
             <div class="input-field col s12 m6">
-              <input placeholder="Company Name" type="text" required class="validate">
+              <input placeholder="Company Name" type="text" name="cmpyname" required class="validate">
             </div>
             <div class="input-field col s12 m6">
-              <input id="email" type="email" placeholder="Email" required class="validate">
+              <input id="email" type="email" placeholder="Email" name="email" required class="validate">
+            </div>
+            {{-- @error('email')
+            <div class="red-text">{{$message}}</div>
+            @enderror --}}
+            <div class="input-field col s12 m6">
+              <input type="number" placeholder="Phone Number" name="phonenumber" required class="validate">
             </div>
             <div class="input-field col s12 m6">
-              <input type="number" placeholder="Phone Number" required class="validate">
+              <input placeholder="Make a user name" name="username" type="text" required class="validate">
             </div>
+            {{-- @error('username')
+            <div class="red-text">{{$message}}</div>
+            @enderror --}}
             <div class="input-field col s12 m6">
-              <input placeholder="Make a user name" type="text" required class="validate">
-            </div>
-            <div class="input-field col s12 m6">
-                <input placeholder="Enter Your PAN/VAT Number" required type="text" class="validate">
+                <input placeholder="Enter Your PAN/VAT Number" name="pannumber" required type="text" class="validate">
               </div>
               <div class="file-field col s12 m6 input-field">
                 <div class="btn theme">
                   <span>File</span>
-                  <input type="file" required>
+                  <input type="file" name="pancertificate" required>
                 </div>
                 <div class="file-path-wrapper">
                   <input class="file-path validate" type="text" required placeholder="PAN Certificate Verification">
                 </div>
               </div>
+              {{-- @error('pancertificate')
+              <div class="red-text">{{$message}}</div>
+              @enderror --}}
                 <div class='input-field col s12'>
-                  <input class='validate' type='password' required placeholder="Password" name='password' id='password' />
+                  <input class='validate' type='password' name="password" required placeholder="Password" name='password' id='password' />
                   <span toggle="#password" class="field-icon toggle-password"><span class="material-icons">visibility</span></span>
                  </div>
             
@@ -52,7 +63,7 @@
             </div>
             <div class="col s12">
                 <label>
-                    <input required type="checkbox" />
+                    <input required type="checkbox" id="agreebox" name="agree"/>
                     <span>Agree to our <a href="">Terms and Conditions</a> and <a href="">Privary Policy</a></span>
                   </label>
             </div>
@@ -95,6 +106,7 @@ $(".toggle-password").click(function (e) {
   }
 });
 
+
 function passwordcheck(){
     $('#pwmsg').html("")
    var cp = $('#confirm-password').val()
@@ -111,5 +123,37 @@ function passwordcheck(){
        console.log('passwords do not match')
    }
 }
+
+$('#regemployer').submit(function(e){
+    e.preventDefault();
+    let formData = new FormData($('#regemployer')[0]);
+    $.ajax({
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        url:"{{url('addemployer')}}",
+        data:formData,
+        contentType: false,
+        processData: false,
+        type:'POST',
+        success:function(response){
+            $('#regemployer')['0'].remove();
+            $('#emailmsg').text('Please check Your email Id for verification')
+            M.toast({html: 'You have been Registered!'})
+        },
+        error:function (response) {
+              if(response.responseJSON.errors.username){
+                var unerr = response.responseJSON.errors.username;  
+                M.toast({html: unerr})
+              }
+              if(response.responseJSON.errors.pancertificate){
+                var emerr = response.responseJSON.errors.pancertificate;  
+                M.toast({html: emerr})
+              }
+              if(response.responseJSON.errors.email){
+                var emerr = response.responseJSON.errors.email;  
+                M.toast({html: emerr})
+              }
+            }
+    })
+})
 </script>
 @endsection

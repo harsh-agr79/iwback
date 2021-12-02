@@ -8,6 +8,7 @@
 body{
     font-family: sans-serif;
     background:var(--mainBgColor);
+    overflow-x: hidden;
 }
 .section-card{
     width:100%;
@@ -32,20 +33,31 @@ body{
     grid-template-columns:repeat(4, 1fr);
     grid-column-gap:0.7rem;
     grid-row-gap:0.7rem;
+    position:relative;
 }
-.profile-dashboard{
+.profile-dashboard,
+.left-section{
     display:grid;
     grid-column: 1 / 4;
     grid-row-gap:0.7rem;
 }
 @media(max-width:768px){
     .main-content{
-        width:90vw;
+        width:100vw;
         grid-template-columns: 1fr;
-        margin:1.4rem auto;
+        margin:0 auto;
+    }
+    .profile-dashboard{
+        grid-row-gap: 1rem;
     }
     .profile-sidebar{
         grid-column: span 3;
+    }
+    .section-card{
+        width:100%;
+        background:#fff;
+        box-shadow:var(--boxShadow);
+        border-radius:0px;
     }
 }
 /* profile info start */
@@ -90,7 +102,7 @@ body{
 }
 .avatar-pic{
     position:relative;
-    display:inline-block;
+    display:block;
     margin:-6rem 1rem 1rem;
 }
 .avatar-img{
@@ -185,6 +197,14 @@ div.divider{
     .modal{
         width:80%;
     }
+    .cover-pic{
+        border-radius:0px;
+    }
+    .avatar-img{
+        position:relative;
+        left:50%;
+        transform:translateX(-50%);
+    }
 }
 /* profile info end */
 
@@ -206,8 +226,7 @@ div.divider{
     color:black;
     display:grid;
     grid-template-columns:repeat(3, 1fr);
-    margin:1rem;
-    transform:translateX(-10px);
+    margin:1rem auto;
 }
 .article-count .article-col{
     display:inline-block;
@@ -227,21 +246,62 @@ div.divider{
     font-size:2.2rem;
     color:var(--skin-color);
 }
-.article-count .article-col h6{
+.article-count .article-col a{
     text-transform: capitalize;
     cursor: pointer;
+    color:black;
 }
-.article-count .article-col h6:hover{
+.article-count .article-col a:hover{
     color:var(--skin-color);
     text-decoration: underline;
 }
 /* your dashboard section end */
 
+/* overview start */
+.overview-section{
+    padding: 0 1.5rem;
+}
+.overview-section h3{
+    font-size:1.3rem;
+    font-weight:600;
+}
+.overview-section .extra-overview h6{
+    font-size:1rem;
+    font-weight:600
+}
+.overview-section .extra-overview a{
+    text-decoration: none;
+    color:var(--skin-color);
+}
+.overview-section .extra-overview p{
+    font-size:0.9rem;
+    text-transform: capitalize;
+}
+/* overview end */
+
+/* recent job start */
+.recent-jobs{
+    padding:0 1.6rem;
+}
+.recent-jobs h1{
+    font-size:1.6rem;
+    font-weight:600;
+}
+.recent-jobs .recent-job-box{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    grid-column-gap:1rem;
+    grid-row-gap:1rem;
+    margin-bottom:1.5rem;
+}
+
+/* recent job end */
+
 /* profile sidebar start */
 .profile-sidebar{
-    display:block;
+    grid-row-gap:0.7rem;
 }
-.profile-editor{
+.job-poster a{
     display:block;
     padding:0.5rem 0.7rem;
     display:flex;
@@ -249,15 +309,16 @@ div.divider{
     align-items: center;
     cursor:pointer;    
 }
-.profile-editor h5{
+.job-poster h5{
     font-size:1rem;
     text-align:left;
-    color: var(--mainGrey);
+    color: var(--skin-color);
 }
-.profile-editor i{
-    color:var(--mainGrey);
+.job-poster i{
+    color:var(--skin-color);
 }
-.featured-employers{
+.featured-employers,
+.dashboard-tabs{
     padding-bottom:1rem;
 }
 .featured-employers h5{
@@ -269,7 +330,7 @@ div.divider{
     display:flex;
     align-items: flex-start;
     column-gap: 1.4rem;
-    margin:1rem 1.2rem;
+    margin:0.7rem 1.2rem;
 }
 .company-connect .company-logo{
     width:50px;
@@ -288,22 +349,14 @@ div.divider{
     margin-top:-10px;
     color:var(--mainGrey);
 }
-.company-connect .company-connect-data .connect-btn{
-    background: transparent;
-    border:1px solid var(--mainGrey);
-    border-radius:100px;
-    padding:0.3rem 0.6rem;
-    outline:none;
-    cursor:pointer;
-    transition:0.3s;
-}
-.company-connect .company-connect-data .connect-btn:hover{
-    border:2px solid var(--mainGrey);
-}
 .featured-employers .divider{
     width:90%;
+    height:1px;
 }
 @media (max-width:768px){
+    .profile-sidebar{
+        display:none;
+    }
     .company-connect{
         column-gap: 3rem;
     }
@@ -323,5 +376,199 @@ div.divider{
         height:50%;
     }
 }
+
+/* Tab Menu Start */
+.dashboard-tabs{
+    padding:0.5rem 0;
+    margin:0.7rem 0;
+}
+.dashboard-tabs .tab-menu{
+    display:flex;
+    align-items: center;
+    color:var(--skin-color);
+    text-decoration: none;
+    text-transform: capitalize;
+    padding-left:0.5rem;
+}
+.dashboard-tabs .tab-menu i{
+    margin-right:1.5rem;
+}
+.dashboard-tabs .divider{
+    height:1px;
+    width:100%;
+    background:rgb(236, 236, 236);
+}
+/* Tab Menu End */
+
+/* New Job Poster start */
+.job-upload-form form{
+    padding:1rem;
+}
+.job-upload-form form h1{
+    font-size:1.6rem;
+    display:inline;
+    padding: 0.5rem;
+    line-height:2;
+    font-weight:500;
+    text-transform:capitalize;
+}
+.exp-field{
+    margin-right:10px;
+}
+.job-upload-form form .job-form-field{
+    padding:0.5rem;
+    position:relative;
+}
+.job-upload-form form .job-form-field label{
+    font-size:1rem;
+    color:black;
+    user-select:none;
+    text-transform: capitalize;
+}
+.job-upload-form form .job-form-field input,
+.job-upload-form form .job-form-field select,
+.job-upload-form form .job-form-field textarea{
+    border:1px solid grey;
+    width:100%;
+    border-radius:10px;
+    outline:none;
+    padding-bottom:0;
+    resize:vertical;
+}
+.chips{
+    border:none;
+    outline:none;
+}
+.no-effect-label{
+    transform:translateY(0);
+    position:static;
+    top:0;
+}
+.job-upload-form form .job-form-field input:focus{
+    border-bottom:1px solid var(--skin-color)!important;
+}
+.file-field{
+    padding-top:15px;
+}
+.select-field{
+    position:absolute;
+    bottom:-24px;
+    left:10px;
+    transition:0.3s;
+}
+.select-label{
+    transform:translateY(-24px);
+}
+label span{
+    font-size:0.7rem;
+    color:var(--mainGrey);
+    font-style:italic;
+}
+.single-row-form{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
+    grid-row-gap:1.2rem;
+}
+input[type=datetime-local]:required:invalid::-webkit-datetime-edit {
+    color: transparent;
+}
+input[type=datetime-local]:focus::-webkit-datetime-edit {
+    color: black !important;
+}
+select{
+    display:block;
+    outline:none;
+    border:none;
+    border-bottom:1px solid var(--mainGrey);
+}
+select:focus{
+    border:none;
+}
+.salary-div{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px,1fr));
+    transition:0.3s;
+}
+.qualification-div{
+    padding-top:20px;
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px,1fr));
+    grid-row-gap:1.2rem;
+}
+input[type="checkbox"] ~ span{
+    color:black;
+    display:inline
+}
+.check{
+    display:block;
+}
+.hide-block{
+    transition:0.3s;
+    display:none;
+}
+.submit-btn{
+    background-color:var(--skin-color);
+    width:100%;
+    border-radius:20px;
+}
+.file-field .btn{
+    background:var(--skin-color);
+    border-radius:10px;
+}
+.file-field .btn:hover{
+    background:rgb(10, 153, 153);
+}
+@media(max-width:586px){
+    .sector-field{
+        transform: translateY(-30px);
+    }
+    .type-field{
+        transform:translateY(20px);
+    }
+}
+@media(max-width:768px){
+    .job-upload-form{
+        margin:1rem;
+        width:90%;
+        border-radius: 10px;
+    }
+    .select-field{
+        position:static;
+        top:0;
+        left:0;
+        transition:0.3s;
+    }
+    .sector-field{
+        transform:translateY(20px);
+    }
+    .select-label{
+        transform:translateY(10px);
+    }
+    .file-field{
+        padding-top:0;
+    }
+    .exp-field{
+        margin-right:0;
+    }
+}
+@media(max-width:1200px){
+    .select-label{
+        transform:translateY(-30px);
+    }
+    .single-row-form{
+        grid-row-gap:0.7rem;
+    }
+    .skill-field{
+        transform:translateY(20px);
+    }
+    .submit-btn{
+        margin-top:2rem;
+    }
+}@media(max-width:832px){
+    .select-label{
+        transform:translateY(-18px);
+    }
+}
+/* New Job Poster end */
 /* profile sidebar end */
 /* main content end */

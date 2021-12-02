@@ -21,6 +21,73 @@
     <span class="hide">{{$user = 'guest'}}</span> 
 @endif
 <body>
+  @if (session()->has('CMPY_LOGIN'))
+      <header>
+        <div class="navbar-fixed">
+          <nav class="grey lighten-5">
+              <div class="nav-wrapper">
+                  <a href="../index.html" class="brand-logo hide-on-med-and-down" style="margin-left: 10px; margin-top: 5px;">
+                      <img src="../assets/images/iwmain.png" height="40" alt="">
+                  </a>
+                  <a href="../index.html" class="brand-logo hide-on-large-only">
+                      <img src="../assets/images/iw.png" height="50" alt="">
+                  </a>
+                  <a class="right hide-on-large-only" style="margin-right:10px;">
+                      <span class="btn theme modal-trigger" href="#modal3">
+                          Login
+                      </span>
+                  </a>
+                  <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+                      <i class="material-icons black-text">menu</i>
+                  </a>
+                  <ul class="right hide-on-med-and-down">
+                      <li>
+                          <a class="black-text" href="../jobs.html">Internships</a>
+                      </li>
+                      <li>
+                          <a class="black-text" href="../jobs.html">Freshers Jobs</a>
+                      </li>
+                      <li>
+                          <a class="black-text" href="../jobs.html">Jobs</a>
+                      </li>
+                      <li>
+                          <a class="black-text" href="../mobile.html">Contact Us</a>
+                      </li>
+                      <li>
+                          <a href="#" class="btn-floating white">
+                              <i class="material-icons" style="color: #006994;">notifications</i>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#" class="btn-floating white">
+                              <i class="material-icons" style="color: #006994">account_circle</i>
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+          </nav>
+      </div>
+      
+      <ul class="sidenav" id="mobile-demo">
+          <li>
+              <a class="black-text" href="../jobs.html">Internships</a>
+          </li>
+          <li>
+              <a class="black-text" href="../jobs.html">Freshers Jobs</a>
+          </li>
+          <li>
+              <a class="black-text" href="../jobs.html">Jobs</a>
+          </li>
+          <li>
+              <a class="black-text" href="../mobile.html">Contact Us</a>
+          </li>
+          <li>
+              <div class="divider"></div>
+          </li>
+      </ul>
+      </header>
+  @else
+      
   <header>
     <ul id='dropdown1' class='dropdown-content'>
       <li><a class="" href="{{url('registeremployer')}}">As a Employer</a></li>
@@ -75,6 +142,7 @@
       <li><div class="divider"></div></li>
     </ul>
   </header>
+  @endif
 
 <main>
     @yield('main')
