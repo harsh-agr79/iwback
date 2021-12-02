@@ -23,15 +23,15 @@
 <body>
   <header>
     <ul id='dropdown1' class='dropdown-content'>
-      <li><a class="" href="{{url('registeremployer.html')}}">As a Employer</a></li>
+      <li><a class="" href="{{url('registeremployer')}}">As a Employer</a></li>
       <li><a class="" href="./registeremployee.html">As a employee</a></li>
     </ul>
     <ul id='dropdown2' class='dropdown-content'>
-      <li><a class="" href="{{url('registeremployer.html')}}">As a Employer</a></li>
+      <li><a class="" href="{{url('registeremployer')}}">As a Employer</a></li>
       <li><a class="" href="./registeremployee.html">As a employee</a></li>
     </ul>
     <ul id='dropdown3' class='dropdown-content'>
-      <li><a class="" href="{{url('registeremployer.html')}}">As a Employer</a></li>
+      <li><a class="" href="{{url('registeremployer')}}">As a Employer</a></li>
       <li><a class="" href="./registeremployee.html">As a employee</a></li>
     </ul>
     <div class="">
