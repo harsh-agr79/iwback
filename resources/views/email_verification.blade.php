@@ -1,11 +1,5 @@
-@component('mail::message')
 Welcome {{$name}}<br>
-@component('mail::panel')
-Please Verify Your email
-@endcomponent
-@component('mail::button', ['url' => url('/verification/'.$verifylink)])
-Verify Account
-@endcomponent
-Thanks,<br>
-{{ config('app.name') }}
-@endcomponent
+
+<a href="{{url('/verification/'.$verifylink)}}" style="font-size: 15px; padding 15px; color:white; background: #006994; border-radius: 10px;">Click here</a> to Verify your email.<br>
+
+Enjoy being at Internwheel!
