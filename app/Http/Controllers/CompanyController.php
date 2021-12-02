@@ -96,6 +96,13 @@ class CompanyController extends Controller
 
         return redirect('/');
     }
+    public function verify(Request $request,$user){
+        $username = Crypt::decrypt($user);
+        Company::where('username',$username)->update([
+            'emailverification'=>'verified'
+        ]);
+        return redirect('company/loginregister/'.$username);
+    }
     /**
      * Show the form for creating a new resource.
      *

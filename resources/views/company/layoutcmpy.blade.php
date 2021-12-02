@@ -78,16 +78,17 @@
         </ul>
 
         <main>
-        @if ($user['0']->emailverification == NULL)
-            <div style="height: 40vh;">
+        @if ($user['0']->emailverification == 'verified')
         
+            @yield('main')
+        @else
+            <div style="height: 40vh;">
+            
             </div>
             <div class="center-align" style="font-size: 30px;">Please verify Your Email first to access <img src="{{asset('assets/images/iwmain.png')}}" class="inline-icon" height="50" alt=""></div>
             <div style="height: 40vh;">
-        
+            
             </div>
-        @else
-                @yield('main')
         @endif
         </main>
       

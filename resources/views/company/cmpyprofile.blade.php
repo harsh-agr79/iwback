@@ -2,6 +2,6 @@
 
 @section('main')
 
-    hello
+  Verified
 
 @endsection
