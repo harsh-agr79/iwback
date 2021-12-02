@@ -16,7 +16,9 @@ class CompanyController extends Controller
      */
     public function index(Request $request)
     {
-        return view('company/cmpyprofile');
+        $userid = session()->get('CMPY_ID');
+        $company = Company::where('id',$userid)->get();
+        return view('company/cmpyprofile', compact('company'));
     }
     public function register(Request $request){
 
@@ -98,10 +100,18 @@ class CompanyController extends Controller
     }
     public function verify(Request $request,$user){
         $username = Crypt::decrypt($user);
-        Company::where('username',$username)->update([
-            'emailverification'=>'verified'
-        ]);
-        return redirect('company/loginregister/'.$username);
+        $user = Company::where('username',$username)->get();
+
+        if($user['0']->emailverification == 'verified'){
+            echo'<h1>The Link and expired</h1>';
+        }
+        else{
+            Company::where('username',$username)->update([
+                'emailverification'=>'verified',
+            ]);
+            return redirect('company/loginregister/'.$username);
+        }
+
     }
     /**
      * Show the form for creating a new resource.

@@ -17,17 +17,24 @@
         <div class="navbar-fixed">
             <nav class="grey lighten-5">
                 <div class="nav-wrapper">
-                    <a href="../index.html" class="brand-logo hide-on-med-and-down" style="margin-left: 10px; margin-top: 5px;">
-                        <img src="../assets/images/iwmain.png" height="40" alt="">
+                    <a href="{{url('/')}}" class="brand-logo hide-on-med-and-down" style="margin-left: 10px; margin-top: 5px;">
+                        <img src="{{asset('assets/images/iwmain.png')}}" height="40" alt="">
                     </a>
-                    <a href="../index.html" class="brand-logo hide-on-large-only">
-                        <img src="../assets/images/iw.png" height="50" alt="">
+                    <a href="{{url('/')}}" class="brand-logo hide-on-large-only">
+                        <img src="{{asset('assets/images/iw.png')}}" height="50" alt="">
                     </a>
-                    <a class="right hide-on-large-only" style="margin-right:10px;">
-                        <span class="btn theme modal-trigger" href="#modal3">
-                            Login
-                        </span>
-                    </a>
+                    <ul class="right hide-on-large-only">
+                        <li>
+                            <a href="#">
+                                <i class="material-icons" style="color: #006994;">notifications</i>
+                            </a>
+                        </li>
+                        <li>  <a href="#" data-target="accountdrop2" class="dropdown-trigger">
+                            <i class="material-icons" style="color: #006994">account_circle</i>
+                        </a></li>
+                    </ul>
+                  
+                 
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger">
                         <i class="material-icons black-text">menu</i>
                     </a>
@@ -50,9 +57,23 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="btn-floating white">
+                            <a href="#" data-target="accountdrop" class="btn-floating dropdown-trigger white">
                                 <i class="material-icons" style="color: #006994">account_circle</i>
                             </a>
+                            <ul id='accountdrop' class='dropdown-content'>
+                                <li><a href="{{url('company/profile')}}" class="black-text"><i class="material-icons theme-text">account_circle</i>Profile</a></li>
+                                <li><a href="#!" class="black-text"><i class="material-icons theme-text">business_center</i>Jobs posted</a></li>
+                                <li><a href="#!" class="black-text"><i class="material-icons theme-text">groups</i>Saved Candidates</a></li>
+                                <li><a href="#!" class="black-text"><i class="material-icons theme-text">settings</i>Account Settings</a></li>
+                                <li><a href="{{url('company/logout')}}" class="black-text"><i class="material-icons theme-text">logout</i>Logout</a></li>
+                              </ul>
+                              <ul id='accountdrop2' class='dropdown-content'>
+                                <li><a href="{{url('company/profile')}}" class="black-text"><i class="material-icons theme-text">account_circle</i>Profile</a></li>
+                                <li><a href="#!" class="black-text"><i class="material-icons theme-text">business_center</i>Jobs posted</a></li>
+                                <li><a href="#!" class="black-text"><i class="material-icons theme-text">groups</i>Saved Candidates</a></li>
+                                <li><a href="#!" class="black-text"><i class="material-icons theme-text">settings</i>Account Settings</a></li>
+                                <li><a href="{{url('company/logout')}}" class="black-text"><i class="material-icons theme-text">logout</i>Logout</a></li>
+                              </ul>
                         </li>
                     </ul>
                 </div>

@@ -23,6 +23,9 @@ body{
 .theme{
     background: var(--skin-color);
 }
+.theme-text{
+    color: var(--skin-color);
+}
 /* navbar end */
 
 /* main content start */

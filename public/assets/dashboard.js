@@ -1,5 +1,9 @@
 $(document).ready(function(){
     $('.sidenav').sidenav();
+    $('.dropdown-trigger').dropdown({
+        constrainWidth:false,
+        coverTrigger:false, 
+    });
     $('input#input_text, textarea#textarea2').characterCounter();
     $('.modal').modal();
     var today = new Date()
