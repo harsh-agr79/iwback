@@ -1,8 +1,8 @@
 @extends('layout')
 
 @section('main')
-    <div style="margin-left: 1vw; margin-top: 1vw; margin-right: 1vw; border-radius: 30px;">
-      <div class="carousel carousel-slider center" style="border-radius: 30px; height: 500px;">
+    <div>
+      <div class="carousel carousel-slider center" style="height: 500px;">
           <!-- <div class="carousel-fixed-item center">
             <a class="btn waves-effect white grey-text darken-text-2">button</a>
           </div> -->
