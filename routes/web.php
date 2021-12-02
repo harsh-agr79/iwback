@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\FirstController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SectorController;
 use App\Http\Controllers\SkillController;
@@ -17,9 +17,10 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', [Controller::class, 'index']);
-Route::get('/login', [Controller::class, 'login']);
-Route::post('/auth',[Controller::class, 'auth'])->name('auth');
+Route::get('/', [FirstController::class, 'index']);
+Route::get('/login', [FirstController::class, 'login']);
+Route::get('/registeremployer', [FirstController::class, 'registeremployer']);
+Route::post('/auth',[FirstController::class, 'auth'])->name('auth');
 
 Route::group(['middleware'=>'admin_auth'], function(){
     Route::get('/admin',[AdminController::class, 'index']);
