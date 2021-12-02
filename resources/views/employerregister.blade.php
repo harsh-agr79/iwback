@@ -68,7 +68,7 @@
                   </label>
             </div>
             <div class="col s12 center" style="margin-top: 10vh;">
-              <button type="submit" id="subbtn" class="disabled modal-close waves-effect waves-green btn-large theme">Register</button>
+              <button type="submit" onclick="M.toast({html: 'Please wait!'})" id="subbtn" class="disabled modal-close waves-effect waves-green btn-large theme">Register</button>
             </div>
   </form>
 
