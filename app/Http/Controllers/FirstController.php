@@ -16,6 +16,9 @@ class FirstController extends Controller
         $result['title'] = 'Internwheel';
         $result['sector'] = Sector::where('sectorshow', 'on')->get();
         $result['sliders'] = Home::where('section','slider')->orderBy('contorder','ASC')->get();
+        if(session()->has('CMPY_LOGIN')){
+            $result['user'] = Company::where('id',session()->get('CMPY_ID'))->get();
+        }
         return view('index', $result);
     }
     
@@ -73,7 +76,7 @@ class FirstController extends Controller
                     $request->session()->put('CMPY_TIME', now());
                 }
             }elseif(isset($result4[0]->id)){
-                if($password == Crypt::decrypt($result3[0]->password)){
+                if($password == Crypt::decrypt($result4[0]->password)){
                     $request->session()->put('CMPY_LOGIN', true);
                     $request->session()->put('CMPY_ID', $result4['0']->id);
                     $request->session()->put('CMPY_TIME', now());

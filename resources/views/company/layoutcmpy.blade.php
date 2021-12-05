@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +8,9 @@
     <!-- materialize css cdn -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('assets/dashboard.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/style.css')}}">
-    <link rel="icon" href="{{asset('assets/images/title.png')}}">
+    <link rel="stylesheet" href="../assets/dashboard.css">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="icon" href="../assets/images/title.png">
     <title>Internwheel | Dashboard</title>
 </head>
 <body>
@@ -23,33 +24,24 @@
                     <a href="{{url('/')}}" class="brand-logo hide-on-large-only">
                         <img src="{{asset('assets/images/iw.png')}}" height="50" alt="">
                     </a>
-                    <ul class="right hide-on-large-only">
-                        <li>
-                            <a href="#">
-                                <i class="material-icons" style="color: #006994;">notifications</i>
-                            </a>
-                        </li>
-                        <li>  <a href="#" data-target="accountdrop2" class="dropdown-trigger">
-                            <i class="material-icons" style="color: #006994">account_circle</i>
-                        </a></li>
-                    </ul>
-                  
-                 
+                    <a class="right hide-on-large-only" style="margin-right:10px;">
+                        <i class="material-icons black-text">message</i>
+                    </a>
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger">
-                        <i class="material-icons black-text">menu</i>
+                         <i class="material-icons" style="color: #006994">account_circle</i>
                     </a>
                     <ul class="right hide-on-med-and-down">
                         <li>
-                            <a class="black-text" href="../jobs.html">Internships</a>
+                            <a class="black-text" href="{{url('/')}}">Home</a>
                         </li>
                         <li>
-                            <a class="black-text" href="../jobs.html">Freshers Jobs</a>
+                            <a class="black-text" href="{{url('company/profile')}}">Dashboard</a>
                         </li>
                         <li>
-                            <a class="black-text" href="../jobs.html">Jobs</a>
+                            <a class="black-text" href="">Post Jobs</a>
                         </li>
                         <li>
-                            <a class="black-text" href="../mobile.html">Contact Us</a>
+                            <a class="black-text" href="">Contact Us</a>
                         </li>
                         <li>
                             <a href="#" class="btn-floating white">
@@ -64,55 +56,87 @@
                                 <li><a href="{{url('company/profile')}}" class="black-text"><i class="material-icons theme-text">account_circle</i>Profile</a></li>
                                 <li><a href="#!" class="black-text"><i class="material-icons theme-text">business_center</i>Jobs posted</a></li>
                                 <li><a href="#!" class="black-text"><i class="material-icons theme-text">groups</i>Saved Candidates</a></li>
-                                <li><a href="#!" class="black-text"><i class="material-icons theme-text">settings</i>Account Settings</a></li>
+                                <li><a href="{{url('company/settings')}}" class="black-text"><i class="material-icons theme-text">settings</i>Account Settings</a></li>
                                 <li><a href="{{url('company/logout')}}" class="black-text"><i class="material-icons theme-text">logout</i>Logout</a></li>
                               </ul>
                               <ul id='accountdrop2' class='dropdown-content'>
                                 <li><a href="{{url('company/profile')}}" class="black-text"><i class="material-icons theme-text">account_circle</i>Profile</a></li>
                                 <li><a href="#!" class="black-text"><i class="material-icons theme-text">business_center</i>Jobs posted</a></li>
                                 <li><a href="#!" class="black-text"><i class="material-icons theme-text">groups</i>Saved Candidates</a></li>
-                                <li><a href="#!" class="black-text"><i class="material-icons theme-text">settings</i>Account Settings</a></li>
+                                <li><a href="{{url('company/settings')}}" class="black-text"><i class="material-icons theme-text">settings</i>Account Settings</a></li>
                                 <li><a href="{{url('company/logout')}}" class="black-text"><i class="material-icons theme-text">logout</i>Logout</a></li>
                               </ul>
                         </li>
                     </ul>
                 </div>
             </nav>
+            <aside class="bottom-nav">
+                <a class="bottom-tab" href="{{url('/')}}">
+                    <i class="material-icons">home</i>
+                    <p>Home</p>
+                </a>
+                <a class="bottom-tab" href="#">
+                    <i class="material-icons">group</i>
+                    <p>Saved Candidates</p>
+                </a>
+                <a class="bottom-tab active" href="#">
+                    <i class="material-icons">add_box</i>
+                    <p>Post Job</p>
+                </a>
+                <a class="bottom-tab" href="#">
+                    <i class="material-icons">notifications</i>
+                    <p>Notifications</p>
+                </a>
+                <a class="bottom-tab final-tab" href="#">
+                    <i class="material-icons">business_center</i>
+                    <p>Jobs Posted</p>
+                </a>
+            </aside>
         </div>
         
         <ul class="sidenav" id="mobile-demo">
-            <li>
-                <a class="black-text" href="../jobs.html">Internships</a>
-            </li>
-            <li>
-                <a class="black-text" href="../jobs.html">Freshers Jobs</a>
-            </li>
-            <li>
-                <a class="black-text" href="../jobs.html">Jobs</a>
-            </li>
-            <li>
-                <a class="black-text" href="../mobile.html">Contact Us</a>
-            </li>
-            <li>
+            <div class="dashboard-tabs section-card">
+                <a class="tab-menu" href="{{url('company/profile')}}">
+                    <i class="material-icons">account_circle</i>
+                    <p class="menu-text">{{$user['0']->cmpyname}}</p>
+                </a>
                 <div class="divider"></div>
-            </li>
+                <a class="tab-menu" href="job-manager.html">
+                    <i class="material-icons">business_center</i>
+                    <p class="menu-text">Jobs Posted</p>
+                </a>
+                <div class="divider"></div>
+                <a class="tab-menu" href="saved-candidates.html">
+                    <i class="material-icons">groups</i>
+                    <p class="menu-text">Saved Candidates</p>
+                </a>
+                <div class="divider"></div>
+                <a class="tab-menu" href="{{url('company/settings')}}">
+                    <i class="material-icons">settings</i>
+                    <p class="menu-text">Account Settings</p>
+                </a>
+                <div class="divider"></div>
+                <a class="tab-menu" href="{{url('company/logout')}}">
+                    <i class="material-icons">logout</i>
+                    <p class="menu-text">Log Out</p>
+                </a>
+            </div>
         </ul>
 
         <main>
-        @if ($user['0']->emailverification == 'verified')
-        
-            @yield('main')
-        @else
-            <div style="height: 40vh;">
+            @if ($user['0']->emailverification == 'verified')
             
-            </div>
-            <div class="center-align" style="font-size: 30px;">Please verify Your Email first to access <img src="{{asset('assets/images/iwmain.png')}}" class="inline-icon" height="50" alt=""></div>
-            <div style="height: 40vh;">
-            
-            </div>
-        @endif
-        </main>
-      
+                @yield('main')
+            @else
+                <div style="height: 40vh;">
+                
+                </div>
+                <div class="center-align" style="font-size: 30px;">Please verify Your Email first to access <img src="{{asset('assets/images/iwmain.png')}}" class="inline-icon" height="50" alt=""></div>
+                <div style="height: 40vh;">
+                
+                </div>
+            @endif
+            </main>
 
         <footer class="page-footer theme" style="margin-top: 10vh;">
             <div class="">
@@ -211,5 +235,5 @@
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="{{asset('assets/dashboard.js')}}"></script>
+<script src="../assets/dashboard.js"></script>
 </html>

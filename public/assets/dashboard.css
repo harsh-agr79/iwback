@@ -10,6 +10,10 @@ body{
     background:var(--mainBgColor);
     overflow-x: hidden;
 }
+pre{
+    font-family: sans-serif;
+    font-weight: 500;
+}
 .section-card{
     width:100%;
     background:#fff;
@@ -23,8 +27,49 @@ body{
 .theme{
     background: var(--skin-color);
 }
-.theme-text{
-    color: var(--skin-color);
+.sidenav .divider{
+    background:#E0E0E0;
+    height:1px;
+}
+.bottom-nav{
+    background:white;
+    height:50px;
+    width:100vw;
+    position:fixed;
+    bottom:0;
+    left:0;
+    display:grid;
+    grid-template-columns: repeat(5,1fr);
+    display:none;
+}
+.bottom-nav .bottom-tab{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color:var(--mainGrey);
+}
+.bottom-nav .bottom-tab i{
+    display:inline;
+    margin-top:7px;
+    line-height:0.6;
+}
+.bottom-nav .bottom-tab p{
+    font-size:0.8rem;
+    line-height:0.8;
+    white-space: nowrap;
+}
+.bottom-nav .bottom-tab.active{
+    color:black;
+    border-top:2px solid black;
+}
+.bottom-nav .final-tab{
+    border:none;
+}
+@media(max-width:768px){
+    .bottom-nav{
+        display:grid;
+    }
 }
 /* navbar end */
 
@@ -69,7 +114,9 @@ body{
 }
 .cover-pic{
     width:100%;
-    background:url("../assets/slider/PORT.png") center / cover no-repeat;
+    background-position:center;
+    background-size:cover; 
+    background-repeat:no-repeat;
     height:200px;
     border-radius:10px 10px 0 0;
     position:relative;
@@ -181,10 +228,10 @@ div.divider{
     margin:-1.1rem 0 0 -1.1rem;
 }
 .contact-list .contact-detail h5{
-    font-size:1.4rem;
+    font-size:1rem;
 }
 .contact-list .contact-detail p{
-    margin-top:-10px;
+    margin-top:0px;
 }
 .about-user{
     margin-top:-2rem;
@@ -392,7 +439,7 @@ div.divider{
     text-decoration: none;
     text-transform: capitalize;
     padding-left:0.5rem;
-}
+} 
 .dashboard-tabs .tab-menu i{
     margin-right:1.5rem;
 }
@@ -404,10 +451,12 @@ div.divider{
 /* Tab Menu End */
 
 /* New Job Poster start */
-.job-upload-form form{
+.job-upload-form form,
+.settings-section{
     padding:1rem;
 }
-.job-upload-form form h1{
+.job-upload-form form h1,
+.settings-section h1{
     font-size:1.6rem;
     display:inline;
     padding: 0.5rem;
@@ -530,7 +579,8 @@ input[type="checkbox"] ~ span{
     }
 }
 @media(max-width:768px){
-    .job-upload-form{
+    .job-upload-form,
+    .settings-section{
         margin:1rem;
         width:90%;
         border-radius: 10px;
@@ -573,5 +623,88 @@ input[type="checkbox"] ~ span{
     }
 }
 /* New Job Poster end */
+
+/* Post Confirmation Start */
+.job-upload-form form.hide-form{
+    opacity:0;
+    visibility: hidden;
+    display: none;
+}
+.confirmation-page i{
+    font-size:15rem;
+    color:var(--skin-color);
+    display:block;
+    text-align:center;
+    margin:2rem auto;
+}
+.confirmation-page h1{
+    text-transform: capitalize;
+    text-align:center;
+    font-size:3rem;
+}
+.confirmation-page p{
+    color:var(--mainGrey);
+    padding:0 3rem;
+    text-align:center;
+}
+.confirmation-page .cnf-links{
+    display:flex;
+    justify-content: center;
+    margin-bottom:2rem;
+    column-gap: 1rem;
+}
+.confirmation-page .cnf-links a{
+    border:1px solid var(--skin-color);
+    padding:1rem;
+    color:var(--skin-color);
+    border-radius:10px;
+    cursor:pointer;
+}
+.confirmation-page{
+    transition:0.3s;
+    opacity:0;
+    display:none;
+}
+.confirmation-page.show-page{
+    opacity:1;
+    display:block;
+}
+/* Post Confirmation End */
+
+/* Account Settings Start */
+.settings-item{
+    display:grid;
+    justify-content: center;
+    grid-template-columns: 5fr 1fr;
+    align-items: center;
+    margin-bottom:1rem;
+}
+.settings-item .item-title,
+.settings-item .current-data{
+    font-size:1.1rem;
+    padding: 0 1rem;
+    flex:0 0 50%;
+    font-weight:600;
+    line-height:0.1;
+}
+.settings-item i{
+    color:var(--skin-color);
+    cursor:pointer;
+    line-height:1.5;
+    grid-row:span 2;
+    display:block;
+}
+.settings-item .current-data{
+    font-weight:300;
+    font-size:0.8rem;
+    color:var(--mainGrey);
+    font-style:italic;
+}
+.deactivate-btn{
+    color:red!important;
+    display: inline;
+    cursor:pointer;
+}
+/* Account Settings End */
 /* profile sidebar end */
 /* main content end */

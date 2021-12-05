@@ -29,6 +29,8 @@ Route::get('verification/{id}', [CompanyController::class, 'verify']);
 Route::group(['middleware'=>'company_auth'], function(){
     Route::get('/company/profile', [CompanyController::class, 'index']);
     Route::get('/company/logout', [CompanyController::class, 'logout']);
+    Route::get('/company/settings', [CompanyController::class, 'settings']);
+    Route::post('/company/update', [CompanyController::class, 'cmpupdate'])->name('cmppro.up');
 });
 Route::group(['middleware'=>'admin_auth'], function(){
     Route::get('/admin',[AdminController::class, 'index']);

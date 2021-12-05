@@ -84,4 +84,24 @@ $(document).ready(function(){
             salaryDiv.classList.remove('hide-block')
         }
     })
+
+    const form = document.querySelector('.job-upload-form form')
+    const confirmationPage = document.querySelector('.confirmation-page')
+    form.addEventListener('submit',(e) => {
+        e.preventDefault()
+        form.classList.add('hide-block')
+        confirmationPage.classList.add('show-page')
+    })
+
+    //bottom navbar
+    let bottomTab = document.querySelectorAll('.bottom-tab')
+    for(let i=0; i<bottomTab.length; i++){
+        bottomTab[i].onclick = function(){
+            let j = 0
+            while(j<bottomTab.length){
+                bottomTab[j++].className = 'bottom-tab'
+            }
+            bottomTab[i].className = 'bottom-tab active'
+        }
+    }
 });

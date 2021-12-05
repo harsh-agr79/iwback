@@ -2,33 +2,39 @@
 
 @section('main')
 
- 
+
+<form action="{{route('cmppro.up')}}" id="profileform" method="POST">
+    @csrf
+    <input type="hidden" name="id", value="{{$company['0']->id}}">
 <div class="main-content">
     <section class="profile-dashboard">
         <div class="profile-info section-card">
             <div class="img-container">
-                <div class="cover-pic">
+                <div class="cover-pic" style="background: url({{asset('assets/images/icon.png')}}) center / cover no-repeat ">
                     <span class="cover-edit-btn">
                         <i class="material-icons">mode_edit</i>
                     </span>
                 </div>
                 <div class="avatar">
                     <div class="avatar-pic">
-                        <img class="avatar-img" src="../assets/images/icon.png">
+                        <img class="avatar-img" src="{{asset('assets/images/icon.png')}}">
                         <div class="avatar-title">
                             <h4>{{$company['0']->cmpyname}}</h4>
-                            <p class="location">{{$company['0']->mainlocation}}</p>
+                            <p class="location" id="ml">{{$company['0']->mainlocation}}</p>
+                            <input id="mlinp" type="text" class="browser-default" placeholder="Main Branch Location" style="display:none; padding: 10px; border-radius:10px;" name="mainlocation" value="{{$company['0']->mainlocation}}" required>
                             <div></div>
                             <a class="contact-toggle modal-trigger" href="#modal1" data-target="modal1">Contact Info</a>
                         </div>
                     </div>
-                    <span class="avatar-edit-btn">
-                        <i class="material-icons">mode_edit</i>                            
+                    <span class="avatar-edit-btn" onclick="mainlocation()">
+                        <i class="material-icons tooltipped" id="mledi"  data-position="bottom" data-tooltip="Edit Profile Details">mode_edit</i>                            
+                        <i class="material-icons" id="mlsli" style="display: none;" onclick="submit()">save</i>                            
                     </span>
                 </div>
                 <div class="about-user">
                     <h4>About Us</h4>
-                    <p>{{$company['0']->about}}</p>
+<pre id="abo">{{$company['0']->about}}</pre>
+                    <textarea id="aboinp" name="about" style="display: none;" class="materialize-textarea browser-default" placeholder="Give a short description about your company">{{$company['0']->about}}</textarea>
                 </div>
             </div>
         </div>
@@ -40,7 +46,6 @@
                 <div class="divider"></div>
                 <div class="contact-edit">
                     <h6>Contact Info</h6>
-                    <i class="material-icons">edit</i>
                 </div>
                 <ul class="contact-list">
                     <li>
@@ -62,7 +67,6 @@
         </div>
 
         <div class="user-dashboard-section section-card">
-            <h1>Your Dashboard</h1>
             <div class="article-count section-card">
                 <div class="article-col col-1">
                     <span>8</span>
@@ -81,10 +85,12 @@
 
         <div class="overview-section section-card">
             <h3>Overview</h3>
-<pre>{{$company['0']->overview}}</pre>
+<pre id="ove">{{$company['0']->overview}}</pre>
+<textarea id="oveinp" style="display: none;" name="overview" class="materialize-textarea browser-default" placeholder="Give a short description about your company">{{$company['0']->overview}}</textarea>
             <div class="extra-overview">
                 <h6>Website</h6>
-                <a href="{{$company['0']->website}}" target="_blank">{{$company['0']->website}}</a>
+                <a href="{{'https://'.$company['0']->website}}" id="web" target="_blank">{{$company['0']->website}}</a>
+                <input type="url" name="website" id="webinp" placeholder="Company Website" class="browser-default" value="{{$company['0']->website}}" style="padding:10px; border-radius:10px; display:none;">
             </div>
             <div class="extra-overview">
                 <h6>Location</h6>
@@ -92,14 +98,16 @@
             </div>
             <div class="extra-overview">
                 <h6>Company Size</h6>
-                <p>{{$company['0']->cmpysize}}</p>
+                <p id="siz">{{$company['0']->cmpysize}}</p>
+                <input type="text" name="cmpysize" placeholder="Company Size" id="sizinp" class="browser-default" value="{{$company['0']->cmpysize}}" style="padding:10px; border-radius:10px; display:none;">
             </div>
-            <div class="extra-overview">
+            <div class="extra-overview" style="margin-bottom: 10px;">
                 <h6>Estd.</h6>
-                <p>{{$company['0']->cmpyestd}}</p>
+                <p id="est">{{$company['0']->cmpyestd}}</p>
+                <input type="number" min="1900" max="2025" step="1" value="{{$company['0']->est}}" name="cmpyestd" placeholder="Company Established Year" id="estinp" class="browser-default" value="{{$company['0']->cmpysize}}" style="padding:10px; border-radius:10px; display:none;">
             </div>
         </div>
-
+</form>
         <div class="recent-jobs section-card">
             <h1>Recent Job Openings</h1>
             <div class="recent-job-box">
@@ -265,7 +273,7 @@
                 <p class="menu-text">Saved Candidates</p>
             </a>
             <div class="divider"></div>
-            <a class="tab-menu" href="account-settings.html">
+            <a class="tab-menu" href="{{url('company/settings')}}">
                 <i class="material-icons">settings</i>
                 <p class="menu-text">Account Settings</p>
             </a>
@@ -277,5 +285,30 @@
         </div>
     </section>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function(){
+    $('.tooltipped').tooltip();
+  });
+    function mainlocation(){
+        $('#ml').toggle();
+        $('#mlinp').toggle();
+        $('#mledi').toggle();
+        $('#mlsli').toggle();
+        $('#abo').toggle();
+        $('#aboinp').toggle(); 
+        $('#ove').toggle();
+        $('#oveinp').toggle();
+        $('#web').toggle();
+        $('#webinp').toggle();
+        $('#siz').toggle();
+        $('#sizinp').toggle();
+        $('#est').toggle();
+        $('#estinp').toggle();
+    }
+    function submit(){
+        $('#profileform').submit();
+    }
 
+</script>
 @endsection

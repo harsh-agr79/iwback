@@ -113,6 +113,30 @@ class CompanyController extends Controller
         }
 
     }
+    public function cmpupdate(Request $request){
+        $ml = $request->post('mainlocation');
+        $about = $request->post('about');
+        $overview = $request->post('overview');
+        $website = $request->post('website');
+        $size = $request->post('cmpysize');
+        $estd = $request->post('cmpyestd');
+        $id = $request->post('id');
+
+        Company::where('id',$id)->update([
+            'website'=>$website,
+            'about'=>$about,
+            'overview'=>$overview,
+            'mainlocation'=>$ml,
+            'cmpysize'=>$size,
+            'cmpyestd'=>$estd,
+        ]);
+        return back();
+    }
+    public function settings(Request $request){
+        $userid = session()->get('CMPY_ID');
+        $company = Company::where('id',$userid)->get();
+        return view('company/accountsettings', compact('company'));
+    }
     /**
      * Show the form for creating a new resource.
      *
