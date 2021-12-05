@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Crypt;
-use Mail;
+use App\Mail\emailverify;
 
 class CompanyController extends Controller
 {
@@ -59,15 +60,8 @@ class CompanyController extends Controller
           ]);  
         }
         if($success){
-        
                 $data=['name'=>$firstname, 'verifylink'=>Crypt::encrypt($username)];
-                $user['to']=$email;
-                Mail::send(['html'=>'email_verification'],$data,function($messages)
-                use ($user){
-                    $messages->to($user['to']);
-                    $messages->subject('Verify Your Email');
-                }    
-            );
+                Mail::to($email)->send(new emailverify($data));
         }
 
     }
@@ -103,7 +97,7 @@ class CompanyController extends Controller
         $user = Company::where('username',$username)->get();
 
         if($user['0']->emailverification == 'verified'){
-            echo'<h1>The Link and expired</h1>';
+            echo'<h1>The Link has expired</h1>';
         }
         else{
             Company::where('username',$username)->update([
