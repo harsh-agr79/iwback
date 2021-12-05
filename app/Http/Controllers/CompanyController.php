@@ -62,7 +62,7 @@ class CompanyController extends Controller
         
                 $data=['name'=>$firstname, 'verifylink'=>Crypt::encrypt($username)];
                 $user['to']=$email;
-                Mail::send('email_verification',$data,function($messages)
+                Mail::send(['html'=>'email_verification'],$data,function($messages)
                 use ($user){
                     $messages->to($user['to']);
                     $messages->subject('Verify Your Email');
