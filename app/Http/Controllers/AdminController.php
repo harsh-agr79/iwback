@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Company;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -97,6 +98,11 @@ class AdminController extends Controller
                 'message'=>'Admin Not Found'
             ]);
         }
+    }
+    public function company(Request $request)
+    {
+        $result['company']=Company::all();
+        return view('admin/company', $result);
     }
 
 

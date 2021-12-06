@@ -46,6 +46,7 @@ Route::group(['middleware'=>'admin_auth'], function(){
     Route::get('/admin/sectors',[SectorController::class, 'index']);
     Route::get('/admin/skills',[SkillController::class, 'index']);
     Route::get('/admin/edithome',[HomeController::class, 'index']);
+    Route::get('/admin/company',[AdminController::class, 'company']);
 
     //ADMIN AJAX CRUD
     Route::post('/adminadd',[AdminController::class, 'addadmin']);
