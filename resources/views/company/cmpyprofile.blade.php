@@ -1,16 +1,38 @@
 @extends('company/layoutcmpy')
-<meta name="csrf-token" content="{{ csrf_token() }}" />
 @section('main')
 
-
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+<div id="editcover" class="modal">
+    <div class="modal-content">
+        <form id="upcp" name="coverpic" method="POST" enctype="multipart/form-data">
+            <div class="file-field input-field">
+              <div class="btn">
+                <span>Select Cover Pic</span>
+                <input type="hidden" name="id" value="{{$company['0']->id}}">
+                <input name="coverpic" type="file">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+                <input type="hidden" id="oldimg" value="{{$company['0']->cmpycp}}" name="oldimg">
+              </div>
+            </div>
+                <div class="center">
+                    <button class="modal-close theme btn waves-effect" type="submit">Update</button>
+                </div>
+          </form>
+    </div>
+    <div class="modal-footer">
+    </div>
+  </div>
+</div>
 <form action="" id="profileform" method="POST">
     <input type="hidden" name="id", value="{{$company['0']->id}}">
 <div class="main-content">
     <section class="profile-dashboard">
         <div class="profile-info section-card">
             <div class="img-container">
-                <div class="cover-pic" style="background: url({{asset('assets/images/icon.png')}}) center / cover no-repeat ">
-                    <span class="cover-edit-btn">
+                <div class="cover-pic" id="cppic" style="background: url({{asset('company/cp/'.$company['0']->cmpycp)}}) center / cover no-repeat ">
+                    <span class="cover-edit-btn modal-trigger" href="#editcover">
                         <i class="material-icons">mode_edit</i>
                     </span>
                 </div>
@@ -316,6 +338,8 @@ function mainlocation(){
               success:function(response){
                 console.log(response)
                 // console.log(response.company[0].mainlocation)
+                $('#cppic').css('background-image', 'url("/company/cp/' + response.company[0].cmpycp + '")');
+                $('#oldimg').val(response.company[0].cmpycp)
                 $('#ml').text(response.company[0].mainlocation);
                 $('#ml2').text(response.company[0].mainlocation);
                 $('#mlinp').val(response.company[0].mainlocation);
@@ -348,6 +372,23 @@ function mainlocation(){
         success:function(result){
             fetchcmpy();
             M.toast({html: 'Profile Updated!'})
+        }
+    })
+  });
+  $('#upcp').submit(function(e){
+    e.preventDefault();
+    let formData = new FormData($('#upcp')[0]);
+    $.ajax({
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        url:"{{url('company/updatecp')}}",
+        data: formData,
+        contentType: false,
+        processData: false,
+        type:'POST',
+        success:function(result){
+            fetchcmpy();
+            $('#upcp')[0].reset();
+            M.toast({html: 'Cover Pic Updated!'})
         }
     })
   });

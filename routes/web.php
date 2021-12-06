@@ -32,6 +32,7 @@ Route::group(['middleware'=>'company_auth'], function(){
     Route::get('/company/logout', [CompanyController::class, 'logout']);
     Route::get('/company/settings', [CompanyController::class, 'settings']);
     Route::post('/company/update', [CompanyController::class, 'cmpupdate'])->name('cmppro.up');
+    Route::post('/company/updatecp', [CompanyController::class, 'cmpupdatecp'])->name('upcp');
 });
 
 

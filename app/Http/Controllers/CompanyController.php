@@ -6,6 +6,7 @@ use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Crypt;
+use Illuminate\Support\Facades\File;
 use App\Mail\emailverify;
 
 class CompanyController extends Controller
@@ -129,6 +130,28 @@ class CompanyController extends Controller
             'cmpysize'=>$size,
             'cmpyestd'=>$estd,
         ]);
+    }
+    public function cmpupdatecp(Request $request){
+    
+        // echo 'hello';
+        $request->validate([
+            'coverpic'=>'image|mimes:jpeg,png,jpg,svg'
+        ]);
+        $id=$request->post('id');
+        if($request->hasFile('coverpic')){
+            $path='company/cp/'.$request->post('oldimg');
+            $file = $request->file('coverpic');
+            $ext = $file->getClientOriginalExtension();
+            $image_name = time().'cmpycp'.'.'.$ext;
+            $file->move('company/cp/',$image_name);
+            $image = $image_name;
+            Company::where('id', $id)->update([
+                'cmpycp'=>$image,
+            ]);
+            if(File::exists($path)) {
+                File::delete($path);
+            }
+        }
     }
     public function settings(Request $request){
         $userid = session()->get('CMPY_ID');
