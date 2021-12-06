@@ -17,7 +17,7 @@
               </div>
             </div>
                 <div class="center">
-                    <button class="modal-close theme btn waves-effect" type="submit">Update</button>
+                    <button class="modal-close theme btn waves-effect" onclick="M.toast({html: 'Please wait!'})" type="submit">Update</button>
                 </div>
           </form>
     </div>
@@ -50,7 +50,7 @@
               </div>
             </div>
                 <div class="center">
-                    <button class="modal-close theme btn waves-effect" type="submit">Update</button>
+                    <button class="modal-close theme btn waves-effect" onclick="M.toast({html: 'Please wait!'})" type="submit">Update</button>
                 </div>
           </form>
     </div>
@@ -381,13 +381,13 @@ function mainlocation(){
               url:"/companyget",
               dataType:"json",
               success:function(response){
-                console.log(response)
+                // console.log(response)
                 var a = response.company[0].cmpydp
-                console.log(a);
+                // console.log(a);
                 var b = "dp/"
                 var c = ""
                 var d = b + a +c
-                console.log(d);
+                // console.log(d);
                 $('#cppic').css('background-image', 'url("/company/cp/' + response.company[0].cmpycp + '")');
                 $('#profilepic').attr('src', d)
                 $('#oldimg').val(response.company[0].cmpycp)
