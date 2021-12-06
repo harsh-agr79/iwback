@@ -153,6 +153,28 @@ class CompanyController extends Controller
             }
         }
     }
+    public function cmpupdatedp(Request $request){
+    
+        // echo 'hello';
+        $request->validate([
+            'dp'=>'image|mimes:jpeg,png,jpg,svg'
+        ]);
+        $id=$request->post('id');
+        if($request->hasFile('dp')){
+            $path='company/cp/'.$request->post('olddp');
+            $file = $request->file('dp');
+            $ext = $file->getClientOriginalExtension();
+            $image_name = time().'cmpydp'.'.'.$ext;
+            $file->move('company/dp/',$image_name);
+            $image = $image_name;
+            Company::where('id', $id)->update([
+                'cmpydp'=>$image,
+            ]);
+            if(File::exists($path)) {
+                File::delete($path);
+            }
+        }
+    }
     public function settings(Request $request){
         $userid = session()->get('CMPY_ID');
         $company = Company::where('id',$userid)->get();

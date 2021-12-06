@@ -25,6 +25,49 @@
     </div>
   </div>
 </div>
+<div id="dp" class="modal bottom-sheet">
+    <div class="modal-content">
+      
+            {{-- <div style="font-size: 20px; padding:10px; width:100%; margin-top:10px;" class="z-depth-1 modal-trigger" href="#viewdp"><a href="" class="black-text">View Profile image</a></div> --}}
+            <div style="font-size: 20px; padding:10px; width:100%; margin-top:10px;" class="z-depth-1 modal-trigger" href="#editdp"><a href="" class="black-text">Update Profile image</a></div>
+    </div>
+    {{-- <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat"><i class="material-icons">close</i></a>
+    </div> --}}
+  </div>
+  <div id="editdp" class="modal">
+    <div class="modal-content">
+        <form id="updp" method="POST" enctype="multipart/form-data">
+            <div class="file-field input-field">
+              <div class="btn">
+                <span>Select Profile Pic</span>
+                <input type="hidden" name="id" value="{{$company['0']->id}}">
+                <input name="dp" type="file">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+                <input type="hidden" id="olddp" value="{{$company['0']->cmpydp}}" name="olddp">
+              </div>
+            </div>
+                <div class="center">
+                    <button class="modal-close theme btn waves-effect" type="submit">Update</button>
+                </div>
+          </form>
+    </div>
+    <div class="modal-footer">
+    </div>
+  </div>
+</div>
+<div id="viewdp" class="modal">
+    <div class="modal-content">
+        <div class="center">
+            <img src="{{asset('assets/images/icon.png')}}"  style="height: 60vh;" class="responsive-img" alt="">
+        </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+  </div>
+</div>
 <form action="" id="profileform" method="POST">
     <input type="hidden" name="id", value="{{$company['0']->id}}">
 <div class="main-content">
@@ -38,7 +81,8 @@
                 </div>
                 <div class="avatar">
                     <div class="avatar-pic">
-                        <img class="avatar-img" src="{{asset('assets/images/icon.png')}}">
+                        <img class="avatar-img modal-trigger" href="#dp" id="profilepic"  src="{{asset('assets/images/icon.png')}}">
+                       
                         <div class="avatar-title">
                             <h4>{{$company['0']->cmpyname}}</h4>
                             <p class="location" id="ml"></p>
@@ -306,6 +350,7 @@
         </div>
     </section>
 </div>
+<span class="hide" id="dpname"></span>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 
@@ -337,9 +382,16 @@ function mainlocation(){
               dataType:"json",
               success:function(response){
                 console.log(response)
-                // console.log(response.company[0].mainlocation)
+                var a = response.company[0].cmpydp
+                console.log(a);
+                var b = "dp/"
+                var c = ""
+                var d = b + a +c
+                console.log(d);
                 $('#cppic').css('background-image', 'url("/company/cp/' + response.company[0].cmpycp + '")');
+                $('#profilepic').attr('src', d)
                 $('#oldimg').val(response.company[0].cmpycp)
+                $('#olddp').val(response.company[0].cmpydp)
                 $('#ml').text(response.company[0].mainlocation);
                 $('#ml2').text(response.company[0].mainlocation);
                 $('#mlinp').val(response.company[0].mainlocation);
@@ -354,6 +406,7 @@ function mainlocation(){
                 $('#sizinp').val(response.company[0].cmpysize);
                 $('#est').text(response.company[0].cmpyestd);
                 $('#estinp').val(response.company[0].cmpyestd);
+
               }
           })
       }
@@ -389,6 +442,23 @@ function mainlocation(){
             fetchcmpy();
             $('#upcp')[0].reset();
             M.toast({html: 'Cover Pic Updated!'})
+        }
+    })
+  });
+  $('#updp').submit(function(e){
+    e.preventDefault();
+    let formData = new FormData($('#updp')[0]);
+    $.ajax({
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        url:"{{url('company/updatedp')}}",
+        data: formData,
+        contentType: false,
+        processData: false,
+        type:'POST',
+        success:function(result){
+            fetchcmpy();
+            $('#updp')[0].reset();
+            M.toast({html: 'Profile Pic Updated!'})
         }
     })
   });
