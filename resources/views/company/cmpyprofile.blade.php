@@ -1,10 +1,9 @@
 @extends('company/layoutcmpy')
-
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 @section('main')
 
 
-<form action="{{route('cmppro.up')}}" id="profileform" method="POST">
-    @csrf
+<form action="" id="profileform" method="POST">
     <input type="hidden" name="id", value="{{$company['0']->id}}">
 <div class="main-content">
     <section class="profile-dashboard">
@@ -20,8 +19,8 @@
                         <img class="avatar-img" src="{{asset('assets/images/icon.png')}}">
                         <div class="avatar-title">
                             <h4>{{$company['0']->cmpyname}}</h4>
-                            <p class="location" id="ml">{{$company['0']->mainlocation}}</p>
-                            <input id="mlinp" type="text" class="browser-default" placeholder="Main Branch Location" style="display:none; padding: 10px; border-radius:10px;" name="mainlocation" value="{{$company['0']->mainlocation}}" required>
+                            <p class="location" id="ml"></p>
+                            <input id="mlinp" type="text" class="browser-default" placeholder="Main Branch Location" style="display:none; padding: 10px; border-radius:10px;" name="mainlocation" required>
                             <div></div>
                             <a class="contact-toggle modal-trigger" href="#modal1" data-target="modal1">Contact Info</a>
                         </div>
@@ -33,8 +32,8 @@
                 </div>
                 <div class="about-user">
                     <h4>About Us</h4>
-<pre id="abo">{{$company['0']->about}}</pre>
-                    <textarea id="aboinp" name="about" style="display: none;" class="materialize-textarea browser-default" placeholder="Give a short description about your company">{{$company['0']->about}}</textarea>
+<pre id="abo"></pre>
+                    <textarea id="aboinp" name="about" style="display: none;" class="materialize-textarea browser-default" placeholder="Give a short description about your company"></textarea>
                 </div>
             </div>
         </div>
@@ -42,7 +41,7 @@
         <!-- Modal Structure -->
         <div id="modal1" class="modal">
             <div class="modal-content">
-                <h4>{{$company['0']->cmpyname}}</h4>
+                <h4></h4>
                 <div class="divider"></div>
                 <div class="contact-edit">
                     <h6>Contact Info</h6>
@@ -85,26 +84,26 @@
 
         <div class="overview-section section-card">
             <h3>Overview</h3>
-<pre id="ove">{{$company['0']->overview}}</pre>
-<textarea id="oveinp" style="display: none;" name="overview" class="materialize-textarea browser-default" placeholder="Give a short description about your company">{{$company['0']->overview}}</textarea>
+<pre id="ove"></pre>
+<textarea id="oveinp" style="display: none;" name="overview" class="materialize-textarea browser-default" placeholder="Give a short description about your company"></textarea>
             <div class="extra-overview">
                 <h6>Website</h6>
-                <a href="{{'https://'.$company['0']->website}}" id="web" target="_blank">{{$company['0']->website}}</a>
+                <a href="" id="web" target="_blank"></a>
                 <input type="url" name="website" id="webinp" placeholder="Company Website" class="browser-default" value="{{$company['0']->website}}" style="padding:10px; border-radius:10px; display:none;">
             </div>
             <div class="extra-overview">
                 <h6>Location</h6>
-                <p>{{$company['0']->mainlocation}}</p>
+                <p id="ml2"></p>
             </div>
             <div class="extra-overview">
                 <h6>Company Size</h6>
-                <p id="siz">{{$company['0']->cmpysize}}</p>
-                <input type="text" name="cmpysize" placeholder="Company Size" id="sizinp" class="browser-default" value="{{$company['0']->cmpysize}}" style="padding:10px; border-radius:10px; display:none;">
+                <p id="siz"></p>
+                <input type="text" name="cmpysize" placeholder="Company Size" id="sizinp" class="browser-default" value="" style="padding:10px; border-radius:10px; display:none;">
             </div>
             <div class="extra-overview" style="margin-bottom: 10px;">
                 <h6>Estd.</h6>
-                <p id="est">{{$company['0']->cmpyestd}}</p>
-                <input type="number" min="1900" max="2025" step="1" value="{{$company['0']->est}}" name="cmpyestd" placeholder="Company Established Year" id="estinp" class="browser-default" value="{{$company['0']->cmpysize}}" style="padding:10px; border-radius:10px; display:none;">
+                <div id="est"></div>
+                <input type="number" min="1900" max="2025" step="1" value="" name="cmpyestd" placeholder="Company Established Year" id="estinp" class="browser-default" value="" style="padding:10px; border-radius:10px; display:none;">
             </div>
         </div>
 </form>
@@ -287,10 +286,8 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-    $(document).ready(function(){
-    $('.tooltipped').tooltip();
-  });
-    function mainlocation(){
+
+function mainlocation(){
         $('#ml').toggle();
         $('#mlinp').toggle();
         $('#mledi').toggle();
@@ -309,6 +306,55 @@
     function submit(){
         $('#profileform').submit();
     }
+    $(document).ready(function(){
+    fetchcmpy();
+    function fetchcmpy(){
+          $.ajax({
+              type:"GET",
+              url:"/companyget",
+              dataType:"json",
+              success:function(response){
+                console.log(response)
+                // console.log(response.company[0].mainlocation)
+                $('#ml').text(response.company[0].mainlocation);
+                $('#ml2').text(response.company[0].mainlocation);
+                $('#mlinp').val(response.company[0].mainlocation);
+                $('#abo').html(response.company[0].about);
+                $('#aboinp').val(response.company[0].about);
+                $('#ove').text(response.company[0].overview);
+                $('#oveinp').val(response.company[0].overview);
+                $('#web').text(response.company[0].website);
+                $("#web").attr("href", "https://"+response.company[0].website)
+                $('#webinp').val(response.company[0].website);
+                $('#siz').text(response.company[0].cmpysize);
+                $('#sizinp').val(response.company[0].cmpysize);
+                $('#est').text(response.company[0].cmpyestd);
+                $('#estinp').val(response.company[0].cmpyestd);
+              }
+          })
+      }
+    $('.tooltipped').tooltip();
 
+    $('#profileform').submit(function(e){
+    e.preventDefault();
+    let formData = new FormData($('#profileform')[0]);
+    $.ajax({
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        url:"{{url('company/update')}}",
+        data: formData,
+        contentType: false,
+        processData: false,
+        type:'POST',
+        success:function(result){
+            fetchcmpy();
+            M.toast({html: 'Profile Updated!'})
+        }
+    })
+  });
+
+ 
+
+    
+});
 </script>
 @endsection

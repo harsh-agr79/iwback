@@ -21,6 +21,11 @@ class CompanyController extends Controller
         $company = Company::where('id',$userid)->get();
         return view('company/cmpyprofile', compact('company'));
     }
+    public function cmpy(Request $request){
+        $userid = session()->get('CMPY_ID');
+        $company = Company::where('id',$userid)->get();
+        return response()->json(['company'=>$company]);
+    }
     public function register(Request $request){
 
         $request->validate([
@@ -124,7 +129,6 @@ class CompanyController extends Controller
             'cmpysize'=>$size,
             'cmpyestd'=>$estd,
         ]);
-        return back();
     }
     public function settings(Request $request){
         $userid = session()->get('CMPY_ID');
