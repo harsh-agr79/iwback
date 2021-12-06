@@ -1,6 +1,11 @@
 @extends('admin/layoutadmin')
 
 @section('main')
+<style>
+    tr{
+        font-size: 13px;
+    }
+</style>
 <div>
     <div class="center">
             <div class="center-align">

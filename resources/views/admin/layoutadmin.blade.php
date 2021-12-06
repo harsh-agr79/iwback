@@ -28,8 +28,8 @@
     </header>
     <ul id="slide-out" class="theme sidenav sidenav-fixed">
         <li><a href="#!" class="white-text">Super Admin</a></li>
-        <li><a href="#!" class="white-text">DashBoard</a></li>
-        <li><a href="#!" class="white-text">Companies</a></li>
+        <li><a href="" class="white-text">DashBoard</a></li>
+        <li><a href="{{url('admin/company')}}" class="white-text">Companies</a></li>
         <li><a href="#!" class="white-text">Employees</a></li>
         @if($user['0']->username == 'harshagr')
         <li><a href="{{url('admin/sectors')}}" class="white-text">Sector</a></li>
