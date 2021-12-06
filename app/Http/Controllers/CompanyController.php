@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use Crypt;
 use Illuminate\Support\Facades\File;
 use App\Mail\emailverify;
+use Image;
 
 class CompanyController extends Controller
 {
@@ -161,11 +162,13 @@ class CompanyController extends Controller
         ]);
         $id=$request->post('id');
         if($request->hasFile('dp')){
-            $path='company/cp/'.$request->post('olddp');
+            $path='company/dp/'.$request->post('olddp');
             $file = $request->file('dp');
             $ext = $file->getClientOriginalExtension();
             $image_name = time().'cmpydp'.'.'.$ext;
-            $file->move('company/dp/',$image_name);
+            $image_resize = Image::make($file->getRealPath());
+            $image_resize->fit(300);
+            $image_resize->save(public_path('company/dp/'.$image_name));
             $image = $image_name;
             Company::where('id', $id)->update([
                 'cmpydp'=>$image,
