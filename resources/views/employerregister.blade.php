@@ -7,7 +7,11 @@
             <img src="./assets/images/iwmain.png" height="90" class="responsive-img" alt="">
         </div>
     </div>
+    
       <h4 class="center-align" id="emailmsg">Register as a Employer</h4>
+      <div id="loadercont" class="center">
+      
+      </div>
       <form id="regemployer" enctype="multipart/form-data" method="POST" class="row container">
           @csrf
           <div class="input-field col s12 m6">
@@ -126,6 +130,19 @@ function passwordcheck(){
 
 $('#regemployer').submit(function(e){
     e.preventDefault();
+    $('#regemployer').toggle();
+    $('#emailmsg').text('Please Wait!')
+    $('#loadercont').append('<div id="loader" class="preloader-wrapper big active">\
+    <div class="spinner-layer spinner-blue-only">\
+      <div class="circle-clipper left">\
+        <div class="circle"></div>\
+      </div><div class="gap-patch">\
+        <div class="circle"></div>\
+      </div><div class="circle-clipper right">\
+        <div class="circle"></div>\
+      </div>\
+    </div>\
+  </div>');
     let formData = new FormData($('#regemployer')[0]);
     $.ajax({
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -135,11 +152,14 @@ $('#regemployer').submit(function(e){
         processData: false,
         type:'POST',
         success:function(response){
-            $('#regemployer')['0'].remove();
-            $('#emailmsg').text('Please check Your email Id for verification')
+            $('#loader').remove();
+            $('#emailmsg').text('Please check Your email for verification, check the spam folder incase you do not find the mail')
             M.toast({html: 'You have been Registered!'})
         },
         error:function (response) {
+              $('#loader').remove();
+              $('#regemployer').toggle();
+              $('#emailmsg').text('Register as employer')
               if(response.responseJSON.errors.username){
                 var unerr = response.responseJSON.errors.username;  
                 M.toast({html: unerr})
