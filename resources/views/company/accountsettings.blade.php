@@ -145,13 +145,14 @@
                     <div id="editpn" class="modal">
                         <div class="modal-content">
                             <h5 class="center-align">Edit Your Phone Number</h5>
-                            <form action="">
+                            <form action="" method="POST" enctype="multipart/form-data" id="editpnform">
                                 <div class="row">
                                     <div class="col s12">
                                         <input type="password" name="password" placeholder="Enter Your Password to Confirm" required>
                                     </div>
                                     <div class="col s12">
-                                        <input type="text" name="Phone Number" placeholder="New Phone Number" value="{{$company['0']->phonenumber}}" required>
+                                        <input type="hidden" name="id" value="{{$company['0']->id}}">
+                                        <input type="text" name="phonenumber" placeholder="New Phone Number" id="pn" value="{{$company['0']->phonenumber}}" required>
                                     </div>
                                     <div class="center col s12">
                                         <button class="theme btn waves-effect" type="submit">Update</button>
@@ -221,6 +222,7 @@
                 $('#cn').val(response.company[0].cmpyname);
                 $('#username').text(response.company[0].username);
                 $('#un').val(response.company[0].username);
+                $('#pn').val(response.company[0].phonenumber);
               }
           })
       }
@@ -303,26 +305,26 @@
             }
             })
         });
-        // $('#editemailform').submit(function(e){
-        //     e.preventDefault();
-        //     let formData = new FormData($('#editemailform')[0]);
-        //     $.ajax({
-        //     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        //     url:"{{url('company/updateemail')}}",
-        //     data: formData,
-        //     contentType: false,
-        //     processData: false,
-        //     type:'POST',
-        //     success:function(result){
-        //         M.toast({html: result.pw})
-        //         if(result.pw === 'Email Has Been Changed'){
-        //             fetchcmpy();
-        //             $('#editemail').modal('close');
-        //             $('#editemailform')[0].reset();
-        //         }
-        //     }
-        //     })
-        // });
+        $('#editpnform').submit(function(e){
+            e.preventDefault();
+            let formData = new FormData($('#editpnform')[0]);
+            $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            url:"{{url('company/updatepn')}}",
+            data: formData,
+            contentType: false,
+            processData: false,
+            type:'POST',
+            success:function(result){
+                M.toast({html: result.pw})
+                if(result.pw === 'Phone number Has Been Changed'){
+                    fetchcmpy();
+                    $('#editpn').modal('close');
+                    $('#editpnform')[0].reset();
+                }
+            }
+            })
+        });
     })
 </script>
 @endsection

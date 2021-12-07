@@ -249,6 +249,21 @@ class CompanyController extends Controller
             return ['pw'=>'Incorrect Password'];
         }
     }
+    public function cmpupdatepn(Request $request){
+        $id = $request->post('id');
+        $password = $request->post('password');
+        $phonenumber = $request->post('phonenumber');
+        $company = Company::where('id',$id)->get();
+        if(Crypt::decrypt($company['0']->password) === $password){
+            Company::where('id',$id)->update([
+                'phonenumber'=>$phonenumber,
+            ]);
+            return ['pw'=>'Phone number Has Been Changed'];
+        }
+        else{
+            return ['pw'=>'Incorrect Password'];
+        }
+    }
     public function cmpupdateemail(Request $request){
         $request->validate([
             'email'=>'required|unique:admins,email|unique:companies,email',

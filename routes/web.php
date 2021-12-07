@@ -39,6 +39,7 @@ Route::group(['middleware'=>'company_auth'], function(){
     Route::post('/company/updateun', [CompanyController::class, 'cmpupdateun'])->name('upun');
     Route::post('/company/updatecn', [CompanyController::class, 'cmpupdatecn'])->name('upcn');
     Route::post('/company/updatepw', [CompanyController::class, 'cmpupdatepw'])->name('uppw');
+    Route::post('/company/updatepn', [CompanyController::class, 'cmpupdatepn'])->name('uppn');
     Route::post('/company/updateemail', [CompanyController::class, 'cmpupdateemail'])->name('upemail');
 });
 
