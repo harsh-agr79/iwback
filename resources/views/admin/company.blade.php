@@ -40,10 +40,14 @@
                                     <i class="material-icons">check</i>
                                 @endif</td>
                                 <td>
-                                    <label>
-                                        <input type="checkbox" />
-                                        <span>Verify</span>
-                                      </label>
+                                    <form action="{{route('cav')}}" enctype="multipart/form-data" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{$item->id}}">
+                                        <label>
+                                            <input type="checkbox" @if($item->adminverification == 'verified') checked @else @endif name="adminverify" onclick="submit()"/>
+                                            <span>@if($item->adminverification == 'verified') Verified @else Verify @endif</span>
+                                          </label>
+                                    </form>  
                                 </td>
                                 <td><i class="material-icons">more_vert</i></td>
                             </tr>

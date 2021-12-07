@@ -120,13 +120,13 @@
                             <p>{{$company['0']->email}}</p>
                         </span>
                     </li>
-                    <li>
+                    {{-- <li>
                         <i class="material-icons">phone</i>
                         <span class="contact-detail">
                             <h5>Phone</h5>
                             <p>(+977) {{$company['0']->phonenumber}}</p>
                         </span>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>

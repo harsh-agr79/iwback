@@ -34,6 +34,10 @@ Route::group(['middleware'=>'company_auth'], function(){
     Route::post('/company/update', [CompanyController::class, 'cmpupdate'])->name('cmppro.up');
     Route::post('/company/updatecp', [CompanyController::class, 'cmpupdatecp'])->name('upcp');
     Route::post('/company/updatedp', [CompanyController::class, 'cmpupdatedp'])->name('updp');
+    Route::post('/company/updatename', [CompanyController::class, 'cmpupdatename'])->name('upname');
+    Route::post('/company/updateun', [CompanyController::class, 'cmpupdateun'])->name('upun');
+    Route::post('/company/updatecn', [CompanyController::class, 'cmpupdatecn'])->name('upcn');
+    Route::post('/company/updatepw', [CompanyController::class, 'cmpupdatepw'])->name('uppw');
 });
 
 
@@ -48,6 +52,8 @@ Route::group(['middleware'=>'admin_auth'], function(){
     Route::get('/admin/edithome',[HomeController::class, 'index']);
     Route::get('/admin/company',[AdminController::class, 'company']);
 
+    //ADMIN SIDE COMPANY CRUD
+    Route::post('/company/adminverify',[CompanyController::class,'cmpadminverify'])->name('cav');
     //ADMIN AJAX CRUD
     Route::post('/adminadd',[AdminController::class, 'addadmin']);
     Route::post('/adminupdate',[AdminController::class, 'updateadmin']);

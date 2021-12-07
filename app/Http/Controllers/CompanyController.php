@@ -183,6 +183,90 @@ class CompanyController extends Controller
         $company = Company::where('id',$userid)->get();
         return view('company/accountsettings', compact('company'));
     }
+
+    public function cmpadminverify(Request $request){
+        $id = $request->post('id');
+        $av = $request->post('adminverify');
+        if($av == NULL){
+            $av2 = '';
+        }
+        else{
+            $av2 = 'verified';
+        }
+        Company::where('id',$id)->update([
+            'adminverification'=>$av2,
+        ]);
+        return back();
+    }
+    public function cmpupdatename(Request $request){
+        $id = $request->post('id');
+        $password = $request->post('password');
+        $firstname = $request->post('firstname');
+        $lastname = $request->post('lastname');
+        $company = Company::where('id',$id)->get();
+        if(Crypt::decrypt($company['0']->password) === $password){
+            Company::where('id',$id)->update([
+                'firstname'=>$firstname,
+                'lastname'=>$lastname,
+            ]);
+            return ['pw'=>'Name Has Been Changed'];
+        }
+        else{
+            return ['pw'=>'Incorrect Password'];
+        }
+    }
+    public function cmpupdateun(Request $request){
+        $id = $request->post('id');
+        $password = $request->post('password');
+        $username = $request->post('username');
+        $company = Company::where('id',$id)->get();
+        if(Crypt::decrypt($company['0']->password) === $password){
+            Company::where('id',$id)->update([
+                'username'=>$username,
+            ]);
+            return ['pw'=>'Username Has Been Changed'];
+        }
+        else{
+            return ['pw'=>'Incorrect Password'];
+        }
+    }
+    public function cmpupdatecn(Request $request){
+        $id = $request->post('id');
+        $password = $request->post('password');
+        $cmpyname = $request->post('cmpyname');
+        $company = Company::where('id',$id)->get();
+        if(Crypt::decrypt($company['0']->password) === $password){
+            Company::where('id',$id)->update([
+                'cmpyname'=>$cmpyname,
+            ]);
+            return ['pw'=>'Company name Has Been Changed'];
+        }
+        else{
+            return ['pw'=>'Incorrect Password'];
+        }
+    }
+    public function cmpupdatepw(Request $request){
+        $id = $request->post('id');
+        $password = $request->post('password');
+        $newpassword = $request->post('newpassword');
+        $newpassword2 = $request->post('newpassword2');
+        $company = Company::where('id',$id)->get();
+        if(Crypt::decrypt($company['0']->password) === $password){
+            if($newpassword === $newpassword2){
+                Company::where('id',$id)->update([
+                    'password'=>Crypt::encrypt($newpassword),
+                ]);
+                return ['pw'=>'Password Has Been Changed'];
+            }
+            else
+            {
+                return ['pw'=>'The New Passwords Do not match'];
+            }      
+        }
+        else{
+            return ['pw'=>'Incorrect Password'];
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *

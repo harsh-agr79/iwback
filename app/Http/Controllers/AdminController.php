@@ -101,7 +101,7 @@ class AdminController extends Controller
     }
     public function company(Request $request)
     {
-        $result['company']=Company::all();
+        $result['company']=Company::orderBy('adminverification','asc')->get();
         return view('admin/company', $result);
     }
 
