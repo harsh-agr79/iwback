@@ -24,7 +24,7 @@ Route::get('/registeremployer', [FirstController::class, 'registeremployer']);
 Route::post('/auth',[FirstController::class, 'auth'])->name('auth');
 Route::post('/addemployer',[CompanyController::class, 'register']);
 Route::get('company/loginregister/{id}', [CompanyController::class, 'registerlogin']);
-Route::get('verification/{id}', [CompanyController::class, 'verify']);
+Route::get('verification/{id}/{id2}', [CompanyController::class, 'verify']);
 Route::get('emailchange/{id}/{id2}', [CompanyController::class, 'emailchange']);
 
 Route::group(['middleware'=>'company_auth'], function(){

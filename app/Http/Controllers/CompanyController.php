@@ -53,6 +53,7 @@ class CompanyController extends Controller
             $image_name = time().'cmpypan'.'.'.$ext;
             $file->move('company/pancertificates/',$image_name);
             $image = $image_name;
+            $randid = rand(111111111111111,999999999999999);
         }
         if($password == $password2 && $agree == 'on'){
          $success =  Company::insert([
@@ -65,10 +66,11 @@ class CompanyController extends Controller
             'pannumber'=>$pannumber,
             'pancertificate'=>$image_name,
             'password'=>Crypt::encrypt($password),
+            'extra2'=>Crypt::encrypt($randid)
           ]);  
         }
         if($success){
-                $data=['name'=>$firstname, 'verifylink'=>Crypt::encrypt($username)];
+                $data=['name'=>$firstname, 'verifylink'=>Crypt::encrypt($username), 'randid'=>Crypt::encrypt($randid)];
                 Mail::to($email)->send(new emailverify($data));
         }
 
@@ -100,7 +102,7 @@ class CompanyController extends Controller
 
         return redirect('/');
     }
-    public function verify(Request $request,$user){
+    public function verify(Request $request,$user,$ri){
         $username = Crypt::decrypt($user);
         $user = Company::where('username',$username)->get();
 
@@ -108,10 +110,16 @@ class CompanyController extends Controller
             echo'<h1>The Link has expired</h1>';
         }
         else{
-            Company::where('username',$username)->update([
-                'emailverification'=>'verified',
-            ]);
-            return redirect('company/loginregister/'.$username);
+            if(Crypt::decrypt($user['0']->extra2) == Crypt::decrypt($ri)){
+                Company::where('username',$username)->update([
+                    'emailverification'=>'verified',
+                    'extra2'=>Crypt::encrypt($ri),
+                ]);
+                return redirect('company/loginregister/'.$username);
+            }
+           else{
+            echo'<h1>The Link has expired</h1>';
+           }
         }
 
     }
