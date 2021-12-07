@@ -25,6 +25,7 @@ Route::post('/auth',[FirstController::class, 'auth'])->name('auth');
 Route::post('/addemployer',[CompanyController::class, 'register']);
 Route::get('company/loginregister/{id}', [CompanyController::class, 'registerlogin']);
 Route::get('verification/{id}', [CompanyController::class, 'verify']);
+Route::get('emailchange/{id}/{id2}', [CompanyController::class, 'emailchange']);
 
 Route::group(['middleware'=>'company_auth'], function(){
     Route::get('/company/profile', [CompanyController::class, 'index']);
@@ -38,6 +39,7 @@ Route::group(['middleware'=>'company_auth'], function(){
     Route::post('/company/updateun', [CompanyController::class, 'cmpupdateun'])->name('upun');
     Route::post('/company/updatecn', [CompanyController::class, 'cmpupdatecn'])->name('upcn');
     Route::post('/company/updatepw', [CompanyController::class, 'cmpupdatepw'])->name('uppw');
+    Route::post('/company/updateemail', [CompanyController::class, 'cmpupdateemail'])->name('upemail');
 });
 
 

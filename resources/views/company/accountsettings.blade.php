@@ -92,13 +92,15 @@
                     <div id="editemail" class="modal">
                         <div class="modal-content">
                             <h5 class="center-align">Edit Your Email</h5>
-                            <form action="">
+                            <form action="{{route('upemail')}}" id="editemailform" method="POST" enctype="multipart/form-data">
+                                @csrf
                                 <div class="row">
                                     <div class="col s12">
                                         <input type="password" name="password" placeholder="Enter Your Password to Confirm" required>
                                     </div>
                                     <div class="col s12">
-                                        <input type="text" name="firstname" placeholder="First Name" value="{{$company['0']->email}}" required>
+                                        <input type="hidden" name="id" value="{{$company['0']->id}}">
+                                        <input type="text" name="email" placeholder="Email" value="{{$company['0']->email}}" required>
                                     </div>
                                     <div class="center col s12">
                                         <button class="theme btn waves-effect" type="submit">Update</button>
@@ -301,6 +303,26 @@
             }
             })
         });
+        // $('#editemailform').submit(function(e){
+        //     e.preventDefault();
+        //     let formData = new FormData($('#editemailform')[0]);
+        //     $.ajax({
+        //     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        //     url:"{{url('company/updateemail')}}",
+        //     data: formData,
+        //     contentType: false,
+        //     processData: false,
+        //     type:'POST',
+        //     success:function(result){
+        //         M.toast({html: result.pw})
+        //         if(result.pw === 'Email Has Been Changed'){
+        //             fetchcmpy();
+        //             $('#editemail').modal('close');
+        //             $('#editemailform')[0].reset();
+        //         }
+        //     }
+        //     })
+        // });
     })
 </script>
 @endsection

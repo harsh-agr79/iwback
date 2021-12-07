@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use Crypt;
 use Illuminate\Support\Facades\File;
 use App\Mail\emailverify;
+use App\Mail\emailchange;
 use Image;
 
 class CompanyController extends Controller
@@ -216,6 +217,9 @@ class CompanyController extends Controller
         }
     }
     public function cmpupdateun(Request $request){
+        $request->validate([
+            'username'=>'required|unique:admins,username|unique:companies,username',
+        ]);
         $id = $request->post('id');
         $password = $request->post('password');
         $username = $request->post('username');
@@ -245,6 +249,32 @@ class CompanyController extends Controller
             return ['pw'=>'Incorrect Password'];
         }
     }
+    public function cmpupdateemail(Request $request){
+        $request->validate([
+            'email'=>'required|unique:admins,email|unique:companies,email',
+        ]);
+        $id = $request->post('id');
+        $password = $request->post('password');
+        $email = $request->post('email');
+        $company = Company::where('id',$id)->get();
+        $randomid = rand(111111111111111,999999999999999);
+        if(Crypt::decrypt($company['0']->password) === $password){
+          $success = Company::where('id',$id)->update([
+                'email'=>$email,
+                'emailverification'=>'',
+                'extra1'=>$randomid
+            ]);
+            if($success){
+                $username = Crypt::encrypt($company[0]->username);
+                $data=['name'=>$company[0]->firstname, 'verifylink'=>Crypt::encrypt($username), 'randomid'=>Crypt::encrypt($randomid)];
+                Mail::to($email)->send(new emailchange($data));
+            }
+            return redirect('/');
+        }
+        else{
+            return back();
+        }
+    }
     public function cmpupdatepw(Request $request){
         $id = $request->post('id');
         $password = $request->post('password');
@@ -265,6 +295,22 @@ class CompanyController extends Controller
         }
         else{
             return ['pw'=>'Incorrect Password'];
+        }
+    }
+    public function emailchange(Request $request, $un,$ri){
+        $user = Crypt::decrypt($un);
+        $username = Crypt::decrypt($user);
+        $randomid = Crypt::decrypt($ri);
+        $company = Company::where('username',$username)->get();
+        if($company[0]->extra1 == $randomid){
+            Company::where('username',$username)->update([
+                'emailverification'=>'verified',
+                'extra1'=>Crypt::encrypt($ri).rand(1111111111,9999999999),
+            ]);
+            return redirect('/');
+        }
+        else{
+            echo 'The Link has already expired';
         }
     }
     /**
