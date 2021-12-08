@@ -9,6 +9,8 @@ use Crypt;
 use Illuminate\Support\Facades\File;
 use App\Mail\emailverify;
 use App\Mail\emailchange;
+use App\Mail\cmpdeactivate;
+use App\Mail\cmpreactivate;
 use Image;
 
 class CompanyController extends Controller
@@ -328,6 +330,78 @@ class CompanyController extends Controller
         if($company[0]->extra1 == $randomid){
             Company::where('username',$username)->update([
                 'emailverification'=>'verified',
+                'extra1'=>Crypt::encrypt($ri).rand(1111111111,9999999999),
+            ]);
+            return redirect('/');
+        }
+        else{
+            echo 'The Link has already expired';
+        }
+    }
+    public function cmpdeactivate(Request $request)
+    {
+        $id = $request->post('id');
+        $password = $request->post('password');
+        $reason = $request->post('reason');
+        $company = Company::where('id',$id)->get();
+        $randid = rand(111111111111111,999999999999999);
+        if(Crypt::decrypt($company[0]->password) === $password){
+              $success = Company::where('id',$id)->update([
+                  'extra1'=>Crypt::encrypt($randid),
+                  'extra3'=>$reason,
+              ]);
+            if($success){
+                $username = Crypt::encrypt($company[0]->username);
+                $data=['name'=>$company[0]->firstname, 'deactivatelink'=>Crypt::encrypt($company[0]->username), 'randomid'=>Crypt::encrypt(Crypt::encrypt($randid))];
+                Mail::to($company[0]->email)->send(new cmpdeactivate($data));
+            }
+            return ['pw'=>'Check Your email to deactivate your account'];
+        }
+        else{
+            return ['pw'=>'Incorrect Password'];
+        }
+    }
+    public function cmpreactivate(Request $request)
+    {
+        $id = $request->post('id');
+        $company = Company::where('id',$id)->get();
+        $randid = rand(111111111111111,999999999999999);
+        
+              $success = Company::where('id',$id)->update([
+                  'extra1'=>Crypt::encrypt($randid),
+                  'extra3'=>'',
+              ]);
+            if($success){
+                $username = Crypt::encrypt($company[0]->username);
+                $data=['name'=>$company[0]->firstname, 'reactivatelink'=>Crypt::encrypt($company[0]->username), 'randomid'=>Crypt::encrypt(Crypt::encrypt($randid))];
+                Mail::to($company[0]->email)->send(new cmpreactivate($data));
+            }
+            return ['pw'=>'Check Your email to reactivate your account'];
+    }
+    public function confirmda(Request $request,$un,$ri){
+        $username = Crypt::decrypt($un);
+        $randid = Crypt::decrypt($ri);
+        $randomid = Crypt::decrypt($randid);
+        $company = Company::where('username',$username)->get();
+        if(Crypt::decrypt($company[0]->extra1) == $randomid){
+            Company::where('username',$username)->update([
+                'deactivate'=>'on',
+                'extra1'=>Crypt::encrypt($ri).rand(1111111111,9999999999),
+            ]);
+            return redirect('company/logout');
+        }
+        else{
+            echo 'The Link has already expired';
+        }
+    }
+    public function confirmra(Request $request,$un,$ri){
+        $username = Crypt::decrypt($un);
+        $randid = Crypt::decrypt($ri);
+        $randomid = Crypt::decrypt($randid);
+        $company = Company::where('username',$username)->get();
+        if(Crypt::decrypt($company[0]->extra1) == $randomid){
+            Company::where('username',$username)->update([
+                'deactivate'=>'',
                 'extra1'=>Crypt::encrypt($ri).rand(1111111111,9999999999),
             ]);
             return redirect('/');

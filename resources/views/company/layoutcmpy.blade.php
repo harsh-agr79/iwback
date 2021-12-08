@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- materialize css cdn -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -124,18 +125,86 @@
         </ul>
 
         <main>
-            @if ($user['0']->emailverification == 'verified')
-            
-                @yield('main')
-            @else
-                <div style="height: 40vh;">
-                
+            @if($user['0']->deactivate === 'on')
+        <div style="height: 40vh;">
+        
+        </div>
+        <div class="center-align" style="font-size: 30px;">Your account is Deactivated, if you want to reactivate your account please <br><span class="btn theme waves-effect modal-trigger" href="#reactivate"> click here </span><br><img src="{{asset('assets/images/iwmain.png')}}" class="inline-icon" height="50" alt=""></div>
+        
+        <div id="reactivate" class="modal">
+            <div class="modal-content">
+                <div id="loadercont" class="center">
+
                 </div>
-                <div class="center-align" style="font-size: 30px;">Please verify Your Email first to access <img src="{{asset('assets/images/iwmain.png')}}" class="inline-icon" height="50" alt=""></div>
-                <div style="height: 40vh;">
-                
+                <div id="emailmsg">
+
                 </div>
-            @endif
+              <form action="" method="POST" enctype="multipart/form-data" id="reactivateacc">
+                @csrf
+                  <div class="center">
+                    <h4>Reactivate account</h4>
+                    <input type="hidden" name="id" value="{{$user['0']->id}}">
+                    <button class="btn theme waves-effect">Reactivate</button>
+                  </div>
+                 
+              </form>
+            </div>
+           
+          </div>
+                  
+        <div style="height: 40vh;">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+              $(document).ready(function(){
+                    $('.modal').modal();
+
+                    $('#reactivateacc').submit(function(e){
+            e.preventDefault();
+            $('#reactivateacc').toggle();
+            $('#loadercont').append('<div id="loader" class="preloader-wrapper big active">\
+    <div class="spinner-layer spinner-blue-only">\
+      <div class="circle-clipper left">\
+        <div class="circle"></div>\
+      </div><div class="gap-patch">\
+        <div class="circle"></div>\
+      </div><div class="circle-clipper right">\
+        <div class="circle"></div>\
+      </div>\
+    </div>\
+  </div>');
+            let formData = new FormData($('#reactivateacc')[0]);
+            $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            url:"{{url('company/reactivate')}}",
+            data: formData,
+            contentType: false,
+            processData: false,
+            type:'POST',
+            success:function(result){
+                M.toast({html: result.pw})
+                if(result.pw === 'Check Your email to reactivate your account'){
+                    $('#loader').remove();
+                    $('#emailmsg').text('Please check Your email to Reactivate your account, check the spam folder incase you do not find the mail')
+                }
+            }
+            })
+        });
+              });
+        </script>
+        </div>
+    @elseif ($user['0']->emailverification == 'verified')
+    
+        @yield('main')
+    
+    @else
+        <div style="height: 40vh;">
+        
+        </div>
+        <div class="center-align" style="font-size: 30px;">Please verify Your Email first to access <img src="{{asset('assets/images/iwmain.png')}}" class="inline-icon" height="50" alt=""></div>
+        <div style="height: 40vh;">
+        
+        </div>
+    @endif
             </main>
 
         <footer class="page-footer theme" style="margin-top: 10vh;">

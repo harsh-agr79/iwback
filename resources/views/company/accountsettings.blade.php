@@ -164,7 +164,35 @@
                 </div>
                 <div class="settings-item">
                     <h3 class="item-title">Deactivate Account</h3>
-                    <i class="material-icons deactivate-btn">warning</i>
+                    <i class="material-icons btn red white-text modal-trigger" href="#deactivate">warning</i>
+                    <div id="deactivate" class="modal">
+                        <div class="modal-content">
+                            <div id="loadercont" class="center">
+
+                            </div>
+                            <div id="emailmsg"></div>
+                            <form action="" method="POST" enctype="multipart/form-data" id="deactivateacc">
+                                @csrf
+                                <div class="row">
+                                    <div class="col s12">
+                                        <h3>Are you sure you want to deactivate your account?</h3>
+                                        <h6>You can recover your account until after 30 days of deactivation after that your account along with all your details will be permanently deleted.</h6>
+                                    </div>
+                                    <input type="hidden" name="id" value="{{$company['0']->id}}">
+                                    <input type="password" name="password" required placeholder="Enter your password to confirm">
+                                    <div class="col s12">
+                                        <h5>Specify the reason:</h5>
+                                        <div class="input-field col s12">
+                                            <textarea id="textarea2" name="reason" required class="materialize-textarea"></textarea>
+                                            <label for="textarea2">Reason</label>
+                                          </div>
+                                    </div>
+                                    <div class="col s6 right-align"><span class="modal-close btn waves-effect theme">Cancel</span></div>
+                                    <div class="col s6"><button class="btn waves-effect red">Continue To Deactivate</button></div>
+                                </div>
+                            </form>
+                        </div>
+                      </div>
                 </div>
             </div>
         </div>
@@ -321,6 +349,39 @@
                     fetchcmpy();
                     $('#editpn').modal('close');
                     $('#editpnform')[0].reset();
+                }
+            }
+            })
+        });
+        $('#deactivateacc').submit(function(e){
+            e.preventDefault();
+            $('#deactivateacc').toggle();
+            $('#loadercont').append('<div id="loader" class="preloader-wrapper big active">\
+    <div class="spinner-layer spinner-blue-only">\
+      <div class="circle-clipper left">\
+        <div class="circle"></div>\
+      </div><div class="gap-patch">\
+        <div class="circle"></div>\
+      </div><div class="circle-clipper right">\
+        <div class="circle"></div>\
+      </div>\
+    </div>\
+  </div>');
+            let formData = new FormData($('#deactivateacc')[0]);
+            $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            url:"{{url('company/deactivate')}}",
+            data: formData,
+            contentType: false,
+            processData: false,
+            type:'POST',
+            success:function(result){
+                M.toast({html: result.pw})
+                if(result.pw === 'Check Your email to deactivate your account'){
+                    $('#loader').remove();
+                    $('#emailmsg').text('Please check Your email to deactivate your account, check the spam folder incase you do not find the mail')
+                    fetchcmpy();
+                    $('#deactivateacc')[0].reset();
                 }
             }
             })

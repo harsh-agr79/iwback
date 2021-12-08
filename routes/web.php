@@ -26,6 +26,8 @@ Route::post('/addemployer',[CompanyController::class, 'register']);
 Route::get('company/loginregister/{id}', [CompanyController::class, 'registerlogin']);
 Route::get('verification/{id}/{id2}', [CompanyController::class, 'verify']);
 Route::get('emailchange/{id}/{id2}', [CompanyController::class, 'emailchange']);
+Route::get('cmpdeactivate/{id}/{id2}', [CompanyController::class, 'confirmda']);
+Route::get('cmpreactivate/{id}/{id2}', [CompanyController::class, 'confirmra']);
 
 Route::group(['middleware'=>'company_auth'], function(){
     Route::get('/company/profile', [CompanyController::class, 'index']);
@@ -41,6 +43,8 @@ Route::group(['middleware'=>'company_auth'], function(){
     Route::post('/company/updatepw', [CompanyController::class, 'cmpupdatepw'])->name('uppw');
     Route::post('/company/updatepn', [CompanyController::class, 'cmpupdatepn'])->name('uppn');
     Route::post('/company/updateemail', [CompanyController::class, 'cmpupdateemail'])->name('upemail');
+    Route::post('/company/deactivate', [CompanyController::class, 'cmpdeactivate']);
+    Route::post('/company/reactivate', [CompanyController::class, 'cmpreactivate']);
 });
 
 
