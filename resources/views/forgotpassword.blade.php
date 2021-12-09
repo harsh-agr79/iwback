@@ -55,7 +55,7 @@
        </div>
          </div>      
          <div class="col s12 center">
-           <button class="modal-close waves-effect waves-green btn-large theme">Verify</button>
+           <button class="modal-close waves-effect waves-green btn-large theme">Update password</button>
          </div>
     </form>
 </div>
