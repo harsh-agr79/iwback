@@ -23,7 +23,7 @@
    <div class="row center">
       <span class="red-text" style="font-size: 20px;">{{session('error')}}</span> <br>
        <span>
-           <a href="">Forgot password?</a>
+           <a href="{{url('forgotpassword')}}">Forgot password?</a>
        </span>
        <br>
        <span>

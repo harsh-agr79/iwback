@@ -11,6 +11,8 @@ use App\Mail\emailverify;
 use App\Mail\emailchange;
 use App\Mail\cmpdeactivate;
 use App\Mail\cmpreactivate;
+use App\Mail\cmpadminverify;
+use App\Mail\cmpadminunverify;
 use Image;
 
 class CompanyController extends Controller
@@ -198,14 +200,20 @@ class CompanyController extends Controller
     public function cmpadminverify(Request $request){
         $id = $request->post('id');
         $av = $request->post('adminverify');
+        $company = Company::where('id',$id)->get();
         if($av == NULL){
             $av2 = '';
+            $data=['name'=>$company[0]->firstname];
+            Mail::to($company[0]->email)->send(new cmpadminunverify($data));
         }
         else{
             $av2 = 'verified';
+            $data=['name'=>$company[0]->firstname];
+            Mail::to($company[0]->email)->send(new cmpadminverify($data));
         }
         Company::where('id',$id)->update([
             'adminverification'=>$av2,
+            
         ]);
         return back();
     }
@@ -410,6 +418,7 @@ class CompanyController extends Controller
             echo 'The Link has already expired';
         }
     }
+    
     /**
      * Show the form for creating a new resource.
      *

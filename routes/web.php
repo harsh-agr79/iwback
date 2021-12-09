@@ -20,6 +20,10 @@ use App\Http\Controllers\CompanyController;
 
 Route::get('/', [FirstController::class, 'index']);
 Route::get('/login', [FirstController::class, 'login']);
+Route::get('/forgotpassword', [FirstController::class, 'forgotpassword']);
+Route::post('/forgotpassword/mail', [FirstController::class, 'fpwmail']);
+Route::post('/forgotpassword/verifycode', [FirstController::class, 'fpwvc']);
+Route::post('/forgotpassword/newpassword', [FirstController::class, 'fpwnp']);
 Route::get('/registeremployer', [FirstController::class, 'registeremployer']);
 Route::post('/auth',[FirstController::class, 'auth'])->name('auth');
 Route::post('/addemployer',[CompanyController::class, 'register']);
