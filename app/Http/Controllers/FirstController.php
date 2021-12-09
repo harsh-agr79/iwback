@@ -11,6 +11,7 @@ use App\Mail\forgotpassword;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Crypt;
+use Carbon\Carbon;
 
 class FirstController extends Controller
 {
@@ -55,6 +56,7 @@ class FirstController extends Controller
         if(isset($cmp[0]->id)){
             Company::where('email',$email)->update([
                 'extra4'=>Crypt::encrypt($randomid),
+                'extra5'=>time(),
             ]);
             $data=['name'=>$cmp[0]->firstname, 'randomid'=>$randomid];
             Mail::to($email)->send(new forgotpassword($data));
