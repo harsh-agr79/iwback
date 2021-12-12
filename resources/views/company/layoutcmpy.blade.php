@@ -207,7 +207,11 @@
     @endif
             </main>
 
-        <footer class="page-footer theme" style="margin-top: 10vh;">
+            <div class="hide-on-large-only" style="height: 100px;">
+
+            </div>
+
+        <footer class="page-footer hide-on-med-and-down theme" style="margin-top: 10vh;">
             <div class="">
                 <div class="row">
                     <div class="col l3 s12">
