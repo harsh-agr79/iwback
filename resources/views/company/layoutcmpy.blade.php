@@ -216,9 +216,9 @@
                         <div class="row">
                             <div class="col s3"></div>
                             <div class="col s6 row">
-                                <div class="col s4"><a href="" class=""><img src="../assets/svgs/fb.svg" height="70" alt=""></a></div>
-                                <div class="col s4"><a href="" class=""><img src="../assets/svgs/ig.svg" height="70" alt=""></a></div>
-                                <div class="col s4"><a href="" class=""><img src="../assets/svgs/li.svg" height="70" alt=""></a></div>
+                                <div class="col s4"><a href="" class=""><img src="{{asset('assets/svgs/fb.svg')}}" height="70" alt=""></a></div>
+                                <div class="col s4"><a href="" class=""><img src="{{asset('assets/svgs/ig.svg')}}" height="70" alt=""></a></div>
+                                <div class="col s4"><a href="" class=""><img src="{{asset('assets/svgs/li.svg')}}" height="70" alt=""></a></div>
                             </div>
                             <div class="col s3"></div>
                             
