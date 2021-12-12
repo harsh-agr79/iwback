@@ -165,15 +165,6 @@
                         <label class="inplbl">Work Duration(Optional)</label>
                         <input type="text" placeholder="Work Duration" class="browser-default inpfield" name="duration">
                      </div>
-                     <div class="col s12 file-field input-field">
-                        <div class="btn">
-                          <span>File</span>
-                          <input type="file" multiple>
-                        </div>
-                        <div class="file-path-wrapper">
-                          <input class="file-path validate" type="text" placeholder="Upload Files Related to your job(Optional)">
-                        </div>
-                      </div>
                       <input type="hidden" name="cmpyname" value="{{$user['0']->cmpyname}}">
                       <input type="hidden" name="cmpyemail" value="{{$user['0']->email}}">
                       <input type="hidden" name="cmpyusername" value="{{$user['0']->username}}">
@@ -192,8 +183,7 @@
                 <h1>Your Job has been Posted!</h1>
                 <p>Your job has been published. If you need help please contact us via email contact@internwheel.com</p>
                 <div class="cnf-links">
-                    <a href="job-manager.html">Manage Jobs</a>
-                    <a href="#">View Job</a>
+                    <a href="{{url('company/jobsmanager')}}">Manage Jobs</a>
                 </div>
             </div>
         </div>

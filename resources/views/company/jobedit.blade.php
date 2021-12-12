@@ -2,6 +2,11 @@
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 @section('main')
 @if($user['0']->adminverification == 'verified')
+
+                  @php
+                        $skills = explode('|',$job[0]->skills);
+                        $perks = explode('|',$job[0]->perks);
+                  @endphp
 <div class="main-content">
     <section class="left-section">
         <div class="section-card">
@@ -54,7 +59,11 @@
                      <div class="col s12 m6 inp-container">
                         <label class="inplbl">Orientation</label>
                         <select name="orientation" class="browser-default inpfield">
+                            @if ($job[0]->orientation == NULL)
                             <option value="" disabled selected>Work in Home/Office</option>
+                            @else
+                            <option value="{{$job[0]->orientation}}" selected>{{$job[0]->orientation}}</option>
+                            @endif
                             <option value="Work Form Home">Work Form Home</option>
                             <option value="Work On Site">Work On Site</option>
                           </select>
@@ -62,7 +71,21 @@
                      @if ($job[0]->stipend == 'on')
                      <div class="col s12 inp-container" style="margin-top: 10px;">
                         <label class="check">
-                            <input name="work-based-stipend" type="checkbox" checked onchange="salary()" name="work-based-stipend" id="wbs" />
+                            <input name="work-based-stipend" type="checkbox" checked name="work-based-stipend" id="wbs" />
+                            <span class="inplbl">Work Based Salary</span>
+                        </label>
+                     </div>
+                     
+                     <div class="col s12 inp-container">
+                        <div class="hide-block" id="salary-div">
+                            <label class="inplbl">Salary </label>
+                            <input type="number" placeholder="Salary" name="salary" id="salaryfld" class="salary-field inpfield browser-default"/>
+                        </div>
+                     </div>
+                     @else
+                     <div class="col s12 inp-container" style="margin-top: 10px;">
+                        <label class="check">
+                            <input name="work-based-stipend" type="checkbox" onchange="salary()" name="work-based-stipend" id="wbs" />
                             <span class="inplbl">Work Based Salary</span>
                         </label>
                      </div>
@@ -70,11 +93,9 @@
                      <div class="col s12 inp-container">
                         <div class="" id="salary-div" style>
                             <label class="inplbl">Salary </label>
-                            <input type="number" placeholder="Salary" name="salary" id="salaryfld" class="salary-field inpfield browser-default" required/>
+                            <input type="number" placeholder="Salary" value="{{$job[0]->stipend}}" name="salary" id="salaryfld" class="salary-field inpfield browser-default" required/>
                         </div>
                      </div>
-                     @else
-                         
                      @endif
                     
                      <style>
@@ -97,10 +118,18 @@
                             </div>
                              
                              <div id="skillsrow">
+                                 @foreach ($skills as $item)
+                                 @if ($item == NULL)
+                                     
+                                 @else
                                  <div class='input-field col s12 m3'>
-                                    <input class='validate browser-default inpfield autocomplete skills' type='text' placeholder="Skill"  name='skill[]'/>
-                                    {{-- <span class="field-icon toggle-password" ><span class="material-icons">clear</span></span> --}}
+                                    <input class='validate browser-default inpfield autocomplete skills' value="{{$item}}" type='text' placeholder="Skill"  name='skill[]'/>
+                                    <span class="field-icon toggle-password" onclick="this.parentNode.remove()"><span class="material-icons">clear</span></span>
                                 </div>
+                                 @endif
+                                 
+                                 @endforeach
+                                 
                              </div>
                             
                              <div class="col s12 m2 center" style="margin-top:15px;">
@@ -128,7 +157,11 @@
                      <div class="col s12 m6 inp-container">
                         <label class="inplbl">Experience</label>
                         <select name="experience" class="browser-default inpfield">
+                            @if ($job[0]->experience == NULL)
                             <option value="" disabled selected>Select Experience Level</option>
+                            @else
+                            <option value="{{$job[0]->experience}}" selected>Select Experience Level</option>
+                            @endif
                             <option value="Fresher">Fresher</option>
                             <option value="1year">1 Year</option>
                             <option value="2years">2 Years</option>
@@ -140,7 +173,11 @@
                      <div class="col s12 m6 inp-container">
                         <label class="inplbl">Branch</label>
                         <select name="branches" class="browser-default inpfield">
+                            @if ($job[0]->branchlocation == NULL)
                             <option value="" disabled selected>Select Branch Of the job</option>
+                            @else
+                            <option value="{{$job[0]->branchlocation}}" selected>{{$job[0]->branchlocation}}</option>
+                            @endif
                             <option value="Bagbazaar, Kathmandu">Bagbazaar, Kathmandu</option>
                             <option value="Balkumari, Lalitpur">Balkumari, Lalitpur</option>
                             <option value="Buddhanagar, Kathmandu">Buddhanagar, Kathmandu</option>
@@ -160,10 +197,16 @@
                                 <span class="field-icon toggle-password" onclick="this.parentNode.remove()"><span class="material-icons">clear</span></span>
                             </div>
                              <div id="perksrow">
+                                @foreach ($perks as $item)
+                                @if ($item == NULL)
+                                    
+                                @else
                                  <div class='input-field col s12 m3'>
-                                    <input class='validate browser-default inpfield' type='text' placeholder="Perks"  name='perk[]'/>
-                                    {{-- <span class="field-icon toggle-password" ><span class="material-icons">clear</span></span> --}}
+                                    <input class='validate browser-default inpfield' value="{{$item}}" type='text' placeholder="Perks"  name='perk[]'/>
+                                    <span class="field-icon toggle-password" onclick="this.parentNode.remove()"><span class="material-icons">clear</span></span>
                                 </div>
+                                @endif
+                                @endforeach
                              </div>
                              <div class="col s12 m2 center" style="margin-top:15px;">
                                 <div class="center">
@@ -187,6 +230,8 @@
                           <input class="file-path validate" type="text" placeholder="Upload Files Related to your job(Optional)">
                         </div>
                       </div> --}}
+                      <input type="hidden" name="id" value="{{$job['0']->id}}">
+                      <input type="hidden" name="jobid" value="{{$job['0']->jobid}}">
                       <input type="hidden" name="cmpyname" value="{{$user['0']->cmpyname}}">
                       <input type="hidden" name="cmpyemail" value="{{$user['0']->email}}">
                       <input type="hidden" name="cmpyusername" value="{{$user['0']->username}}">
@@ -202,11 +247,10 @@
            </form>
             <div class="confirmation-page" id="confirmation-page" style="display: none;">
                 <i class="material-icons">offline_pin</i>
-                <h1>Your Job has been Posted!</h1>
+                <h1>Your Job has been Updated</h1>
                 <p>Your job has been published. If you need help please contact us via email contact@internwheel.com</p>
                 <div class="cnf-links">
-                    <a href="job-manager.html">Manage Jobs</a>
-                    <a href="#">View Job</a>
+                    <a href="{{url('company/jobsmanager')}}">Manage Jobs</a>
                 </div>
             </div>
         </div>
@@ -310,7 +354,7 @@
                  let formData = new FormData($('#postjobform')[0]);
                  $.ajax({
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                    url:"{{url('addjob')}}",
+                    url:"{{url('editjob')}}",
                     data:formData,
                     contentType: false,
                     processData: false,
@@ -319,7 +363,7 @@
                         $('#postjobform')['0'].reset();
                         $('#postjobform').toggle();
                         $('#confirmation-page').toggle();
-                        M.toast({html: 'Job Posted!'})
+                        M.toast({html: 'Job Updated!'})
                     }
                  })
             });

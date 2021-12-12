@@ -42,6 +42,7 @@ Route::group(['middleware'=>'company_auth'], function(){
     Route::get('/job/{id}', [JobController::class, 'jobdetail']);
     Route::get('/job/edit/{id}', [JobController::class, 'jobedit']);
     Route::post('/addjob', [JobController::class, 'postjob'])->name('postjob');
+    Route::post('/editjob', [JobController::class, 'editjob']);
     Route::get('/companyget', [CompanyController::class, 'cmpy']);
     Route::get('/company/logout', [CompanyController::class, 'logout']);
     Route::post('/company/update', [CompanyController::class, 'cmpupdate'])->name('cmppro.up');

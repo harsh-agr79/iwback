@@ -52,6 +52,7 @@ class JobController extends Controller
             $jobrequirements=$request->post('jobrequirements');
             $perks=$request->post('perk',[]);
             $openings=$request->post('openings');
+            $experience=$request->post('experience');
 
         Job::insert([
             'title'=>$title,
@@ -74,6 +75,66 @@ class JobController extends Controller
             'jobrequirements'=>$jobrequirements,
             'perks'=>implode('|',$perks),
             'openings'=>$openings,
+            'experience'=>$experience,
+        ]);
+    }
+    public function editjob(Request $request)
+    {
+            $title = $request->post('title');
+            $type=$request->post('type');
+            $sector=$request->post('sector');
+            $branchlocation=$request->post('branches');
+            $duration=$request->post('duration');
+            $deadline=$request->post('deadline');
+            $wbs=$request->post('work-based-stipend');
+            $salary = $request->post('salary');
+
+            if($wbs === NULL)
+            {
+                $stipend = $salary;
+            }
+            else
+            {
+                $stipend = $wbs;
+            }
+            $jobid = $request->post('jobid');
+            $orientation=$request->post('orientation');
+            $cmpyname=$request->post('cmpyname');
+            $cmpyemail=$request->post('cmpyemail');
+            $cmpyid=$request->post('cmpyid');
+            $cmpyusername=$request->post('cmpyusername');
+            $cmpyabout=$request->post('cmpyabout');
+            $website=$request->post('website');
+            $aboutjob=$request->post('aboutjob');
+            $skills = $request->post('skill',[]);
+            $jobrequirements=$request->post('jobrequirements');
+            $perks=$request->post('perk',[]);
+            $openings=$request->post('openings');
+            $experience=$request->post('experience');
+            $id = $request->post('id');
+
+        Job::where('id',$id)->update([
+            'title'=>$title,
+            'type'=>$type,
+            'sector'=>$sector,
+            'branchlocation'=>$branchlocation,
+            'duration'=>$duration,
+            'deadline'=>$deadline,
+            'stipend'=>$stipend,
+            'jobid'=>$jobid,
+            'orientation'=>$orientation,
+            'cmpyname'=>$cmpyname,
+            'cmpyemail'=>$cmpyemail,
+            'cmpyid'=>$cmpyid,
+            'cmpyusername'=>$cmpyusername,
+            'cmpyabout'=>$cmpyabout,
+            'website'=>$website,
+            'aboutjob'=>$aboutjob,
+            'skills'=>implode('|',$skills),
+            'jobrequirements'=>$jobrequirements,
+            'perks'=>implode('|',$perks),
+            'openings'=>$openings,
+            'experience'=>$experience,
         ]);
     }
     public function jobmanager(Request $request)
