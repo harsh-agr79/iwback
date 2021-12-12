@@ -35,11 +35,9 @@
                             @else
                             <option value="{{$job[0]->sector}}" selected>{{$job[0]->sector}}</option>
                             @endif
-                            <option value="Accounting">Accounting</option>
-                            <option value="Programming">Programming</option>
-                            <option value="Marketing">Marketing</option>
-                            <option value="Food & Restaurant">Food & Restaurant</option>
-                            <option value="Communication">Communication</option>
+                            @foreach ($sector as $item)
+                                <option value="{{$item->sector}}">{{$item->sector}}</option>
+                            @endforeach
                           </select>
                      </div>
                      <div class="col s12 inp-container">

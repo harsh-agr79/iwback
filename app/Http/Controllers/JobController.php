@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use App\Models\Company;
+use App\Models\Sector;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
@@ -16,8 +17,9 @@ class JobController extends Controller
     public function index(Request $request)
     {
         $userid = session()->get('CMPY_ID');
-        $company = Company::where('id',$userid)->get();
-        return view('company/postajob', compact('company'));
+        $result['company'] = Company::where('id',$userid)->get();
+        $result['sector'] = Sector::all();
+        return view('company/postajob', $result);
     }
 
     public function postjob(Request $request)
@@ -149,6 +151,7 @@ class JobController extends Controller
     }
     public function jobedit(Request $request, $jobid){
         $result['job']=Job::where('jobid',$jobid)->get();
+        $result['sector'] = Sector::all();
         return view('company/jobedit', $result);
     }
 
