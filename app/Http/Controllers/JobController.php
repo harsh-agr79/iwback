@@ -86,6 +86,10 @@ class JobController extends Controller
         $result['job']=Job::where('jobid',$jobid)->get();
         return view('company/jobdetails', $result);
     }
+    public function jobedit(Request $request, $jobid){
+        $result['job']=Job::where('jobid',$jobid)->get();
+        return view('company/jobedit', $result);
+    }
 
     /**
      * Store a newly created resource in storage.

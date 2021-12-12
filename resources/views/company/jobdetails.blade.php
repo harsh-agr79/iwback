@@ -74,7 +74,7 @@
                 </div>
                 <div class="col s6 right-align">
                   <a href=""><i class="material-icons right">share</i></a>
-                  {{-- <a href=""><i class="material-icons right">bookmark_border</i></a> --}}
+                  <a href="{{url('job/edit/'.$job[0]->jobid)}}"><i class="material-icons right">edit</i></a>
                 </div>
               </div>
           </div>

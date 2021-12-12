@@ -6,6 +6,8 @@ $(document).ready(function(){
     });
     $('input#input_text, textarea#textarea2').characterCounter();
     $('.modal').modal();
+    
+
     var today = new Date()
     var year = today.getFullYear()
     var month = today.getMonth() + 1
@@ -72,18 +74,7 @@ $(document).ready(function(){
     });
 
     //salary post
-    var salaryDiv = document.querySelector('#salary-div')
-
-    $('#wbs').change(() => {
-        if($('#salaryfld').attr('required')){
-            $('#salaryfld').removeAttr('required')
-            salaryDiv.classList.add('hide-block')
-        }
-        else{
-            $('#salaryfld').attr('required','required')
-            salaryDiv.classList.remove('hide-block')
-        }
-    })
+    
 
     // const form = document.querySelector('.job-upload-form form')
     // const confirmationPage = document.querySelector('.confirmation-page')

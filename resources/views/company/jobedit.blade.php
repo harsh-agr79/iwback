@@ -1,31 +1,35 @@
 @extends('company/layoutcmpy')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 @section('main')
-@if($company['0']->adminverification == 'verified')
+@if($user['0']->adminverification == 'verified')
 <div class="main-content">
     <section class="left-section">
         <div class="section-card">
             <form id="postjobform">
                 @csrf
                <div class="row form-container">
-                <h4>Post a new job</h4>
+                <h4>Edit Job: {{$job[0]->title}}</h4>
                 <div class="divider"></div>
                    <div class="col s12 inp-container">
                        <label class="inplbl">Job title</label>
-                       <input type="text" placeholder="Job title" class="browser-default inpfield" name="title">
+                       <input type="text" placeholder="Job title" value="{{$job[0]->title}}" class="browser-default inpfield" name="title">
                     </div>
                     <div class="col s12 inp-container">
                         <label class="inplbl">Job Description</label>
-                        <textarea type="text" placeholder="Job Description" name="aboutjob" class="browser-default inpfield" name="title"></textarea>
+                        <textarea type="text" placeholder="Job Description" name="aboutjob" class="browser-default inpfield" name="title">{{$job[0]->aboutjob}}</textarea>
                      </div>
                      <div class="col s12 m6 inp-container">
                         <label class="inplbl">Application Deadline</label>
-                        <input type="date" class="browser-default inpfield" id="application-deadline" name="deadline">
+                        <input type="date" class="browser-default inpfield" value="{{$job[0]->deadline}}" name="deadline">
                      </div>
                      <div class="col s12 m6 inp-container">
                         <label class="inplbl">Sector</label>
                         <select name="sector" class="browser-default inpfield">
+                            @if ($job[0]->sector == NULL)
                             <option value="" disabled selected>Select Sector</option>
+                            @else
+                            <option value="{{$job[0]->sector}}" selected>{{$job[0]->sector}}</option>
+                            @endif
                             <option value="Accounting">Accounting</option>
                             <option value="Programming">Programming</option>
                             <option value="Marketing">Marketing</option>
@@ -36,7 +40,11 @@
                      <div class="col s12 inp-container">
                         <label class="inplbl">Job Type</label>
                         <select name="type" class="browser-default inpfield">
+                            @if ($job[0]->type == NULL)
                             <option value="" disabled selected>Select Job Type</option>
+                            @else
+                            <option value="{{$job[0]->type}}" selected>{{$job[0]->type}}</option>
+                            @endif
                             <option value="Fresher">Fresher</option>
                             <option value="Internship">Internship</option>
                             <option value="Part Time">Part Time</option>
@@ -51,19 +59,24 @@
                             <option value="Work On Site">Work On Site</option>
                           </select>
                      </div>
+                     @if ($job[0]->stipend == 'on')
                      <div class="col s12 inp-container" style="margin-top: 10px;">
                         <label class="check">
-                            <input name="work-based-stipend" type="checkbox" name="work-based-stipend" id="wbs" />
+                            <input name="work-based-stipend" type="checkbox" checked onchange="salary()" name="work-based-stipend" id="wbs" />
                             <span class="inplbl">Work Based Salary</span>
                         </label>
                      </div>
                      
                      <div class="col s12 inp-container">
-                        <div class="" id="salary-div">
+                        <div class="" id="salary-div" style>
                             <label class="inplbl">Salary </label>
                             <input type="number" placeholder="Salary" name="salary" id="salaryfld" class="salary-field inpfield browser-default" required/>
                         </div>
                      </div>
+                     @else
+                         
+                     @endif
+                    
                      <style>
                          span.field-icon {
                              float: right;
@@ -106,11 +119,11 @@
                      </div> 
                      <div class="col s12 inp-container">
                         <label class="inplbl">Job Requirements</label>
-                        <textarea type="text" placeholder="Job Requirements" class="browser-default inpfield" name="jobrequirements"></textarea>
+                        <textarea type="text" placeholder="Job Requirements" class="browser-default inpfield" name="jobrequirements">{{$job[0]->jobrequirements}}</textarea>
                      </div>
                      <div class="col s12 inp-container">
                         <label class="inplbl">No. Of Openings</label>
-                        <input type="text" placeholder="Number Of Openings" class="browser-default inpfield" name="openings">
+                        <input type="text" placeholder="Number Of Openings" class="browser-default inpfield" value="{{$job[0]->openings}}" name="openings">
                      </div>
                      <div class="col s12 m6 inp-container">
                         <label class="inplbl">Experience</label>
@@ -163,9 +176,9 @@
                      </div>
                      <div class="col s12 inp-container">
                         <label class="inplbl">Work Duration(Optional)</label>
-                        <input type="text" placeholder="Work Duration" class="browser-default inpfield" name="duration">
+                        <input type="text" value="{{$job[0]->duration}}" placeholder="Work Duration" class="browser-default inpfield" name="duration">
                      </div>
-                     <div class="col s12 file-field input-field">
+                     {{-- <div class="col s12 file-field input-field">
                         <div class="btn">
                           <span>File</span>
                           <input type="file" multiple>
@@ -173,7 +186,7 @@
                         <div class="file-path-wrapper">
                           <input class="file-path validate" type="text" placeholder="Upload Files Related to your job(Optional)">
                         </div>
-                      </div>
+                      </div> --}}
                       <input type="hidden" name="cmpyname" value="{{$user['0']->cmpyname}}">
                       <input type="hidden" name="cmpyemail" value="{{$user['0']->email}}">
                       <input type="hidden" name="cmpyusername" value="{{$user['0']->username}}">
@@ -200,7 +213,7 @@
     </section>
     <section class="profile-sidebar">
         <div class="job-poster section-card">
-            @if($company[0]->adminverification === 'verified')
+            @if($user[0]->adminverification === 'verified')
             <a href="{{url('company/postajob')}}">
                 <h5>Post a job</h5>
                 <i class="material-icons">add_circle</i>
@@ -312,18 +325,18 @@
             });
 
         })
-        var salaryDiv = document.querySelector('#salary-div')
+   var salaryDiv = document.querySelector('#salary-div')
 
-$('#wbs').change(() => {
-    if($('#salaryfld').attr('required')){
-        $('#salaryfld').removeAttr('required')
-        salaryDiv.classList.add('hide-block')
-    }
-    else{
-        $('#salaryfld').attr('required','required')
-        salaryDiv.classList.remove('hide-block')
-    }
-})
+    $('#wbs').change(() => {
+        if($('#salaryfld').attr('required')){
+            $('#salaryfld').removeAttr('required')
+            salaryDiv.classList.add('hide-block')
+        }
+        else{
+            $('#salaryfld').attr('required','required')
+            salaryDiv.classList.remove('hide-block')
+        }
+    })
 
     
 

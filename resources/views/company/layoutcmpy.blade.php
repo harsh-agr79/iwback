@@ -9,9 +9,9 @@
     <!-- materialize css cdn -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/dashboard.css">
-    <link rel="stylesheet" href="../assets/style.css">
-    <link rel="icon" href="../assets/images/title.png">
+    <link rel="stylesheet" href="{{asset('assets/dashboard.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/style.css')}}">
+    <link rel="icon" href="{{asset('assets/images/title.png')}}">
     <title>Internwheel | Dashboard</title>
 </head>
 <body>
@@ -304,5 +304,5 @@
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="../assets/dashboard.js"></script>
+<script src="{{asset('assets/dashboard.js')}}"></script>
 </html>

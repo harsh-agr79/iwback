@@ -40,6 +40,7 @@ Route::group(['middleware'=>'company_auth'], function(){
     Route::get('/company/postajob', [JobController::class, 'index']);
     Route::get('/company/jobsmanager', [JobController::class, 'jobmanager']);
     Route::get('/job/{id}', [JobController::class, 'jobdetail']);
+    Route::get('/job/edit/{id}', [JobController::class, 'jobedit']);
     Route::post('/addjob', [JobController::class, 'postjob'])->name('postjob');
     Route::get('/companyget', [CompanyController::class, 'cmpy']);
     Route::get('/company/logout', [CompanyController::class, 'logout']);
