@@ -5,7 +5,7 @@
 <div class="main-content">
     <section class="left-section">
         <div class="section-card">
-            <form id="postjobform">
+            <form id="postjobform" autocomplete="off">
                 @csrf
                <div class="row form-container">
                 <h4>Post a new job</h4>

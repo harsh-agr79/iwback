@@ -10,7 +10,7 @@
 <div class="main-content">
     <section class="left-section">
         <div class="section-card">
-            <form id="postjobform">
+            <form id="postjobform" autocomplete="off">
                 @csrf
                <div class="row form-container">
                 <h4>Edit Job: {{$job[0]->title}}</h4>
