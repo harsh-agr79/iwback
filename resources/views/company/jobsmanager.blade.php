@@ -65,7 +65,7 @@
                                 <span class="jobtype">{{$item->type}}</span>
                             </div>
                             <div class="col s6 right-align">
-                                <a href="./jobdetail.html">
+                                <a href="{{url('job/'.$item->jobid)}}">
                                     View Details 
                                     <i class="material-icons right">arrow_forward</i>
                                 </a>
