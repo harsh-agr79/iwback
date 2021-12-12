@@ -20,3 +20,34 @@ Company table
     emailverfication
     adminverification
     block
+
+Post job
+    
+    job title
+    type of job(Internship, freshers, job)
+    branch location
+    start date(optional)
+    duration(Optional)
+    application dead line
+    stipend
+    jobid
+    work from home/work on site
+    Company name
+    company email
+    company id
+    company username
+    company about
+    company website
+    about job
+    skills requirements
+    job requirements
+    perks(optional)
+    number of openings
+    extra section title
+    extra section description
+    files attachment
+    
+
+
+
+    

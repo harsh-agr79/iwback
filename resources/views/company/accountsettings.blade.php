@@ -199,7 +199,7 @@
     </section>
     <section class="profile-sidebar">
         <div class="job-poster section-card">
-            <a href="postAJob.html">
+            <a href="{{url('company/postajob')}}">
                 <h5>Post a job</h5>
                 <i class="material-icons">add_circle</i>
             </a>
@@ -210,7 +210,7 @@
                 <p class="menu-text">Company Profile</p>
             </a>
             <div class="divider"></div>
-            <a class="tab-menu" href="job-manager.html">
+            <a class="tab-menu" href="{{url('company/jobsmanager')}}">
                 <i class="material-icons">business_center</i>
                 <p class="menu-text">Jobs Posted</p>
             </a>

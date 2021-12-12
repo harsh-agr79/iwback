@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Crypt;
@@ -25,8 +26,9 @@ class CompanyController extends Controller
     public function index(Request $request)
     {
         $userid = session()->get('CMPY_ID');
-        $company = Company::where('id',$userid)->get();
-        return view('company/cmpyprofile', compact('company'));
+        $result['company'] = Company::where('id',$userid)->get();
+        $result['jobs'] = Job::where('cmpyid',$userid)->get();
+        return view('company/cmpyprofile',$result);
     }
     public function cmpy(Request $request){
         $userid = session()->get('CMPY_ID');

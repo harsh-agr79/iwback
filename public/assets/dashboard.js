@@ -35,8 +35,8 @@ $(document).ready(function(){
         minutes = '0'+minutes
     }
     
-    var dateFormat = `${year}-${month}-${day}T${hour}:${minutes}`
-    var maxDateFormat = `${finalYear}-${finalMonth}-${day}T${hour}:${minutes}`
+    var dateFormat = `${year}-${month}-${day}`
+    var maxDateFormat = `${finalYear}-${finalMonth}-${day}`
     let deadline = document.querySelector('#application-deadline')
     deadline.setAttribute('min', dateFormat)
     deadline.setAttribute('max', maxDateFormat)
@@ -72,26 +72,26 @@ $(document).ready(function(){
     });
 
     //salary post
-    var salaryDiv = document.querySelector('.salary-div')
+    var salaryDiv = document.querySelector('#salary-div')
 
-    $('#work-based-stipend').change(() => {
-        if($('.salary-field').attr('required')){
-            $('.salary-field').removeAttr('required')
+    $('#wbs').change(() => {
+        if($('#salaryfld').attr('required')){
+            $('#salaryfld').removeAttr('required')
             salaryDiv.classList.add('hide-block')
         }
         else{
-            $('.salary-field').attr('required','required')
+            $('#salaryfld').attr('required','required')
             salaryDiv.classList.remove('hide-block')
         }
     })
 
-    const form = document.querySelector('.job-upload-form form')
-    const confirmationPage = document.querySelector('.confirmation-page')
-    form.addEventListener('submit',(e) => {
-        e.preventDefault()
-        form.classList.add('hide-block')
-        confirmationPage.classList.add('show-page')
-    })
+    // const form = document.querySelector('.job-upload-form form')
+    // const confirmationPage = document.querySelector('.confirmation-page')
+    // form.addEventListener('submit',(e) => {
+    //     e.preventDefault()
+    //     form.classList.add('hide-block')
+    //     confirmationPage.classList.add('show-page')
+    // })
 
     //bottom navbar
     let bottomTab = document.querySelectorAll('.bottom-tab')

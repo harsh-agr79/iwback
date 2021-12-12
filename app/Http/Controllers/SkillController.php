@@ -20,6 +20,10 @@ class SkillController extends Controller
         $skills = Skill::all();
         return response()->json(['skills'=>$skills]);
     }
+    public function skillall(){
+        $p = Skill::all();
+        return response()->json($p);
+    }
     public function addskill(Request $request){
         $request->validate([
             'skill'=>'required|unique:skills,skill,',

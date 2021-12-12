@@ -46,7 +46,7 @@
                     <a class="black-text" href="{{url('company/profile')}}">Dashboard</a>
                 </li>
                 <li>
-                    <a class="black-text" href="">Post Jobs</a>
+                    <a class="black-text" href="{{url('company/postajob')}}">Post Jobs</a>
                 </li>
                 <li>
                     <a class="black-text" href="">Contact Us</a>
@@ -62,14 +62,14 @@
                     </a>
                     <ul id='accountdrop' class='dropdown-content'>
                         <li><a href="{{url('company/profile')}}" class="black-text"><i class="material-icons theme-text">account_circle</i>Profile</a></li>
-                        <li><a href="#!" class="black-text"><i class="material-icons theme-text">business_center</i>Jobs posted</a></li>
+                        <li><a href="{{url('company/jobsmanager')}}" class="black-text"><i class="material-icons theme-text">business_center</i>Jobs posted</a></li>
                         <li><a href="#!" class="black-text"><i class="material-icons theme-text">groups</i>Saved Candidates</a></li>
                         <li><a href="{{url('company/settings')}}" class="black-text"><i class="material-icons theme-text">settings</i>Account Settings</a></li>
                         <li><a href="{{url('company/logout')}}" class="black-text"><i class="material-icons theme-text">logout</i>Logout</a></li>
                       </ul>
                       <ul id='accountdrop2' class='dropdown-content'>
                         <li><a href="{{url('company/profile')}}" class="black-text"><i class="material-icons theme-text">account_circle</i>Profile</a></li>
-                        <li><a href="#!" class="black-text"><i class="material-icons theme-text">business_center</i>Jobs posted</a></li>
+                        <li><a href="{{url('company/jobsmanager')}}" class="black-text"><i class="material-icons theme-text">business_center</i>Jobs posted</a></li>
                         <li><a href="#!" class="black-text"><i class="material-icons theme-text">groups</i>Saved Candidates</a></li>
                         <li><a href="{{url('company/settings')}}" class="black-text"><i class="material-icons theme-text">settings</i>Account Settings</a></li>
                         <li><a href="{{url('company/logout')}}" class="black-text"><i class="material-icons theme-text">logout</i>Logout</a></li>
@@ -87,7 +87,7 @@
             <i class="material-icons">group</i>
             <p>Saved Candidates</p>
         </a>
-        <a class="bottom-tab active" href="#">
+        <a class="bottom-tab active" href="{{url('company/postajob')}}">
             <i class="material-icons">add_box</i>
             <p>Post Job</p>
         </a>
@@ -95,7 +95,7 @@
             <i class="material-icons">notifications</i>
             <p>Notifications</p>
         </a>
-        <a class="bottom-tab final-tab" href="#">
+        <a class="bottom-tab final-tab" href="{{url('company/jobsmanager')}}">
             <i class="material-icons">business_center</i>
             <p>Jobs Posted</p>
         </a>
@@ -109,7 +109,7 @@
             <p class="menu-text">{{$user['0']->cmpyname}}</p>
         </a>
         <div class="divider"></div>
-        <a class="tab-menu" href="job-manager.html">
+        <a class="tab-menu" href="{{url('company/jobsmanager')}}">
             <i class="material-icons">business_center</i>
             <p class="menu-text">Jobs Posted</p>
         </a>

@@ -109,6 +109,7 @@ footer{
 }
 .cmpimg{
   height: 40px;
+  border-radius: 20px;
 }
 .detpg{
   margin-top: 5vh;
@@ -225,4 +226,7 @@ pre {
   vertical-align: bottom;
   margin-right: 0.5vw;
   /* font-size: !important; */
+}
+.self-contain2{
+  margin:0 20px;
 }

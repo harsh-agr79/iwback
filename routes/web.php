@@ -7,6 +7,7 @@ use App\Http\Controllers\SectorController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\JobController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,9 +36,13 @@ Route::get('cmpreactivate/{id}/{id2}', [CompanyController::class, 'confirmra']);
 
 Route::group(['middleware'=>'company_auth'], function(){
     Route::get('/company/profile', [CompanyController::class, 'index']);
+    Route::get('/company/settings', [CompanyController::class, 'settings']);
+    Route::get('/company/postajob', [JobController::class, 'index']);
+    Route::get('/company/jobsmanager', [JobController::class, 'jobmanager']);
+    Route::get('/job/{id}', [JobController::class, 'jobdetail']);
+    Route::post('/addjob', [JobController::class, 'postjob'])->name('postjob');
     Route::get('/companyget', [CompanyController::class, 'cmpy']);
     Route::get('/company/logout', [CompanyController::class, 'logout']);
-    Route::get('/company/settings', [CompanyController::class, 'settings']);
     Route::post('/company/update', [CompanyController::class, 'cmpupdate'])->name('cmppro.up');
     Route::post('/company/updatecp', [CompanyController::class, 'cmpupdatecp'])->name('upcp');
     Route::post('/company/updatedp', [CompanyController::class, 'cmpupdatedp'])->name('updp');
@@ -49,6 +54,7 @@ Route::group(['middleware'=>'company_auth'], function(){
     Route::post('/company/updateemail', [CompanyController::class, 'cmpupdateemail'])->name('upemail');
     Route::post('/company/deactivate', [CompanyController::class, 'cmpdeactivate']);
     Route::post('/company/reactivate', [CompanyController::class, 'cmpreactivate']);
+    Route::get('/findskill',[SkillController::class, 'skillall']);
 });
 
 
