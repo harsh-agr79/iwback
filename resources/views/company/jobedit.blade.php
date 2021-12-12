@@ -240,7 +240,7 @@
                       <input type="hidden" name="cmpyid" value="{{$user['0']->id}}">
                       <input type="hidden" name="cmpyimg" value="{{$user['0']->cmpydp}}">
                       <div class="col s12 center">
-                          <button class="btn-large theme waves-effect">Post <i class="material-icons right">send</i></button>
+                          <button class="btn-large theme waves-effect">Update<i class="material-icons right">send</i></button>
                       </div>
                 </div>
                 
