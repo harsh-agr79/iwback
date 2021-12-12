@@ -40,7 +40,8 @@ class CompanyController extends Controller
         $request->validate([
             'username'=>'required|unique:admins,username|unique:companies,username',
             'email'=>'required|unique:admins,email|unique:companies,email',
-            'pancertificate'=>'image|mimes:jpeg,png,jpg,svg|max:2048'
+            'pancertificate'=>'image|mimes:jpeg,png,jpg,svg|max:2048',
+            'phonenumber'=>'required|numeric|digits_between:10,10',
         ]);
 
         $firstname = $request->post('firstname');
@@ -270,6 +271,9 @@ class CompanyController extends Controller
         }
     }
     public function cmpupdatepn(Request $request){
+        $request->validate([
+            'phonenumber'=>'required|numeric|digits_between:10,10',
+        ]);
         $id = $request->post('id');
         $password = $request->post('password');
         $phonenumber = $request->post('phonenumber');

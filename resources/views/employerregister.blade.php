@@ -172,6 +172,10 @@ $('#regemployer').submit(function(e){
                 var emerr = response.responseJSON.errors.email;  
                 M.toast({html: emerr})
               }
+              if(response.responseJSON.errors.phonenumber){
+                var emerr = response.responseJSON.errors.phonenumber;  
+                M.toast({html: emerr})
+              }
             }
     })
 })

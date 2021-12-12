@@ -291,6 +291,12 @@
                     fetchcmpy();
                     $('#editusername').modal('close');
                 }
+            },
+            error:function (result) {
+              if(result.responseJSON.errors.username){
+                var unerr = result.responseJSON.errors.username;  
+                M.toast({html: unerr})
+              }
             }
             })
         });
@@ -350,6 +356,12 @@
                     $('#editpn').modal('close');
                     $('#editpnform')[0].reset();
                 }
+            },
+            error:function (result) {
+              if(result.responseJSON.errors.phonenumber){
+                var unerr = result.responseJSON.errors.phonenumber;  
+                M.toast({html: unerr})
+              }
             }
             })
         });
