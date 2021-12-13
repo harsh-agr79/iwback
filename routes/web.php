@@ -7,6 +7,8 @@ use App\Http\Controllers\SectorController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\JobController;
 /*
 |--------------------------------------------------------------------------
@@ -20,20 +22,36 @@ use App\Http\Controllers\JobController;
 */
 
 Route::get('/', [FirstController::class, 'index']);
+//login routes
 Route::get('/login', [FirstController::class, 'login']);
+Route::post('/auth',[FirstController::class, 'auth'])->name('auth');
+//company registration process
+Route::get('/registeremployer', [FirstController::class, 'registeremployer']);
+Route::post('/addemployer',[CompanyController::class, 'register']);
+Route::get('company/loginregister/{id}', [CompanyController::class, 'registerlogin']);
+Route::get('verification/{id}/{id2}', [CompanyController::class, 'verify']);
+Route::get('cmpdeactivate/{id}/{id2}', [CompanyController::class, 'confirmda']);
+Route::get('cmpreactivate/{id}/{id2}', [CompanyController::class, 'confirmra']);
+//employee registraton process
+Route::get('/registeremployee', [FirstController::class, 'registeremployee']);
+Route::post('/addemployee',[EmployeeController::class, 'register'])->name('addempl');
+Route::get('candidate/loginregister/{id}', [EmployeeController::class, 'registerlogin']);
+Route::get('verificationcd/{id}/{id2}', [EmployeeController::class, 'verify']);
+Route::get('/google',[GoogleController::class, 'redirectToGoogle']);
+Route::get('/google/callback',[GoogleController::class, 'handleGoogleCallBack']);
+//forgot password process
 Route::get('/forgotpassword', [FirstController::class, 'forgotpassword']);
 Route::post('/forgotpassword/mail', [FirstController::class, 'fpwmail']);
 Route::post('/forgotpassword/verifycode', [FirstController::class, 'fpwvc']);
 Route::post('/forgotpassword/newpassword', [FirstController::class, 'fpwnp']);
-Route::get('/registeremployer', [FirstController::class, 'registeremployer']);
-Route::post('/auth',[FirstController::class, 'auth'])->name('auth');
-Route::post('/addemployer',[CompanyController::class, 'register']);
-Route::get('company/loginregister/{id}', [CompanyController::class, 'registerlogin']);
-Route::get('verification/{id}/{id2}', [CompanyController::class, 'verify']);
+//email change process
 Route::get('emailchange/{id}/{id2}', [CompanyController::class, 'emailchange']);
-Route::get('cmpdeactivate/{id}/{id2}', [CompanyController::class, 'confirmda']);
-Route::get('cmpreactivate/{id}/{id2}', [CompanyController::class, 'confirmra']);
-
+//emplyee middleware group and crud
+Route::group(['middleware'=>'employee_auth'], function(){
+    Route::get('/candidate/profile', [EmployeeController::class, 'index']);
+    Route::get('/candidate/logout', [EmployeeController::class, 'logout']);
+});
+//company middleware group and crud
 Route::group(['middleware'=>'company_auth'], function(){
     Route::get('/company/profile', [CompanyController::class, 'index']);
     Route::get('/company/settings', [CompanyController::class, 'settings']);
@@ -58,8 +76,7 @@ Route::group(['middleware'=>'company_auth'], function(){
     Route::post('/company/reactivate', [CompanyController::class, 'cmpreactivate']);
     Route::get('/findskill',[SkillController::class, 'skillall']);
 });
-
-
+//admin middleware group nad crud
 Route::group(['middleware'=>'admin_auth'], function(){
     Route::get('/admin',[AdminController::class, 'index']);
     Route::get('/admin/logout', [AdminController::class, 'logout']);

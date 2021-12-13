@@ -7,6 +7,7 @@ use App\Models\Admin;
 use App\Models\Sector;
 use App\Models\Home;
 use App\Models\Company;
+use App\Models\Employee;
 use App\Mail\forgotpassword;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
@@ -22,6 +23,9 @@ class FirstController extends Controller
         if(session()->has('CMPY_LOGIN')){
             $result['user'] = Company::where('id',session()->get('CMPY_ID'))->get();
         }
+        if(session()->has('CAND_LOGIN')){
+            $result['user'] = Employee::where('id',session()->get('CAND_ID'))->get();
+        }
         return view('index', $result);
     }
     
@@ -31,6 +35,9 @@ class FirstController extends Controller
             return redirect('/');
         }
         elseif(session()->has('CMPY_LOGIN')){
+            return redirect('/');
+        }
+        elseif(session()->has('CAND_LOGIN')){
             return redirect('/');
         }
         else{
@@ -43,6 +50,9 @@ class FirstController extends Controller
             return redirect('/');
         }
         elseif(session()->has('CMPY_LOGIN')){
+            return redirect('/');
+        }
+        elseif(session()->has('CAND_LOGIN')){
             return redirect('/');
         }
         else{
@@ -115,21 +125,38 @@ class FirstController extends Controller
         elseif(session()->has('CMPY_LOGIN')){
             return redirect('/');
         }
+        elseif(session()->has('CAND_LOGIN')){
+            return redirect('/');
+        }
         else{
             return view('employerregister', $result);
+        }
+    }
+    public function registeremployee(Request $request){
+        $result['title'] = 'Register|Employer';
+        if(session()->has('ADMIN_LOGIN')){
+            return redirect('/');
+        }
+        elseif(session()->has('CMPY_LOGIN')){
+            return redirect('/');
+        }
+        elseif(session()->has('CAND_LOGIN')){
+            return redirect('/');
+        }
+        else{
+            return view('employeeregister', $result);
         }
     }
     public function auth(Request $request){
         $user = $request->post('user');
         $password = $request->post('password');
 
-        $check = Crypt::encrypt($password);
-
-        echo $check;
         $result=Admin::Where(['username'=>$user, 'password'=>$password])->get();
         $result2=Admin::Where(['email'=>$user, 'password'=>$password])->get();
         $result3=Company::Where(['username'=>$user])->get();
         $result4=Company::Where(['email'=>$user])->get();
+        $result5=Employee::Where(['username'=>$user])->get();
+        $result6=Employee::Where(['email'=>$user])->get();
         if(isset($result[0]->id) || isset($result2[0]->id)){
             $request->session()->put('ADMIN_LOGIN', true);
             if(isset($result[0]->id)){
@@ -156,6 +183,23 @@ class FirstController extends Controller
                 }
             }
             return redirect('company/profile');
+        }
+        elseif(isset($result5[0]->id) || isset($result6[0]->id)){
+
+            if(isset($result5[0]->id)){
+                if($password == Crypt::decrypt($result5[0]->password)){
+                    $request->session()->put('CAND_LOGIN', true);
+                    $request->session()->put('CAND_ID', $result5['0']->id);
+                    $request->session()->put('CAND_TIME', now());
+                }
+            }elseif(isset($result6[0]->id)){
+                if($password == Crypt::decrypt($result6[0]->password)){
+                    $request->session()->put('CAND_LOGIN', true);
+                    $request->session()->put('CAND_ID', $result6['0']->id);
+                    $request->session()->put('CAND_TIME', now());
+                }
+            }
+            return redirect('candidate/profile');
         }
         else{
             $request->session()->flash('error', 'please enter valid login details');

@@ -38,8 +38,8 @@ class CompanyController extends Controller
     public function register(Request $request){
 
         $request->validate([
-            'username'=>'required|unique:admins,username|unique:companies,username',
-            'email'=>'required|unique:admins,email|unique:companies,email',
+            'username'=>'required|unique:admins,username|unique:companies,username|unique:employees,username',
+            'email'=>'required|unique:admins,email|unique:companies,email|unique:employees,email',
             'pancertificate'=>'image|mimes:jpeg,png,jpg,svg|max:2048',
             'phonenumber'=>'required|numeric|digits_between:10,10',
         ]);

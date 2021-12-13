@@ -52,6 +52,10 @@ class Kernel extends HttpKernel
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             \App\Http\Middleware\CompanyAuth::class,
         ],
+        'employee_auth' => [
+            // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            \App\Http\Middleware\EmployeeAuth::class,
+        ],
     ];
 
     /**

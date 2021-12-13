@@ -46,8 +46,98 @@ Post job
     extra section title
     extra section description
     files attachment
+
+employee
+    firstname
+    lastname
+    title
+    email
+    google_id
+    username
+    password
+    about
+    skills
+    skills level
+    education-organization
+    education course/subject
+    education time from-to
+    experience-organization
+    experioence-job title/post
+    experience time from-to
+    profile link
+    portfolio website
+    address
+    phonenumber
+    emailverfication
+    deactivate
+    deactivatetime
+    deactivatecode
+    fpwcode
+    fpwtime
+    extra1
+    extra2
+    extra3
+    extra4
+    extra5
+    extra6
+    extra7
+    extra8
+    extra9
+    extra10
     
 
 
 
     
+APP_NAME=Internwheel
+APP_ENV=local
+APP_KEY=base64:wUUGAF3tQ25Z8ssoOeVj/EGjbwE91kwV1ECGGQpdKmU=
+APP_DEBUG=false
+APP_URL=http://localhost
+
+LOG_CHANNEL=stack
+LOG_DEPRECATIONS_CHANNEL=null
+LOG_LEVEL=debug
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=startupl_iw
+DB_USERNAME='startupl_iw'
+DB_PASSWORD='iwdb7932@#*#@'
+
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+FILESYSTEM_DRIVER=local
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+
+MEMCACHED_HOST=127.0.0.1
+
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_MAILER=smtp
+MAIL_HOST=mail.internwheel.com
+MAIL_PORT=465
+MAIL_USERNAME=security@internwheel.com
+MAIL_PASSWORD=iwsecurity12
+MAIL_ENCRYPTION=ssl
+MAIL_FROM_ADDRESS=security@internwheel.com
+MAIL_FROM_NAME="${APP_NAME}"
+
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=
+AWS_USE_PATH_STYLE_ENDPOINT=false
+
+PUSHER_APP_ID=
+PUSHER_APP_KEY=
+PUSHER_APP_SECRET=
+PUSHER_APP_CLUSTER=mt1
+
+MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"

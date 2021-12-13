@@ -19,9 +19,23 @@
       <div class="col s12 center">
         <button class="modal-close waves-effect waves-green btn-large theme">Log In</button>
       </div>
+      <div class="col s12 center-align" style="margin-top: 20px; font-size:20px;">
+        Are you a candidate?
+      </div>
+      <div class="col s12" style="display: flex; justify-content:center; margin-top:5px;">
+        <div class="z-depth-1" style="border-radius:5px;">
+            <a href="{{url('google')}}">
+                <div style="display: flex; align-item:center; justify-content:center; padding:10px; margin:10px; ">
+                    <span style="font-size: 20px;" class="theme-text">Continue with google</span>
+                    <img style="margin-left: 5px;" src="{{asset('assets/svgs/google.svg')}}" height="30" alt="">
+                </div>
+            </a>
+        </div>   
+  </div>
     </form>
    <div class="row center">
       <span class="red-text" style="font-size: 20px;">{{session('error')}}</span> <br>
+     
        <span>
            <a href="{{url('forgotpassword')}}">Forgot password?</a>
        </span>
