@@ -105,7 +105,7 @@
                     <p class="menu-text">Saved Jobs</p>
                 </a>
                 <div class="divider"></div>
-                <a class="tab-menu" href="">
+                <a class="tab-menu" href="{{'/candidate/settings'}}">
                     <i class="material-icons">settings</i>
                     <p class="menu-text">Account Settings</p>
                 </a>
