@@ -898,7 +898,7 @@ input[type="checkbox"] ~ span{
 .exp-item .ins-icon{
     width:40px;
     height:40px;
-    border-radius:50%;
+    /* border-radius:50%; */
 }
 .exp-item .ins-info{
     padding-left:1rem;

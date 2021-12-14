@@ -21,7 +21,8 @@ class EmployeeController extends Controller
     public function index(Request $request)
     {
         if(session()->has('CAND_LOGIN')){
-            return view('employee/candprofile');
+            $result['cand'] = Employee::where('id',session()->get('CAND_ID'))->first();
+            return view('employee/candprofile', $result);
         }
         else{
             return redirect('login');
@@ -350,70 +351,46 @@ class EmployeeController extends Controller
         return redirect('/');
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function taedit(Request $request)
     {
-        //
+        $id = $request->post('id');
+        $title = $request->post('title');
+        $about = $request->post('about');
+
+        Employee::where('id',$id)->update([
+            'title'=>$title,
+            'about'=>$about,
+        ]);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function skilledit(Request $request)
     {
-        //
+        $id = $request->post('id');
+       $skill = $request->post('skill',[]);
+       $sl = $request->post('sl',[]);
+
+       Employee::where('id',$id)->update([
+           'skills'=>implode('|',$skill),
+           'skillslevel'=>implode('|',$sl),
+       ]);
+       return back();
     }
+    public function educationedit(Request $request){
+        $id = $request->post('id');
+        $insname = $request->post('insname',[]);
+        $inscourse = $request->post('inscourse',[]);
+        $frommonth = $request->post('frommonth',[]);
+        $fromyear = $request->post('fromyear',[]);
+        $tomonth = $request->post('tomonth',[]);
+        $toyear = $request->post('toyear',[]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Employee $employee)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Employee $employee)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Employee $employee)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Employee $employee)
-    {
-        //
+        Employee::where('id',$id)->update([
+            'eduorganization'=>implode('|',$insname),
+            'educourse'=>implode('|',$inscourse),
+            'edutimefrommonth'=>implode('|',$frommonth),
+            'edutimefromyear'=>implode('|',$fromyear),
+            'edutimetomonth'=>implode('|',$tomonth),
+            'edutimetoyear'=>implode('|',$toyear),
+        ]);
+        return back();
     }
 }
