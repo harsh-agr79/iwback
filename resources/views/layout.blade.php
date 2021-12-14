@@ -367,7 +367,7 @@
       let formData = new FormData($('#reactivateacc')[0]);
       $.ajax({
       headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-      url:"{{url('company/reactivate')}}",
+      url:"{{url('candidate/reactivate')}}",
       data: formData,
       contentType: false,
       processData: false,
@@ -404,15 +404,15 @@
   <header>
     <ul id='dropdown1' class='dropdown-content'>
       <li><a class="" href="{{url('registeremployer')}}">As a Employer</a></li>
-      <li><a class="" href="{{url('registeremployee')}}">As a employee</a></li>
+      <li><a class="" href="{{url('registeremployee')}}">As a Employee</a></li>
     </ul>
     <ul id='dropdown2' class='dropdown-content'>
       <li><a class="" href="{{url('registeremployer')}}">As a Employer</a></li>
-      <li><a class="" href="{{url('registeremployee')}}">As a employee</a></li>
+      <li><a class="" href="{{url('registeremployee')}}">As a Employee</a></li>
     </ul>
     <ul id='dropdown3' class='dropdown-content'>
       <li><a class="" href="{{url('registeremployer')}}">As a Employer</a></li>
-      <li><a class="" href="{{url('registeremployee')}}">As a employee</a></li>
+      <li><a class="" href="{{url('registeremployee')}}">As a Employee</a></li>
     </ul>
     <div class="">
       <nav class="grey lighten-5">

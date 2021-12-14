@@ -39,6 +39,8 @@ Route::get('candidate/loginregister/{id}', [EmployeeController::class, 'register
 Route::get('verificationcd/{id}/{id2}', [EmployeeController::class, 'verify']);
 Route::get('/google',[GoogleController::class, 'redirectToGoogle']);
 Route::get('/google/callback',[GoogleController::class, 'handleGoogleCallBack']);
+Route::get('cmpdeactivate/cd/{id}/{id2}', [EmployeeController::class, 'confirmda']);
+Route::get('cmpreactivate/cd/{id}/{id2}', [EmployeeController::class, 'confirmra']);
 //forgot password process
 Route::get('/forgotpassword', [FirstController::class, 'forgotpassword']);
 Route::post('/forgotpassword/mail', [FirstController::class, 'fpwmail']);
@@ -46,10 +48,20 @@ Route::post('/forgotpassword/verifycode', [FirstController::class, 'fpwvc']);
 Route::post('/forgotpassword/newpassword', [FirstController::class, 'fpwnp']);
 //email change process
 Route::get('emailchange/{id}/{id2}', [CompanyController::class, 'emailchange']);
+Route::get('emailchange/cd/{id}/{id2}', [EmployeeController::class, 'emailchange']);
 //emplyee middleware group and crud
 Route::group(['middleware'=>'employee_auth'], function(){
     Route::get('/candidate/profile', [EmployeeController::class, 'index']);
+    Route::get('/candidate/settings', [EmployeeController::class, 'settings']);
     Route::get('/candidate/logout', [EmployeeController::class, 'logout']);
+    Route::get('/candidateget',[EmployeeController::class, 'getcandidate']);
+    Route::post('/candidate/updatename', [EmployeeController::class, 'candupdatename'])->name('upname2');
+    Route::post('/candidate/updateun', [EmployeeController::class, 'candupdateun'])->name('upun2');
+    Route::post('/candidate/updatepw', [EmployeeController::class, 'candupdatepw'])->name('uppw2');
+    Route::post('/candidate/updatepn', [EmployeeController::class, 'candupdatepn'])->name('uppn2');
+    Route::post('/candidate/updateemail', [EmployeeController::class, 'candupdateemail'])->name('candupemail');
+    Route::post('/candidate/deactivate', [EmployeeController::class, 'canddeactivate']);
+    Route::post('/candidate/reactivate', [EmployeeController::class, 'candreactivate']);
 });
 //company middleware group and crud
 Route::group(['middleware'=>'company_auth'], function(){

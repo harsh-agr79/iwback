@@ -168,7 +168,7 @@
             let formData = new FormData($('#reactivateacc')[0]);
             $.ajax({
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            url:"{{url('company/reactivate')}}",
+            url:"{{url('candidate/reactivate')}}",
             data: formData,
             contentType: false,
             processData: false,
