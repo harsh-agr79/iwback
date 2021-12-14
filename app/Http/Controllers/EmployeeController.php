@@ -255,25 +255,42 @@ class EmployeeController extends Controller
     public function canddeactivate(Request $request)
     {
         $id = $request->post('id');
+        $gid = $request->post('gid');
         $password = $request->post('password');
         $reason = $request->post('reason');
         $cand = Employee::where('id',$id)->get();
         $randid = rand(111111111111111,999999999999999);
-        if(Crypt::decrypt($cand[0]->password) === $password){
-              $success = Employee::where('id',$id)->update([
-                  'extra1'=>Crypt::encrypt($randid),
-                  'extra3'=>$reason,
-              ]);
-            if($success){
-                $username = Crypt::encrypt($cand[0]->username);
-                $data=['name'=>$cand[0]->firstname, 'deactivatelink'=>'cd/'.Crypt::encrypt($cand[0]->username), 'randomid'=>Crypt::encrypt(Crypt::encrypt($randid))];
-                Mail::to($cand[0]->email)->send(new cmpdeactivate($data));
-            }
-            return ['pw'=>'Check Your email to deactivate your account'];
+        if($gid == NULL)
+        {
+            if(Crypt::decrypt($cand[0]->password) === $password){
+                $success = Employee::where('id',$id)->update([
+                    'extra1'=>Crypt::encrypt($randid),
+                    'extra3'=>$reason,
+                ]);
+              if($success){
+                  $username = Crypt::encrypt($cand[0]->username);
+                  $data=['name'=>$cand[0]->firstname, 'deactivatelink'=>'cd/'.Crypt::encrypt($cand[0]->username), 'randomid'=>Crypt::encrypt(Crypt::encrypt($randid))];
+                  Mail::to($cand[0]->email)->send(new cmpdeactivate($data));
+              }
+              return ['pw'=>'Check Your email to deactivate your account'];
+          }
+          else{
+              return ['pw'=>'Incorrect Password'];
+          }
         }
         else{
-            return ['pw'=>'Incorrect Password'];
+            $success = Employee::where('id',$id)->update([
+                'extra1'=>Crypt::encrypt($randid),
+                'extra3'=>$reason,
+            ]);
+          if($success){
+              $username = Crypt::encrypt($cand[0]->username);
+              $data=['name'=>$cand[0]->firstname, 'deactivatelink'=>'cd/'.Crypt::encrypt($cand[0]->username), 'randomid'=>Crypt::encrypt(Crypt::encrypt($randid))];
+              Mail::to($cand[0]->email)->send(new cmpdeactivate($data));
+          }
+          return ['pw'=>'Check Your email to deactivate your account'];
         }
+        
     }
     public function confirmda(Request $request,$un,$ri){
         $username = Crypt::decrypt($un);

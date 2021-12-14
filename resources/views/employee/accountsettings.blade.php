@@ -216,7 +216,7 @@
                                         <h6>You can recover your account until after 30 days of deactivation after that your account along with all your details will be permanently deleted.</h6>
                                     </div>
                                     <input type="hidden" name="id" value="{{$cand->id}}">
-                                    <input type="password" name="password" required placeholder="Enter your password to confirm">
+                                    <input type="hidden" name="gid" value="{{$cand->google_id}}">
                                     <div class="col s12">
                                         <h5>Specify the reason:</h5>
                                         <div class="input-field col s12">
