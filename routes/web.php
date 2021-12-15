@@ -62,6 +62,10 @@ Route::get('emailchange/cd/{id}/{id2}', [EmployeeController::class, 'emailchange
 
 //emplyee middleware group and crud
 
+//
+Route::get('/findskill',[SkillController::class, 'skillall']);
+
+
 Route::group(['middleware'=>'employee_auth'], function(){
     Route::get('/candidate/profile', [EmployeeController::class, 'index']);
     Route::get('/candidate/settings', [EmployeeController::class, 'settings']);
@@ -110,7 +114,6 @@ Route::group(['middleware'=>'company_auth'], function(){
     Route::post('/company/updateemail', [CompanyController::class, 'cmpupdateemail'])->name('upemail');
     Route::post('/company/deactivate', [CompanyController::class, 'cmpdeactivate']);
     Route::post('/company/reactivate', [CompanyController::class, 'cmpreactivate']);
-    Route::get('/findskill',[SkillController::class, 'skillall']);
 });
 
 //admin middleware group nad crud

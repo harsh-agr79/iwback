@@ -70,10 +70,9 @@
             <ul class="skill-list" id="skills-list">
                 <li id="addskilltab" class="hide">
                     <div class="row">
-                        <div class="col s11">
-                            <input type="text" name="skill[]" id="skills" style="margin-top: 5px;" class="browser-default inpfield">
-                            <label class="inplbl">Skill Level</label>
-                            <select name="sl[]" class="browser-default inpfield">
+                        <div class="col s11 input-field">
+                            <input type="text" name="skill[]" id="skills" style="margin-top: 5px;" placeholder="Skills" autocomplete="off" class="skls autocomplete browser-default inpfield">
+                            <select name="sl[]" class="browser-default inpfield"  style="margin-top: 5px;">
                                 <option value="" selected>Select Skill Level</option>
                                 <option value="Beginner">Beginner</option>
                                 <option value="Intermediate">Intermediate</option>
@@ -97,10 +96,9 @@
                             @else
                                 <li> <div class="skilltxt"> {{$skills[$i]}} <span class="grey-text" style="font-size: 13px;">{{$skillslevel[$i]}}</span></div>
                                     <div class="skillinp row" style="display: none;">
-                                        <div class="col s11">
-                                            <input type="text" name="skill[]" id="skills" style="margin-top: 5px;" value="{{$skills[$i]}}" class="browser-default inpfield">
-                                            <label class="inplbl">Skill Level</label>
-                                            <select name="sl[]" class="browser-default inpfield">
+                                        <div class="col s11 input-field">
+                                            <input type="text" name="skill[]" id="skills" placeholder="sKills" autocomplete="off" style="margin-top: 5px;" value="{{$skills[$i]}}" class="skls autocomplete browser-default inpfield">
+                                            <select name="sl[]" class="browser-default inpfield"  style="margin-top: 5px;">
                                                 <option value="{{$skillslevel[$i]}}" selected>{{$skillslevel[$i]}} </option>
                                                 <option value="Beginner">Beginner</option>
                                                 <option value="Intermediate">Intermediate</option>
@@ -118,7 +116,7 @@
                     @endif  
             </ul>
         </form>
-            <span class="view_more skillinp" style="display: none;" onclick="addskill()">Add skill</span>
+            <span class="view_more skillinp" style="display: none;" id="askl">Add skill</span>
         </div>
 
         <div class="exp-section section-card">
@@ -147,7 +145,7 @@
                                     <input type="text" name="insname[]" placeholder="Institute Name" class="browser-default inpfield"  id="">   
                                     <input style="margin-top:5px;" type="text" name="inscourse[]" placeholder="Course/Degree Name" class="browser-default inpfield"  id="">
                                     <div class="row">
-                                            <div class="col s3">
+                                            <div class="col s6">
                                                 <label class="inplbl">From month</label>
                                                 <select name="frommonth[]" class="browser-default inpfield">
                                                     <option value="" selected>Select Month</option>
@@ -165,7 +163,7 @@
                                                     <option value="Dec">Dec</option>
                                                 </select>
                                             </div>
-                                            <div class="col s3">
+                                            <div class="col s6">
                                                 <label class="inplbl">From year</label>
                                                     <select name="fromyear[]" class="browser-default inpfield">
                                                         <option value="" selected>Select Year</option>
@@ -174,11 +172,31 @@
                                                         @endfor
                                                     </select>
                                             </div>
-                                            <div class="col s3">
+                                            <div class="col s12 center" style="margin:20px;">
+                                                <label>
+                                                    <input type="checkbox" onchange="if(this.parentNode.parentNode.parentNode.querySelector('.tminp').hasAttribute('disabled'))
+                                                    {
+                                                        this.parentNode.parentNode.parentNode.querySelector('.tminp').removeAttribute('disabled');
+                                                        this.parentNode.parentNode.parentNode.querySelector('.tyinp').removeAttribute('disabled');
+                                                        this.parentNode.parentNode.parentNode.querySelector('.tmhinp').setAttribute('disabled','true');
+                                                        this.parentNode.parentNode.parentNode.querySelector('.tyhinp').setAttribute('disabled','true');
+                                                    }
+                                                    else
+                                                    {
+                                                        // this.parentNode.parentNode.parentNode.querySelector('.tm').style.display = 'none';
+                                                        this.parentNode.parentNode.parentNode.querySelector('.tminp').setAttribute('disabled','true');
+                                                        this.parentNode.parentNode.parentNode.querySelector('.tyinp').setAttribute('disabled','true');
+                                                        this.parentNode.parentNode.parentNode.querySelector('.tmhinp').removeAttribute('disabled');
+                                                        this.parentNode.parentNode.parentNode.querySelector('.tyhinp').removeAttribute('disabled');
+                                                    }"/>
+                                                    <span>Currently Studying here</span>
+                                                  </label>
+                                            </div>
+                                            <div class="col s6 tm">
                                                 <label class="inplbl">To month</label>
-                                                    <select name="tomonth[]" class="browser-default inpfield">
-                                                        <option value="" selected>Select Month</option>
-                                                        <option value="present">Present</option>
+                                                    <input type="hidden" name="tomonth[]" disabled="true" class="tmhinp" value="Present">
+                                                    <select required name="tomonth[]" class="tminp browser-default inpfield">
+                                                        <option value="Present" selected>Select Month</option>
                                                         <option value="Jan">Jan</option>
                                                         <option value="Feb">Feb</option>
                                                         <option value="Mar">Mar</option>
@@ -193,10 +211,11 @@
                                                         <option value="Dec">Dec</option>
                                                     </select>
                                             </div>
-                                            <div class="col s3">
+                                            <div class="col s6 ty">
                                                 <label class="inplbl">To year</label>
-                                                    <select name="toyear[]" class="browser-default inpfield">
-                                                        <option value="" selected>Select Year</option>
+                                                    <input type="hidden" class="tyhinp" disabled="true" name="toyear[]" value="Present">
+                                                    <select required name="toyear[]" class="tyinp browser-default inpfield">
+                                                        <option value="Present" selected>Select Year</option>
                                                         @for ($i = date('Y'); $i >= 1980; $i--)
                                                             <option value="{{$i}}">{{$i}}</option>
                                                         @endfor
@@ -237,9 +256,9 @@
                                 <input type="text" name="insname[]" value="{{$insname[$i]}}" placeholder="Institute Name" class="browser-default inpfield"  id="">   
                                 <input style="margin-top:5px;" type="text" value="{{$inscourse[$i]}}" name="inscourse[]" placeholder="Course/Degree Name" class="browser-default inpfield"  id="">
                                 <div class="row">
-                                        <div class="col s3">
+                                        <div class="col s6">
                                             <label class="inplbl">From month</label>
-                                            <select name="frommonth[]" class="browser-default inpfield">
+                                            <select required name="frommonth[]" class="browser-default inpfield">
                                                 <option value="{{$frommonth[$i]}}" selected>{{$frommonth[$i]}}</option>
                                                 <option value="Jan">Jan</option>
                                                 <option value="Feb">Feb</option>
@@ -255,9 +274,9 @@
                                                 <option value="Dec">Dec</option>
                                             </select>
                                         </div>
-                                        <div class="col s3">
+                                        <div class="col s6">
                                             <label class="inplbl">From year</label>
-                                                <select name="fromyear[]" class="browser-default inpfield">
+                                                <select required name="fromyear[]" class="browser-default inpfield">
                                                     <option value="{{$fromyear[$i]}}" selected>{{$fromyear[$i]}}</option>
                                                     @while ($y >= 1980)
                                                         <option value="{{$y}}">{{$y}}</option>
@@ -266,11 +285,32 @@
                                                     {{$y = date('Y')}}
                                                 </select>
                                         </div>
-                                        <div class="col s3">
+                                        @if ($tomonth[$i] == 'Present')
+                                        <div class="col s12 center" style="margin:20px;">
+                                            <label>
+                                                <input type="checkbox" checked onchange="if(this.parentNode.parentNode.parentNode.querySelector('.tminp').hasAttribute('disabled'))
+                                                {
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tminp').removeAttribute('disabled');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tyinp').removeAttribute('disabled');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tmhinp').setAttribute('disabled','true');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tyhinp').setAttribute('disabled','true');
+                                                }
+                                                else
+                                                {
+                                                    // this.parentNode.parentNode.parentNode.querySelector('.tm').style.display = 'none';
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tminp').setAttribute('disabled','true');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tyinp').setAttribute('disabled','true');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tmhinp').removeAttribute('disabled');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tyhinp').removeAttribute('disabled');
+                                                }"/>
+                                                <span>Currently Studying here</span>
+                                              </label>
+                                        </div>
+                                        <div class="col s6">
                                             <label class="inplbl">To month</label>
-                                                <select name="tomonth[]" class="browser-default inpfield">
-                                                    <option value="{{$tomonth[$i]}}" selected>{{$tomonth[$i]}}</option>
-                                                    <option value="Present">Present</option>
+                                                <input type="hidden" name="tomonth[]" class="tmhinp" value="Present">
+                                                <select required name="tomonth[]"  disabled="true" class="tminp browser-default inpfield">
+                                                    <option value="Present" selected>Select Month</option>
                                                     <option value="Jan">Jan</option>
                                                     <option value="Feb">Feb</option>
                                                     <option value="Mar">Mar</option>
@@ -285,9 +325,61 @@
                                                     <option value="Dec">Dec</option>
                                                 </select>
                                         </div>
-                                        <div class="col s3">
+                                        <div class="col s6">
                                             <label class="inplbl">To year</label>
-                                                <select name="toyear[]" class="browser-default inpfield">
+                                                <input type="hidden" class="tyhinp" name="toyear[]" value="Present">
+                                                <select required name="toyear[]"  disabled="true" class="tyinp browser-default inpfield">
+                                                    <option value="Present" disabled selected>Select Year</option>
+                                                    @while ($y >= 1980)
+                                                        <option value="{{$y}}">{{$y}}</option>
+                                                        {{$y--}}
+                                                    @endwhile
+                                                </select>
+                                        </div>
+                                        @else
+                                        <div class="col s12 center" style="margin:20px;">
+                                            <label>
+                                                <input type="checkbox" onchange="if(this.parentNode.parentNode.parentNode.querySelector('.tminp').hasAttribute('disabled'))
+                                                {
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tminp').removeAttribute('disabled');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tyinp').removeAttribute('disabled');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tmhinp').setAttribute('disabled','true');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tyhinp').setAttribute('disabled','true');
+                                                }
+                                                else
+                                                {
+                                                    // this.parentNode.parentNode.parentNode.querySelector('.tm').style.display = 'none';
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tminp').setAttribute('disabled','true');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tyinp').setAttribute('disabled','true');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tmhinp').removeAttribute('disabled');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tyhinp').removeAttribute('disabled');
+                                                }"/>
+                                                <span>Currently Studying here</span>
+                                              </label>
+                                        </div>
+                                        <div class="col s6">
+                                            <label class="inplbl">To month</label>
+                                                <input type="hidden" name="tomonth[]" disabled="true" class="tmhinp" value="Present">
+                                                <select required name="tomonth[]" class="tminp browser-default inpfield">
+                                                    <option value="{{$tomonth[$i]}}" selected>{{$tomonth[$i]}}</option>
+                                                    <option value="Jan">Jan</option>
+                                                    <option value="Feb">Feb</option>
+                                                    <option value="Mar">Mar</option>
+                                                    <option value="Apr">Apr</option>
+                                                    <option value="May">May</option>
+                                                    <option value="Jun">Jun</option>
+                                                    <option value="Jul">Jul</option>
+                                                    <option value="Aug">Aug</option>
+                                                    <option value="Sept">Sept</option>
+                                                    <option value="Oct">Oct</option>
+                                                    <option value="Nov">Nov</option>
+                                                    <option value="Dec">Dec</option>
+                                                </select>
+                                        </div>
+                                        <div class="col s6">
+                                            <label class="inplbl">To year</label>
+                                                <input type="hidden" class="tyhinp" disabled="true" name="toyear[]" value="Present">
+                                                <select required name="toyear[]" class="tyinp browser-default inpfield">
                                                     <option value="{{$toyear[$i]}}" selected>{{$toyear[$i]}}</option>
                                                     @while ($y >= 1980)
                                                         <option value="{{$y}}">{{$y}}</option>
@@ -295,6 +387,8 @@
                                                     @endwhile
                                                 </select>
                                         </div>
+                                        @endif
+                                       
                                 </div>   
                             </div>
                             <div class="col s1">
@@ -556,6 +650,8 @@
     </section>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
     $('#taedit').click(function(){
         $('#taeditico').toggle();
@@ -577,16 +673,12 @@
         $('.edutxt').toggle();
         $('.eduinp').toggle();
     })
-    function addskill(){
-        var sinp = $('#addskilltab').clone()
-                var sinp2 = sinp.removeClass('hide')
-                sinp2.appendTo("#skills-list")
-    }
-    function addeducation(){
+    
+        function addeducation(){
             var sinp = $('#eduaddtab').clone()
-                var sinp2 = sinp.css('display','block');
-                sinp2.appendTo("#edu-list")
-    }
+            var sinp2 = sinp.css('display','block');
+            sinp2.appendTo("#edu-list")
+        }
         function tasubmit(){
             $('#taform').submit();
         }
@@ -597,7 +689,7 @@
         }
     $(document).ready(function(){
         fetchcand();
-    function fetchcand(){
+        function fetchcand(){
           $.ajax({
               type:"GET",
               url:"/candidateget",
@@ -611,6 +703,33 @@
               }
           })
       }
+      skillget()
+      function skillget(){
+                $.ajax({
+              type:'get',
+              url:'{!!URL::to('findskill')!!}',
+              success:function(response){
+
+                // console.log(response)
+                var custarray = response;
+                var datacust = {};
+                for(var i=0; i< custarray.length; i++){
+
+                  datacust[custarray[i].skill] =null;
+                }
+                console.log(datacust)
+                $('input.skls').autocomplete({
+                  data: datacust,
+                });
+              }
+            })
+           }
+           $('#askl').click(function(){
+             var sinp = $('#addskilltab').clone()
+                var sinp2 = sinp.removeClass('hide')
+                sinp2.appendTo("#skills-list")
+                skillget();
+            })
         $('#taform').submit(function(e){
                  e.preventDefault();
                  let formData = new FormData($('#taform')[0]);
