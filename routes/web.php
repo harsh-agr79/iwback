@@ -84,8 +84,10 @@ Route::group(['middleware'=>'employee_auth'], function(){
 
     //profile edit crud
     Route::post('/candidate/taedit', [EmployeeController::class, 'taedit']);
+    Route::post('/candidate/contedit', [EmployeeController::class, 'contedit']);
     Route::post('/candidate/skilledit', [EmployeeController::class, 'skilledit'])->name('candskill');
     Route::post('/candidate/educationedit', [EmployeeController::class, 'educationedit'])->name('candedu');
+    Route::post('/candidate/experienceedit', [EmployeeController::class, 'experienceedit'])->name('candexp');
     
 
 });

@@ -18,19 +18,44 @@
         $('.edutxt').toggle();
         $('.eduinp').toggle();
     })
+    $('#editexperience').click(function(){
+        $('#editexp').toggle();
+        $('#saveexp').toggle();
+        $('.exptxt').toggle();
+        $('.expinp').toggle();
+    })
+    $('#editcontact').click(function(){
+        $('#editcon').toggle();
+        $('#savecon').toggle();
+        $('#webtxt').toggle();
+        $('#webinp').toggle();
+        $('#adrstxt').toggle();
+        $('#adrsinp').toggle();
+    })
     
         function addeducation(){
             var sinp = $('#eduaddtab').clone()
             var sinp2 = sinp.css('display','block');
             sinp2.appendTo("#edu-list")
         }
+        function addexp(){
+            var sinp = $('#addexptab').clone()
+            var sinp2 = sinp.css('display','block');
+            sinp2.appendTo("#exp-list")
+        }
         function tasubmit(){
             $('#taform').submit();
         }
         function skillsubmit(){
             $('#skillform').submit();
-        }function edusubmit(){
+        }
+        function edusubmit(){
             $('#eduform').submit();
+        }
+        function expsubmit(){
+            $('#expform').submit();
+        }function contsubmit(){
+            $('#contform').submit();
         }
     $(document).ready(function(){
         fetchcand();
@@ -45,6 +70,11 @@
                   $('#titleval').val(response.candidate.title);
                   $('#abouttxt').text(response.candidate.about);
                   $('#aboutinp').val(response.candidate.about);
+                  $('#webtxt').text(response.candidate.portfoliowebsite);
+                  $("#webtxt").attr("href", "https://"+response.candidate.portfoliowebsite)
+                  $('#webinp').val(response.candidate.portfoliowebsite);
+                  $('#adrstxt').text(response.candidate.address);
+                  $('#adrsinp').val(response.candidate.address);
               }
           })
       }
@@ -92,4 +122,21 @@
                     }
                  })
             });
+            $('#contform').submit(function(e){
+                e.preventDefault();
+                let formData = new FormData($('#contform')[0]);
+                $.ajax({
+                   headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                   url:"/candidate/contedit",
+                   data:formData,
+                   contentType: false,
+                   processData: false,
+                   type:'POST',
+                   success:function(response){
+                       $('#contform')['0'].reset();
+                       fetchcand();
+                       M.toast({html: 'Contact Details Updated!'})
+                   }
+                })
+           });
     })

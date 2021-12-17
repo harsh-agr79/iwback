@@ -408,66 +408,319 @@
         <div class="exp-section section-card">
             <h3>
                 Experience
-                <i class="material-icons">edit</i>
+                <div id="editexperience">
+                    <i class="material-icons" id="editexp">edit</i>
+                    <i class="material-icons" style="display: none;" onclick="expsubmit()" id="saveexp">save</i>
+                </div>
             </h3>
-            <div class="exp-grid-section">
-                <div class="exp-item">
-                    <img class="ins-icon" src="{{asset('assets/pngs/experience.png')}}">
-                    <div class="ins-info">
+            <form action="{{route('candexp')}}" id="expform" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="id" value="{{$cand->id}}">
+            <div class="exp-grid-section" id="exp-list">
+                <div class="exp-item" id="addexptab" style="display:none;">
+                    {{-- <img class="exptxt ins-icon" src="{{asset('assets/pngs/experience.png')}}">
+                    <div class="exptxt ins-info">
                         <h5>Horizonlair</h5>
                         <p>Full Stack Developer</p>
                         <span>Apr 2019 - Present</span>
-                    </div>
+                    </div> --}}
+                    <div >
+                        <div class="row">
+                            <div class="col s11">
+                                <input type="text" name="insname[]" placeholder="Organization name" class="browser-default inpfield"  id="">   
+                                <input style="margin-top:5px;" type="text" name="institle[]" placeholder="Post/Type/Title of Job" class="browser-default inpfield"  id="">
+                                <div class="row">
+                                        <div class="col s6">
+                                            <label class="inplbl">From month</label>
+                                            <select name="frommonth[]" class="browser-default inpfield">
+                                                <option value="" selected>Select Month</option>
+                                                <option value="Jan">Jan</option>
+                                                <option value="Feb">Feb</option>
+                                                <option value="Mar">Mar</option>
+                                                <option value="Apr">Apr</option>
+                                                <option value="May">May</option>
+                                                <option value="Jun">Jun</option>
+                                                <option value="Jul">Jul</option>
+                                                <option value="Aug">Aug</option>
+                                                <option value="Sept">Sept</option>
+                                                <option value="Oct">Oct</option>
+                                                <option value="Nov">Nov</option>
+                                                <option value="Dec">Dec</option>
+                                            </select>
+                                        </div>
+                                        <div class="col s6">
+                                            <label class="inplbl">From year</label>
+                                                <select name="fromyear[]" class="browser-default inpfield">
+                                                    <option value="" selected>Select Year</option>
+                                                    @for ($i = date('Y'); $i >= 1980; $i--)
+                                                        <option value="{{$i}}">{{$i}}</option>
+                                                    @endfor
+                                                </select>
+                                        </div>
+                                        <div class="col s12 center" style="margin:20px;">
+                                            <label>
+                                                <input type="checkbox" onchange="if(this.parentNode.parentNode.parentNode.querySelector('.tminp').hasAttribute('disabled'))
+                                                {
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tminp').removeAttribute('disabled');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tyinp').removeAttribute('disabled');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tmhinp').setAttribute('disabled','true');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tyhinp').setAttribute('disabled','true');
+                                                }
+                                                else
+                                                {
+                                                    // this.parentNode.parentNode.parentNode.querySelector('.tm').style.display = 'none';
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tminp').setAttribute('disabled','true');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tyinp').setAttribute('disabled','true');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tmhinp').removeAttribute('disabled');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tyhinp').removeAttribute('disabled');
+                                                }"/>
+                                                <span>Currently Studying here</span>
+                                              </label>
+                                        </div>
+                                        <div class="col s6 tm">
+                                            <label class="inplbl">To month</label>
+                                                <input type="hidden" name="tomonth[]" disabled="true" class="tmhinp" value="Present">
+                                                <select required name="tomonth[]" class="tminp browser-default inpfield">
+                                                    <option value="Present" selected>Select Month</option>
+                                                    <option value="Jan">Jan</option>
+                                                    <option value="Feb">Feb</option>
+                                                    <option value="Mar">Mar</option>
+                                                    <option value="Apr">Apr</option>
+                                                    <option value="May">May</option>
+                                                    <option value="Jun">Jun</option>
+                                                    <option value="Jul">Jul</option>
+                                                    <option value="Aug">Aug</option>
+                                                    <option value="Sept">Sept</option>
+                                                    <option value="Oct">Oct</option>
+                                                    <option value="Nov">Nov</option>
+                                                    <option value="Dec">Dec</option>
+                                                </select>
+                                        </div>
+                                        <div class="col s6 ty">
+                                            <label class="inplbl">To year</label>
+                                                <input type="hidden" class="tyhinp" disabled="true" name="toyear[]" value="Present">
+                                                <select required name="toyear[]" class="tyinp browser-default inpfield">
+                                                    <option value="Present" selected>Select Year</option>
+                                                    @for ($i = date('Y'); $i >= 1980; $i--)
+                                                        <option value="{{$i}}">{{$i}}</option>
+                                                    @endfor
+                                                </select>
+                                        </div>
+                                </div>   
+                            </div>
+                            <div class="col s1">
+                                <i class="material-icons red white-text z-depth-1" style="padding:2px;" onclick="this.parentNode.parentNode.parentNode.parentNode.remove()">delete</i>
+                            </div>
+                        </div>
+                       
+                    </div> 
                 </div>
+                @php
+                    $insname2 = explode('|',$cand->exporganization);
+                    $institle2 = explode('|',$cand->exppost);
+                    $frommonth2 = explode('|',$cand->exptimefrommonth);
+                    $fromyear2 = explode('|',$cand->exptimefromyear);
+                    $tomonth2 = explode('|',$cand->exptimetomonth);
+                    $toyear2 = explode('|',$cand->exptimetoyear);
+                    $y = date('Y');
+                @endphp 
+                @for ($j = 0; $j < count($insname2); $j++)
+                @if ($insname2[$j] == NULL)
+                @else
                 <div class="exp-item">
-                    <img class="ins-icon" src="{{asset('assets/pngs/experience.png')}}">
-                    <div class="ins-info">
-                        <h5>My Power</h5>
-                        <p>Backend Developer</p>
-                        <span>Mar 2017</span>
+                    <img class="exptxt ins-icon" src="{{asset('assets/pngs/experience.png')}}">
+                    <div class="exptxt ins-info">
+                        <h5>{{$insname2[$j]}}</h5>
+                        <p>{{$institle2[$j]}}</p>
+                        <span>{{$frommonth2[$j]}} {{$fromyear2[$j]}} - @if($tomonth2[$j] == 'Present'){{$tomonth2[$j]}} @else{{$tomonth2[$j]}} {{$toyear2[$j]}} @endif</span>
                     </div>
+                    <div class="expinp" style="display: none;">
+                        <div class="row">
+                            <div class="col s11">
+                                <input type="text" name="insname[]" value="{{$insname2[$j]}}" placeholder="Organization name" class="browser-default inpfield"  id="">   
+                                <input style="margin-top:5px;" type="text" name="institle[]" value="{{$institle2[$j]}}" placeholder="Post/Type/Title of Job" class="browser-default inpfield"  id="">
+                                <div class="row">
+                                        <div class="col s6">
+                                            <label class="inplbl">From month</label>
+                                            <select name="frommonth[]" class="browser-default inpfield">
+                                                <option value="{{$frommonth2[$j]}}" selected>{{$frommonth2[$j]}}</option>
+                                                <option value="Jan">Jan</option>
+                                                <option value="Feb">Feb</option>
+                                                <option value="Mar">Mar</option>
+                                                <option value="Apr">Apr</option>
+                                                <option value="May">May</option>
+                                                <option value="Jun">Jun</option>
+                                                <option value="Jul">Jul</option>
+                                                <option value="Aug">Aug</option>
+                                                <option value="Sept">Sept</option>
+                                                <option value="Oct">Oct</option>
+                                                <option value="Nov">Nov</option>
+                                                <option value="Dec">Dec</option>
+                                            </select>
+                                        </div>
+                                        <div class="col s6">
+                                            <label class="inplbl">From year</label>
+                                                <select name="fromyear[]" class="browser-default inpfield">
+                                                    <option value="{{$fromyear2[$j]}}" selected>{{$fromyear2[$j]}}</option>
+                                                    @while ($y >= 1980)
+                                                    <option value="{{$y}}">{{$y}}</option>
+                                                    {{$y--}}
+                                                @endwhile
+                                                {{$y = date('Y')}}
+                                                </select>
+                                        </div>
+                                        @if ($tomonth2[$j] == 'Present')
+                                        <div class="col s12 center" style="margin:20px;">
+                                            <label>
+                                                <input type="checkbox" checked onchange="if(this.parentNode.parentNode.parentNode.querySelector('.tminp').hasAttribute('disabled'))
+                                                {
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tminp').removeAttribute('disabled');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tyinp').removeAttribute('disabled');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tmhinp').setAttribute('disabled','true');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tyhinp').setAttribute('disabled','true');
+                                                }
+                                                else
+                                                {
+                                                    // this.parentNode.parentNode.parentNode.querySelector('.tm').style.display = 'none';
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tminp').setAttribute('disabled','true');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tyinp').setAttribute('disabled','true');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tmhinp').removeAttribute('disabled');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tyhinp').removeAttribute('disabled');
+                                                }"/>
+                                                <span>Currently Studying here</span>
+                                              </label>
+                                        </div>
+                                        <div class="col s6">
+                                            <label class="inplbl">To month</label>
+                                                <input type="hidden" name="tomonth[]" class="tmhinp" value="Present">
+                                                <select required name="tomonth[]"  disabled="true" class="tminp browser-default inpfield">
+                                                    <option value="Present" selected>Select Month</option>
+                                                    <option value="Jan">Jan</option>
+                                                    <option value="Feb">Feb</option>
+                                                    <option value="Mar">Mar</option>
+                                                    <option value="Apr">Apr</option>
+                                                    <option value="May">May</option>
+                                                    <option value="Jun">Jun</option>
+                                                    <option value="Jul">Jul</option>
+                                                    <option value="Aug">Aug</option>
+                                                    <option value="Sept">Sept</option>
+                                                    <option value="Oct">Oct</option>
+                                                    <option value="Nov">Nov</option>
+                                                    <option value="Dec">Dec</option>
+                                                </select>
+                                        </div>
+                                        <div class="col s6">
+                                            <label class="inplbl">To year</label>
+                                                <input type="hidden" class="tyhinp" name="toyear[]" value="Present">
+                                                <select required name="toyear[]"  disabled="true" class="tyinp browser-default inpfield">
+                                                    <option value="Present" disabled selected>Select Year</option>
+                                                    @while ($y >= 1980)
+                                                        <option value="{{$y}}">{{$y}}</option>
+                                                        {{$y--}}
+                                                    @endwhile
+                                                </select>
+                                        </div>
+                                        @else
+                                        <div class="col s12 center" style="margin:20px;">
+                                            <label>
+                                                <input type="checkbox" onchange="if(this.parentNode.parentNode.parentNode.querySelector('.tminp').hasAttribute('disabled'))
+                                                {
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tminp').removeAttribute('disabled');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tyinp').removeAttribute('disabled');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tmhinp').setAttribute('disabled','true');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tyhinp').setAttribute('disabled','true');
+                                                }
+                                                else
+                                                {
+                                                    // this.parentNode.parentNode.parentNode.querySelector('.tm').style.display = 'none';
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tminp').setAttribute('disabled','true');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tyinp').setAttribute('disabled','true');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tmhinp').removeAttribute('disabled');
+                                                    this.parentNode.parentNode.parentNode.querySelector('.tyhinp').removeAttribute('disabled');
+                                                }"/>
+                                                <span>Currently Studying here</span>
+                                              </label>
+                                        </div>
+                                        <div class="col s6">
+                                            <label class="inplbl">To month</label>
+                                                <input type="hidden" name="tomonth[]" disabled="true" class="tmhinp" value="Present">
+                                                <select required name="tomonth[]" class="tminp browser-default inpfield">
+                                                    <option value="{{$tomonth2[$j]}}" selected>{{$tomonth2[$j]}}</option>
+                                                    <option value="Jan">Jan</option>
+                                                    <option value="Feb">Feb</option>
+                                                    <option value="Mar">Mar</option>
+                                                    <option value="Apr">Apr</option>
+                                                    <option value="May">May</option>
+                                                    <option value="Jun">Jun</option>
+                                                    <option value="Jul">Jul</option>
+                                                    <option value="Aug">Aug</option>
+                                                    <option value="Sept">Sept</option>
+                                                    <option value="Oct">Oct</option>
+                                                    <option value="Nov">Nov</option>
+                                                    <option value="Dec">Dec</option>
+                                                </select>
+                                        </div>
+                                        <div class="col s6">
+                                            <label class="inplbl">To year</label>
+                                                <input type="hidden" class="tyhinp" disabled="true" name="toyear[]" value="Present">
+                                                <select required name="toyear[]" class="tyinp browser-default inpfield">
+                                                    <option value="{{$toyear2[$j]}}" selected>{{$toyear2[$j]}}</option>
+                                                    @while ($y >= 1980)
+                                                        <option value="{{$y}}">{{$y}}</option>
+                                                        {{$y--}}
+                                                    @endwhile
+                                                </select>
+                                        </div>
+                                        @endif
+                                </div>   
+                            </div>
+                            <div class="col s1">
+                                <i class="material-icons red white-text z-depth-1" style="padding:2px;" onclick="this.parentNode.parentNode.parentNode.parentNode.remove()">delete</i>
+                            </div>
+                        </div>
+                       
+                    </div> 
                 </div>
+                @endif
+                
+                @endfor
             </div>
+        </form>
+            <span class="view_more expinp" style="display: none;" onclick="addexp()">Add Experience</span>
         </div>
 
         <div class="extra-info contact-info section-card">
             <h1>
                 Contact Info
-                <i class="material-icons">edit</i>
+                <div id="editcontact">
+                    <i class="material-icons" id="editcon">edit</i>
+                    <i class="material-icons" style="display: none;" onclick="contsubmit()" id="savecon">save</i>
+                </div>
             </h1>
-            <div class="contact-item exp-item">
-                <i class="material-icons">account_circle</i>
-                <div class="ins-info">
-                    <h5>Your Profile</h5>
-                    <a href="#">https://www.internwheel.com/account/harsh-agarwal-we72edwa2</a>
+            <form method="POST" enctype="multipart/form-data" id="contform">
+                <input type="hidden" name="id" value="{{$cand->id}}">
+                <div class="contact-item exp-item">
+                    <i class="material-icons">article</i>
+                    <div class="ins-info">
+                        <h5>Portfolio Website</h5>
+                        <a id="webtxt"  href="#" target="_blank"></a>
+                        <input id="webinp" style="display: none; margin-top:10px;" type="text" class="browser-default inpfield" name="website" placeholder="Your Portfolio Website">
+                    </div>
                 </div>
-            </div>
-            <div class="contact-item exp-item">
-                <i class="material-icons">article</i>
-                <div class="ins-info">
-                    <h5>Portfolio</h5>
-                    <a href="#">https://www.internwheel.com/</a>
+                <div class="contact-item exp-item">
+                    <i class="material-icons">place</i>
+                    <div class="ins-info">
+                        <h5>Address</h5>
+                        <p id="adrstxt">New Road, Kathmandu, Province 3, Nepal</p>
+                        <input id="adrsinp" style="display: none; margin-top:10px;" type="text" class="browser-default inpfield" name="address" placeholder="Your Address">
+                    </div>
                 </div>
-            </div>
-            <div class="contact-item exp-item">
-                <i class="material-icons">place</i>
-                <div class="ins-info">
-                    <h5>Address</h5>
-                    <p>New Road, Kathmandu, Province 3, Nepal</p>
-                </div>
-            </div>
+            </form>
             <div class="contact-item exp-item">
                 <i class="material-icons">email</i>
                 <div class="ins-info">
                     <h5>Email</h5>
                     <p>agrharsh@iwhel.com</p>
-                </div>
-            </div>
-            <div class="contact-item exp-item">
-                <i class="material-icons">phone</i>
-                <div class="ins-info">
-                    <h5>Phone</h5>
-                    <p>980-XXXXXXX</p>
                 </div>
             </div>
         </div>

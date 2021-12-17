@@ -71,7 +71,7 @@
                 </a>
                 <a class="bottom-tab" href="#">
                     <i class="material-icons">group</i>
-                    <p>Saved Companies</p>
+                    <p>Saved</p>
                 </a>
                 <a class="bottom-tab" href="">
                     <i class="material-icons">add_box</i>

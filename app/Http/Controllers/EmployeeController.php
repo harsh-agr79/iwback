@@ -362,6 +362,17 @@ class EmployeeController extends Controller
             'about'=>$about,
         ]);
     }
+    public function contedit(Request $request)
+    {
+        $id = $request->post('id');
+        $website = $request->post('website');
+        $address = $request->post('address');
+
+        Employee::where('id',$id)->update([
+            'portfoliowebsite'=>$website,
+            'address'=>$address,
+        ]);
+    }
     public function skilledit(Request $request)
     {
         $id = $request->post('id');
@@ -390,6 +401,25 @@ class EmployeeController extends Controller
             'edutimefromyear'=>implode('|',$fromyear),
             'edutimetomonth'=>implode('|',$tomonth),
             'edutimetoyear'=>implode('|',$toyear),
+        ]);
+        return back();
+    }
+    public function experienceedit(Request $request){
+        $id = $request->post('id');
+        $insname = $request->post('insname',[]);
+        $institle = $request->post('institle',[]);
+        $frommonth = $request->post('frommonth',[]);
+        $fromyear = $request->post('fromyear',[]);
+        $tomonth = $request->post('tomonth',[]);
+        $toyear = $request->post('toyear',[]);
+
+        Employee::where('id',$id)->update([
+            'exporganization'=>implode('|',$insname),
+            'exppost'=>implode('|',$institle),
+            'exptimefrommonth'=>implode('|',$frommonth),
+            'exptimefromyear'=>implode('|',$fromyear),
+            'exptimetomonth'=>implode('|',$tomonth),
+            'exptimetoyear'=>implode('|',$toyear),
         ]);
         return back();
     }
