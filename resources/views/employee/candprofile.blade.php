@@ -1,18 +1,78 @@
 @extends('employee/layoutcand')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 @section('main')
+<div id="editcover" class="modal">
+    <div class="modal-content">
+            <form id="upcp" name="coverpic" method="POST" enctype="multipart/form-data">
+                <div class="file-field input-field">
+                    <div class="btn">
+                      <span>Select Cover Pic</span>
+                      <input type="hidden" name="id" value="{{$cand->id}}">
+                      <input name="coverpic" type="file">
+                    </div>
+                    <div class="file-path-wrapper">
+                      <input class="file-path validate" type="text">
+                      <input type="hidden" id="oldimg" value="{{$cand->candcp}}" name="oldimg">
+                    </div>
+                </div>
+                <div class="center">
+                    <button class="modal-close theme btn waves-effect" onclick="M.toast({html: 'Please wait!'})" type="submit">Update</button>
+                </div>
+          </form>
+        <div class="modal-footer">
+        </div>
+    </div>
+</div>
+<div id="dp" class="modal bottom-sheet">
+    <div class="modal-content">
+      
+            {{-- <div style="font-size: 20px; padding:10px; width:100%; margin-top:10px;" class="z-depth-1 modal-trigger" href="#viewdp"><a href="" class="black-text">View Profile image</a></div> --}}
+            <div style="font-size: 20px; padding:10px; width:100%; margin-top:10px;" class="z-depth-1 modal-trigger" href="#editdp"><a href="" class="black-text">Update Profile image</a></div>
+    </div>
+    {{-- <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat"><i class="material-icons">close</i></a>
+    </div> --}}
+  </div>
+  <div id="editdp" class="modal">
+    <div class="modal-content">
+        <form id="updp" method="POST" enctype="multipart/form-data">
+            <div class="file-field input-field">
+              <div class="btn">
+                <span>Select Profile Pic</span>
+                <input type="hidden" name="id" value="{{$cand->id}}">
+                <input name="dp" type="file">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+                <input type="hidden" id="olddp" value="{{$cand->canddp}}" name="olddp">
+              </div>
+            </div>
+                <div class="center">
+                    <button class="modal-close theme btn waves-effect" onclick="M.toast({html: 'Please wait!'})" type="submit">Update</button>
+                </div>
+          </form>
+    </div>
+    <div class="modal-footer">
+    </div>
+  </div>
+</div>
 <div class="main-content">
+
     <section class="profile-dashboard">
         <div class="profile-info section-card">
             <div class="img-container">
-                <div class="cover-pic">
-                    <span class="cover-edit-btn">
+                <div class="cover-pic" id="cppic">
+                    <span class="cover-edit-btn modal-trigger" href="#editcover">
                         <i class="material-icons">mode_edit</i>
                     </span>
                 </div>
                 <div class="avatar">
                     <div class="avatar-pic">
-                        <img class="avatar-img" src="{{asset('assets/images/icon.png')}}">
+                        @if ($cand->canddp == null)
+                        <img class="avatar-img modal-trigger" href="#dp" src="{{asset('assets/images/icon.png')}}">   
+                        @else
+                        <img class="avatar-img modal-trigger" href="#dp" id="profilepic"  src="{{asset('assets/images/icon.png')}}">
+                        @endif
                         <div class="avatar-title">
                             <h4>{{$cand->firstname}} {{$cand->lastname}}</h4>
                             <p class="location" id="titletxt"></p>

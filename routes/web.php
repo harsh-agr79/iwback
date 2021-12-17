@@ -88,8 +88,8 @@ Route::group(['middleware'=>'employee_auth'], function(){
     Route::post('/candidate/skilledit', [EmployeeController::class, 'skilledit'])->name('candskill');
     Route::post('/candidate/educationedit', [EmployeeController::class, 'educationedit'])->name('candedu');
     Route::post('/candidate/experienceedit', [EmployeeController::class, 'experienceedit'])->name('candexp');
-    
-
+    Route::post('/candidate/updatecp', [EmployeeController::class, 'candupdatecp'])->name('upcp2');
+    Route::post('/candidate/updatedp', [EmployeeController::class, 'candupdatedp'])->name('updp2');
 });
 
 //company middleware group and crud

@@ -58,6 +58,7 @@
             $('#contform').submit();
         }
     $(document).ready(function(){
+        $('.modal').modal();
         fetchcand();
         function fetchcand(){
           $.ajax({
@@ -66,6 +67,15 @@
               dataType:"json",
               success:function(response){
                   console.log(response.candidate.firstname)
+                  var a = response.candidate.canddp
+                    // console.log(a);
+                    var b = "dp/"
+                    var c = ""
+                    var d = b + a +c
+                  $('#cppic').css('background-image', 'url("/candidate/cp/' + response.candidate.candcp + '")');
+                  $('#oldimg').val(response.candidate.candcp);
+                  $('#profilepic').attr('src', d);
+                  $('#olddp').val(response.candidate.canddp);
                   $('#titletxt').html(response.candidate.title);
                   $('#titleval').val(response.candidate.title);
                   $('#abouttxt').text(response.candidate.about);
@@ -139,4 +149,38 @@
                    }
                 })
            });
+           $('#upcp').submit(function(e){
+            e.preventDefault();
+            let formData = new FormData($('#upcp')[0]);
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                url:"/candidate/updatecp",
+                data: formData,
+                contentType: false,
+                processData: false,
+                type:'POST',
+                success:function(result){
+                    fetchcand();
+                    $('#upcp')[0].reset();
+                    M.toast({html: 'Cover Pic Updated!'})
+                }
+            })
+            });
+            $('#updp').submit(function(e){
+                e.preventDefault();
+                let formData = new FormData($('#updp')[0]);
+                $.ajax({
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    url:"/candidate/updatedp",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    type:'POST',
+                    success:function(result){
+                        fetchcand();
+                        $('#updp')[0].reset();
+                        M.toast({html: 'Profile Pic Updated!'})
+                    }
+                })
+                });
     })

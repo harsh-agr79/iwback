@@ -9,7 +9,9 @@ use App\Mail\emailcdverify;
 use App\Mail\emailchange;
 use App\Mail\cmpdeactivate;
 use App\Mail\cmpreactivate;
+use Illuminate\Support\Facades\File;
 use Crypt;
+use Image;
 
 class EmployeeController extends Controller
 {
@@ -422,5 +424,51 @@ class EmployeeController extends Controller
             'exptimetoyear'=>implode('|',$toyear),
         ]);
         return back();
+    }
+    public function candupdatecp(Request $request){
+    
+        // echo 'hello';
+        $request->validate([
+            'coverpic'=>'image|mimes:jpeg,png,jpg,svg'
+        ]);
+        $id=$request->post('id');
+        if($request->hasFile('coverpic')){
+            $path='candidate/cp/'.$request->post('oldimg');
+            $file = $request->file('coverpic');
+            $ext = $file->getClientOriginalExtension();
+            $image_name = time().'candcp'.'.'.$ext;
+            $file->move('candidate/cp/',$image_name);
+            $image = $image_name;
+            Employee::where('id', $id)->update([
+                'candcp'=>$image,
+            ]);
+            if(File::exists($path)) {
+                File::delete($path);
+            }
+        }
+    }
+    public function candupdatedp(Request $request){
+    
+        // echo 'hello';
+        $request->validate([
+            'dp'=>'image|mimes:jpeg,png,jpg,svg'
+        ]);
+        $id=$request->post('id');
+        if($request->hasFile('dp')){
+            $path='candidate/dp/'.$request->post('olddp');
+            $file = $request->file('dp');
+            $ext = $file->getClientOriginalExtension();
+            $image_name = time().'canddp'.'.'.$ext;
+            $image_resize = Image::make($file->getRealPath());
+            $image_resize->fit(300);
+            $image_resize->save(public_path('candidate/dp/'.$image_name));
+            $image = $image_name;
+            Employee::where('id', $id)->update([
+                'canddp'=>$image,
+            ]);
+            if(File::exists($path)) {
+                File::delete($path);
+            }
+        }
     }
 }
