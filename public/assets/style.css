@@ -5,14 +5,14 @@ body {
     background: rgb(238, 238, 238);
 }
 .theme{
-    background: #006994;
+    background: #0082cc;
 }
 .theme-text{
-  color: #006994;
+  color: #0082cc;
 }
 .loginbtn{
     border-radius: 20px;
-   border:1px solid #006994
+   border:1px solid #0082cc
 }
 .center-flex{
     display: flex;
@@ -72,7 +72,7 @@ footer{
      
     /* Handle */
     ::-webkit-scrollbar-thumb {
-      background: #006994; 
+      background: #0082cc; 
       border-radius: 10px;
     }
     
@@ -181,7 +181,7 @@ footer{
 }
 #sort{
   /* padding: 15px 15px 1px 15px; */
-  background: #006994;
+  background: #0082cc;
 }
 .sticky {
   position: fixed;

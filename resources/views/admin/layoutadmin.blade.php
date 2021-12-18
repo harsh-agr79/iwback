@@ -15,8 +15,8 @@
     <header>
         <nav class="white">
             <div class="nav-wrapper">
-              <a href="#!" class="brand-logo hide-on-med-and-down"><img src="../assets/images/iw.png" height="60" style="margin-left: 20px;" alt=""></a>
-              <a href="#!" class="brand-logo hide-on-large-only"><img src="../assets/images/iw.png" height="60" alt=""></a>
+              <a href="#!" class="brand-logo hide-on-med-and-down"><img src="../assets/images/short-transparent.png" height="60" style="margin-left: 20px;" alt=""></a>
+              <a href="#!" class="brand-logo hide-on-large-only"><img src="../assets/images/short-transparent.png" height="60" alt=""></a>
               <a href="#" data-target="slide-out" class="sidenav-trigger left"><i class="material-icons black-text">menu</i></a>
               <ul class="right hide-on-med-and-down">
                 <li><a class="black-text" href=""><i class="material-icons">notifications</i></a></li>

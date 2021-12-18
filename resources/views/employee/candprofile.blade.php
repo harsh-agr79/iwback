@@ -795,7 +795,7 @@
                                 <h4 class="title">Laravel Developer</h4>
                             </div>
                             <div class="col s2 m2">
-                                <img class="cmpimg" src="../../assets/images/iw.png" alt="">
+                                <img class="cmpimg" src="../../assets/images/short-transparent.png" alt="">
                             </div>
                         </div>
                         <div class="col s12 row" style="margin-top: 0;margin-bottom: 0;">
@@ -863,7 +863,7 @@
                                 <h4 class="title">Laravel Developer</h4>
                             </div>
                             <div class="col s2 m2">
-                                <img class="cmpimg" src="../../assets/images/iw.png" alt="">
+                                <img class="cmpimg" src="../../assets/images/short-transparent.png" alt="">
                             </div>
                         </div>
                         <div class="col s12 row" style="margin-top: 0;margin-bottom: 0;">

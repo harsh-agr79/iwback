@@ -36,7 +36,7 @@
           @endforeach
       </div>
       <div class="center" style="margin-top: 5vh;">
-          <button class="waves-effect btn-flat" style="font-size: 20px; font-weight: 600; color: #006994;">View Internships <i class="material-icons right">arrow_forward</i></button>
+          <button class="waves-effect btn-flat" style="font-size: 20px; font-weight: 600; color: #0082cc;">View Internships <i class="material-icons right">arrow_forward</i></button>
         </div>
   </div>
   <div class="">
@@ -66,7 +66,7 @@
        </div>
           
           <div class="center">
-            <button class="waves-effect btn-flat" style="font-size: 20px; font-weight: 600; color: #006994;">View Jobs <i class="material-icons right">arrow_forward</i></button>
+            <button class="waves-effect btn-flat" style="font-size: 20px; font-weight: 600; color: #0082cc;">View Jobs <i class="material-icons right">arrow_forward</i></button>
           </div>
         
       </div>

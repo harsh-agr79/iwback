@@ -3,7 +3,7 @@
 <div style="padding: 20px;margin-top: 10vh; border-radius:10px;" class="white container z-depth-1">
     <div class="center">
         <div style="width: 35vw;" class="container center">
-            <img src="./assets/images/iwmain.png" height="90" class="responsive-img" alt="">
+            <img src="./assets/images/Main-light-transparent.png" height="90" class="responsive-img" alt="">
         </div>
     </div>
     <h4 class="center-align" style="margin-top: 4vh;">Log In</h4>

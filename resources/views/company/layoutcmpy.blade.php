@@ -20,16 +20,16 @@
             <nav class="grey lighten-5">
                 <div class="nav-wrapper">
                     <a href="{{url('/')}}" class="brand-logo hide-on-med-and-down" style="margin-left: 10px; margin-top: 5px;">
-                        <img src="{{asset('assets/images/iwmain.png')}}" height="40" alt="">
+                        <img src="{{asset('assets/images/Main-light-transparent.png')}}" height="40" alt="">
                     </a>
                     <a href="{{url('/')}}" class="brand-logo hide-on-large-only">
-                        <img src="{{asset('assets/images/iw.png')}}" height="50" alt="">
+                        <img src="{{asset('assets/images/short-transparent.png')}}" height="50" alt="">
                     </a>
                     <a class="right hide-on-large-only" style="margin-right:10px;">
                         <i class="material-icons black-text">message</i>
                     </a>
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger">
-                         <i class="material-icons" style="color: #006994">account_circle</i>
+                         <i class="material-icons" style="color: #0082cc">account_circle</i>
                     </a>
                     <ul class="right hide-on-med-and-down">
                         <li>
@@ -46,12 +46,12 @@
                         </li>
                         <li>
                             <a href="#" class="btn-floating white">
-                                <i class="material-icons" style="color: #006994;">notifications</i>
+                                <i class="material-icons" style="color: #0082cc;">notifications</i>
                             </a>
                         </li>
                         <li>
                             <a href="#" data-target="accountdrop" class="btn-floating dropdown-trigger white">
-                                <i class="material-icons" style="color: #006994">account_circle</i>
+                                <i class="material-icons" style="color: #0082cc">account_circle</i>
                             </a>
                             <ul id='accountdrop' class='dropdown-content'>
                                 <li><a href="{{url('company/profile')}}" class="black-text"><i class="material-icons theme-text">account_circle</i>Profile</a></li>
@@ -129,7 +129,7 @@
         <div style="height: 40vh;">
         
         </div>
-        <div class="center-align" style="font-size: 30px;">Your account is Deactivated, if you want to reactivate your account please <br><span class="btn theme waves-effect modal-trigger" href="#reactivate"> click here </span><br><img src="{{asset('assets/images/iwmain.png')}}" class="inline-icon" height="50" alt=""></div>
+        <div class="center-align" style="font-size: 30px;">Your account is Deactivated, if you want to reactivate your account please <br><span class="btn theme waves-effect modal-trigger" href="#reactivate"> click here </span><br><img src="{{asset('assets/images/Main-light-transparent.png')}}" class="inline-icon" height="50" alt=""></div>
         
         <div id="reactivate" class="modal">
             <div class="modal-content">
@@ -200,7 +200,7 @@
         <div style="height: 40vh;">
         
         </div>
-        <div class="center-align" style="font-size: 30px;">Please verify Your Email first to access <img src="{{asset('assets/images/iwmain.png')}}" class="inline-icon" height="50" alt=""></div>
+        <div class="center-align" style="font-size: 30px;">Please verify Your Email first to access <img src="{{asset('assets/images/Main-light-transparent.png')}}" class="inline-icon" height="50" alt=""></div>
         <div style="height: 40vh;">
         
         </div>
