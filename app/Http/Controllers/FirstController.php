@@ -62,6 +62,7 @@ class FirstController extends Controller
     public function fpwmail(Request $request){
         $email = $request->post('email');
         $cmp = Company::where('email',$email)->get();
+        $cand = Employee::where('email',$email)->get();
         $randomid = rand(99999,9999999);
         if(isset($cmp[0]->id)){
             Company::where('email',$email)->update([
@@ -72,6 +73,22 @@ class FirstController extends Controller
             Mail::to($email)->send(new forgotpassword($data));
             return ['pw'=>'Check Your email for verification code'];
         }
+        elseif(isset($cand[0]->id)){
+            if($cand[0]->google_id === NULL){
+                Employee::where('email',$email)->update([
+                    'fpwcode'=>Crypt::encrypt($randomid),
+                    'fpwtime'=>time(),
+                ]);
+                $data=['name'=>$cand[0]->firstname, 'randomid'=>$randomid];
+                Mail::to($email)->send(new forgotpassword($data));
+                return ['pw'=>'Check Your email for verification code'];
+            }
+            else
+            {
+                return ['pw'=>'Invalid Email Id, Try logging in with google'];
+            }
+            
+        }
         else
         {
             return ['pw'=>'Invalid Email ID'];
@@ -80,9 +97,29 @@ class FirstController extends Controller
     public function fpwvc(Request $request){
         $email = $request->post('email');
         $code = $request->post('vfcode');
-        $cmp = Company::where('email',$email)->get();
-        $code2 = Crypt::decrypt($cmp[0]->extra4);
+        $cmp = Company::where('email',$email)->first();
+        $cand = Employee::where('email',$email)->first();
+
+        if(isset($cmp)){
+            $code2 = Crypt::decrypt($cmp->extra4);
+        }
+        else
+        {
+            $code2 = '0';
+        }
+        if(isset($cand)){
+            $code3 = Crypt::decrypt($cand->fpwcode);
+        }
+        else
+        {
+            $code3 = '0';
+        }
+
         if($code2 == $code)
+        {
+            return ['pw'=>'The code has been verified'];
+        }
+        elseif($code3 == $code)
         {
             return ['pw'=>'The code has been verified'];
         }
@@ -98,14 +135,39 @@ class FirstController extends Controller
         $password = $request->post('password');
         $password2 = $request->post('confirm-password');
         $randomid = rand(111111111111,999999999999999);
-        $cmp = Company::where('email',$email)->get();
-        $code2 = Crypt::decrypt($cmp[0]->extra4);
+        $cmp = Company::where('email',$email)->first();
+        $cand = Employee::where('email',$email)->first();
+        if(isset($cmp)){
+            $code2 = Crypt::decrypt($cmp->extra4);
+        }
+        else
+        {
+            $code2 = '0';
+        }
+        if(isset($cand)){
+            $code3 = Crypt::decrypt($cand->fpwcode);
+        }
+        else
+        {
+            $code3 = '0';
+        }
         if($code2 == $code)
         {
             if($password === $password2){
                 Company::where('email',$email)->update([
                     'password'=>Crypt::encrypt($password),
                     'extra4'=>Crypt::encrypt($randomid),
+                ]);
+            return ['pw'=>'The password has been changed'];
+            }else{return ['pw'=>'The passwords do not match'];}
+                
+        }
+        elseif($code3 == $code)
+        {
+            if($password === $password2){
+                Employee::where('email',$email)->update([
+                    'password'=>Crypt::encrypt($password),
+                    'fpwcode'=>Crypt::encrypt($randomid),
                 ]);
             return ['pw'=>'The password has been changed'];
             }else{return ['pw'=>'The passwords do not match'];}

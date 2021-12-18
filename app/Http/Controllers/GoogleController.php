@@ -30,12 +30,18 @@ class GoogleController extends Controller
         else{
                 $admin = Admin::where('email',$user->email)->first();
                 $cmpy = Company::where('email',$user->email)->first();
+                $cand = Employee::where('email',$user->email)->first();
                 if(!empty($admin))
                 {
                     $result['title'] = 'Google Error';
                     return view('googlerror',$result);
                 }
                 elseif(!empty($cmpy))
+                {
+                    $result['title'] = 'Google Error';
+                    return view('googlerror',$result);
+                }
+                elseif(!empty($cand))
                 {
                     $result['title'] = 'Google Error';
                     return view('googlerror',$result);

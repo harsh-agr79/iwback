@@ -70,11 +70,16 @@ function passwordcheck(){
                             $('#emailmsg').text('Please check Your email for the verification code, check the spam folder incase you do not find the mail')
                             $('#emailvc').val(pwd);
                         }
-                        else if(result.pw === 'Invalid Email ID'){
+                        else if(result.pw === 'Invalid Email ID' ){
                             $('#loader').remove();
                             $('#forgotpassword').toggle();
                             $('#emailmsg').text('The Email was invalid please try again')
                         }
+                        else if(result.pw === 'Invalid Email Id, Try logging in with google' ){
+                          $('#loader').remove();
+                          $('#forgotpassword').toggle();
+                          $('#emailmsg').text('The Email was invalid please try again')
+                      }
                     }
                     })
                 });

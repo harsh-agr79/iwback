@@ -420,11 +420,15 @@
             <a href="{{url('/')}}" class="brand-logo hide-on-med-and-down" style="margin-left: 10px; margin-top: 5px;"><img src="{{asset('assets/images/iwmain.png')}}" height="40" alt=""></a>
             <a href="{{url('/')}}" class="brand-logo hide-on-large-only"><img src="{{asset('assets/images/iw.png')}}" height="50" alt=""></a>
             
+            <ul class="right hide-on-large-only ">
               @if($usercu == 'admin')
-              <a class="hide-on-large-only black-text right" style="margin-right:10px;" href="{{url('admin/logout')}}"><i class="material-icons">exit_to_app</i></a>
+              <li><a class="black-text right" style="margin-right:10px;" href="{{url('admin/logout')}}"><i class="material-icons">exit_to_app</i></a></li>
               @else
-              <a class="hide-on-large-only btn theme white-text right" style="margin-right:10px;" href="{{url('login')}}">Login</a>
+              <li><a href="{{url('login')}}"><span class="btn-flat"><img src="{{asset('assets/pngs/login.png')}}" height="30" alt=""></span></a></li>
+              {{-- <li><a class="right" style="margin-right:10px;" href="{{url('login')}}"><span><img src="{{asset('assets/pngs/login.png')}}" height="25" alt=""></span></a></li> --}}
               @endif
+            </ul>
+             
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons black-text">menu</i></a>
             <ul class="right hide-on-med-and-down">
               <li><a class="black-text" href="jobs.html">Internships</a></li>
