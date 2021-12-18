@@ -424,7 +424,7 @@
               @if($usercu == 'admin')
               <li><a class="black-text right" style="margin-right:10px;" href="{{url('admin/logout')}}"><i class="material-icons">exit_to_app</i></a></li>
               @else
-              <li><a href="{{url('login')}}"><span class="btn-flat"><img src="{{asset('assets/pngs/login.png')}}" height="30" alt=""></span></a></li>
+              <li><a class="btn-flat" href="{{url('login')}}"><span ><img src="{{asset('assets/pngs/login.png')}}" height="30" alt=""></span></a></li>
               {{-- <li><a class="right" style="margin-right:10px;" href="{{url('login')}}"><span><img src="{{asset('assets/pngs/login.png')}}" height="25" alt=""></span></a></li> --}}
               @endif
             </ul>
