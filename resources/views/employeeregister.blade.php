@@ -54,10 +54,10 @@
             <div class="col s12" style="display: flex; justify-content:center; margin-top:20px;">
                 <div class="z-depth-1" style="border-radius:5px;">
                     <a href="{{url('google')}}">
-                        <div style="display: flex; align-item:center; justify-content:center; padding:10px; margin:10px; ">
-                            <span style="font-size: 20px;" class="theme-text">Continue with google</span>
-                            <img style="margin-left: 5px;" src="{{asset('assets/svgs/google.svg')}}" height="30" alt="">
-                        </div>
+                      <div style="display: flex; align-item:center; justify-content:center; padding:5px; margin:5px; ">
+                        <span style="font-size: 15px;" class="theme-text">Continue with google</span>
+                        <img style="margin-left: 5px;" src="{{asset('assets/svgs/google.svg')}}" height="20" alt="">
+                    </div>
                     </a>
                 </div>   
           </div>
