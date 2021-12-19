@@ -154,6 +154,12 @@ class JobController extends Controller
         $result['sector'] = Sector::all();
         return view('company/jobedit', $result);
     }
+    public function findjobs(Request $request){
+        $result['title']='Find Jobs';
+        $result['jobs']=Job::all();
+        $result['sector'] = Sector::all();
+        return view('employee/findjobs', $result);
+    }
 
     /**
      * Store a newly created resource in storage.

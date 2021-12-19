@@ -90,6 +90,9 @@ Route::group(['middleware'=>'employee_auth'], function(){
     Route::post('/candidate/experienceedit', [EmployeeController::class, 'experienceedit'])->name('candexp');
     Route::post('/candidate/updatecp', [EmployeeController::class, 'candupdatecp'])->name('upcp2');
     Route::post('/candidate/updatedp', [EmployeeController::class, 'candupdatedp'])->name('updp2');
+
+    //employee job application
+    Route::get('candidate/findjobs', [JobController::class,'findjobs']);
 });
 
 //company middleware group and crud

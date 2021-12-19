@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('assets/dashboard.css')}}">
     <link rel="stylesheet" href="{{asset('assets/style.css')}}">
-    <link rel="icon" href="{{asset('assets/images/title.png')}}">
+    <link rel="icon" href="{{asset('assets/images/icon.png')}}">
     <title>Internwheel | Dashboard</title>
 </head>
 <body>
@@ -64,7 +64,7 @@
                     </ul>
                 </div>
             </nav>
-            <aside class="bottom-nav">
+            <aside class="bottom-nav" style="z-index: 3">
                 <a class="bottom-tab" href="{{url('/')}}">
                     <i class="material-icons">home</i>
                     <p>Home</p>
@@ -204,7 +204,7 @@
 
             </div>
 
-        <footer class="page-footer hide-on-med-and-down theme" style="margin-top: 10vh;">
+        <footer id="footer" class="page-footer hide-on-med-and-down theme" style="margin-top: 10vh;">
             <div class="">
                 <div class="row">
                     <div class="col l3 s12">
@@ -300,6 +300,9 @@
     </div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{asset('assets/nouislider.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="{{asset('assets/dashboard.js')}}"></script>
+<script src="{{asset('assets/script.js')}}"></script>
 </html>
