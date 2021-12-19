@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('assets/dashboard.css')}}">
     <link rel="stylesheet" href="{{asset('assets/style.css')}}">
-    <link rel="icon" href="{{asset('assets/images/title.png')}}">
+    <link rel="icon" href="{{asset('assets/images/icon.png')}}">
     <title>Internwheel | Dashboard</title>
 </head>
 <body>
