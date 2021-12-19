@@ -39,7 +39,7 @@
                             <a class="black-text" href="{{'/candidate/profile'}}">Dashboard</a>
                         </li>
                         <li>
-                            <a class="black-text" href="">Find Jobs</a>
+                            <a class="black-text" href="{{url('candidate/findjobs')}}">Find Jobs</a>
                         </li>
                         <li>
                             <a class="black-text" href="">Contact Us</a>
@@ -73,8 +73,8 @@
                     <i class="material-icons">group</i>
                     <p>Saved</p>
                 </a>
-                <a class="bottom-tab" href="">
-                    <i class="material-icons">add_box</i>
+                <a class="bottom-tab" href="{{url('/candidate/findjobs')}}">
+                    <i class="material-icons">work</i>
                     <p>Find Job</p>
                 </a>
                 <a class="bottom-tab" href="#">

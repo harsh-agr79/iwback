@@ -54,7 +54,7 @@
 
   <div class="row">
     <div class="col s3 hide-on-med-and-down" id="filtersection" style="position: relative">
-      <div id="sortsec" class="white z-depth-2" style="border-radius: 20px; height:65vh; overflow-y:scroll; width:23vw; margin-top:20px;">
+      <div id="sortsec" class="white z-depth-2" style="border-radius: 20px; height:65vh; overflow-y: scroll; overflow-x:hidden; width:23vw; margin-top:20px;">
         <div>
           <h6>Job Type</h6>
           <div class="left-align">
@@ -150,7 +150,14 @@
         </div>
         <div>
           <h6>Salary Range</h6>
-          <div id="salary-slider2"></div> 
+          <p class="range-field">
+            <label>Min Salary</label>
+            <input type="range" id="test5" value="0" min="0" max="100000" />
+          </p>
+          <p class="range-field">
+            <label for="">Max Salary</label>
+            <input type="range" id="test5" min="0" value="100000" max="100000" />
+          </p>
         </div>
       </div>
     </div>
@@ -353,7 +360,14 @@
               </div>
               <div>
                 <h6>Salary Range</h6>
-                <div id="salary-slider2"></div> 
+                <p class="range-field">
+                  <label>Min Salary</label>
+                  <input type="range" id="test5" value="0" min="0" max="100000" />
+                </p>
+                <p class="range-field">
+                  <label for="">Max Salary</label>
+                  <input type="range" id="test5" min="0" value="100000" max="100000" />
+                </p>
               </div>
             </div>
           </div>   
@@ -362,6 +376,14 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
       <script>
         $(document).ready(function(){
+          var window_weight = $(window).width();
+          if (window_weight < 980) {
+            $('#jobsection').removeClass('s9');
+          }
+          else
+          {
+            $('#jobsection').addClass('s9');
+          }
           var jsh = $('#jobsection').outerHeight();
           console.log(jsh)
           var fls = $('#filtersection')

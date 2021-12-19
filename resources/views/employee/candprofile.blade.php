@@ -929,7 +929,7 @@
     </section>
     <section class="profile-sidebar">
         <div class="job-poster section-card">
-            <a href="../../jobs.html">
+            <a href="{{url('candidate/findjobs')}}">
                 <h5>Look For Jobs</h5>
                 <i class="material-icons">business_center</i>
             </a>
