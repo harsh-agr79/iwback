@@ -160,6 +160,10 @@ class JobController extends Controller
         $result['sector'] = Sector::all();
         return view('employee/findjobs', $result);
     }
+    public function candjobdet(Request $request, $jobid){
+        $result['job']=Job::where('jobid',$jobid)->get();
+        return view('employee/jobdet', $result);
+    }
 
     /**
      * Store a newly created resource in storage.

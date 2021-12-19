@@ -93,6 +93,7 @@ Route::group(['middleware'=>'employee_auth'], function(){
 
     //employee job application
     Route::get('candidate/findjobs', [JobController::class,'findjobs']);
+    Route::get('candidate/job/{id}', [JobController::class, 'candjobdet']);
 });
 
 //company middleware group and crud
