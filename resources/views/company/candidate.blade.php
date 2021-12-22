@@ -128,7 +128,7 @@
                 <i class="material-icons">account_circle</i>
                 <div class="ins-info">
                     <h5>Your Profile</h5>
-                    <a href="{{url('account/candidate/'.$cand->username)}}">{{url('account/candidate/'.$cand->username)}}</a>
+                    <a href="{{url('account/candidate/'.$cand->username)}}" style="overflow-wrap: anywhere;">Profile Link</a>
                 </div>
             </div>
             @if ($cand->portfoliowebsite == NULL)
@@ -152,6 +152,7 @@
             </div>
         </div>
     </section>
+   
     <section class="profile-sidebar">
         <div class="job-poster section-card">
             <a onclick="shortlistBtn()">

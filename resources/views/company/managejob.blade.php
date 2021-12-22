@@ -108,7 +108,7 @@
                                 </span>
                             </div>
                             <div class="col s4 center-align">
-                                <span class="center-align" style="font-size: 17px;">
+                                <span class="right-align">
                                     {{$aplt->firstname}} {{$aplt->lastname}}
                                 </span>
                             </div>

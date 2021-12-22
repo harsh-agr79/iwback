@@ -93,7 +93,7 @@
                 </a>
                 <a class="bottom-tab" href="#">
                     <i class="material-icons">group</i>
-                    <p>Saved Candidates</p>
+                    <p>Saved</p>
                 </a>
                 <a class="bottom-tab active" href="{{url('company/postajob')}}">
                     <i class="material-icons">add_box</i>
@@ -117,7 +117,7 @@
                     <p class="menu-text">{{$user['0']->cmpyname}}</p>
                 </a>
                 <div class="divider"></div>
-                <a class="tab-menu" href="{{url('company/jobsmanager')}}l">
+                <a class="tab-menu" href="{{url('company/jobsmanager')}}">
                     <i class="material-icons">business_center</i>
                     <p class="menu-text">Jobs Posted</p>
                 </a>
