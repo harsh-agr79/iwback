@@ -1,6 +1,7 @@
 @extends('company/layoutcmpy')
 
 @section('main')
+
 <div class="main-content">
     <section class="left-section">
         <div class="posted-jobs">
@@ -14,13 +15,6 @@
                             <div class="col s11 m11">
                                 <h4 class="title">{{$item->title}}</h4>
                             </div>
-                            {{-- <button data-target="{{$item->id}}" class="col s1 m1 more_btn">
-                                <i class="material-icons">more_vert</i>
-                            </button>
-                            <button id="{{$item->id}}" class="right-align dropdown-content btn waves-effect waves-light red">
-                                Delete Post 
-                                <i class="material-icons">delete</i>
-                            </button> --}}
                             <a class='dropdown-trigger btn-flat' href='#' data-target='{{$item->id}}'><i class="material-icons">more_vert</i></a>
 
                             <!-- Dropdown Structure -->
@@ -39,11 +33,15 @@
                         <div class="col s12 row hide-on-med-and-down" style="margin-top: 15px;">
                             <div class="col s4 center-align">
                                 <span class="text text-extras"><i class="material-icons inline-icon theme-text">people</i>Applicants</span>
-                               <span class="text2">0 Applicants</span>
+                               <span class="text2">@php
+                                   $applicants = DB::table('applications')->where('jobid',$item->jobid)->count();
+                               @endphp {{$applicants}} Applicants</span>
                             </div>
                             <div class="col s4 center-align"> 
                                 <span class="text text-extras"><i class="material-icons inline-icon theme-text">face</i>Shortlisted</span>
-                                <span class="text2">0 Candidates</span></div>
+                                <span class="text2">@php
+                                    $sled = DB::table('applications')->where('jobid',$item->jobid)->where('shortlist','on')->count();
+                                @endphp {{$sled}} Candidates</span></div>
                             <div class="col s4 center-align">
                                 <span class="text text-extras"><i class="material-icons inline-icon theme-text">hourglass_empty</i>Expire Time</span>
                                 <span class="text2">{{$item->deadline}}</span>
@@ -51,10 +49,10 @@
                         </div>
                         <div class="col s12 row hide-on-large-only" style="margin-top: 15px;">
                             <div class="col s6 left-align">
-                                <span class="text2"><i class="material-icons inline-icon theme-text">people</i>0 Applicants</span>
+                                <span class="text2"><i class="material-icons inline-icon theme-text">people</i>{{$applicants}} Applicants</span>
                             </div>
                             <div class="col s6 left-align"> 
-                                <span class="text2"><i class="material-icons inline-icon theme-text">face</i>0 Candidates</span>
+                                <span class="text2"><i class="material-icons inline-icon theme-text">face</i>{{$sled}} Candidates</span>
                                 </div>
                             <div class="col s6 left-align">
                                 <span class="text2"><i class="material-icons inline-icon theme-text">hourglass_empty</i>{{$item->deadline}}</span>
@@ -65,13 +63,12 @@
                                 <span class="jobtype">{{$item->type}}</span>
                             </div>
                             <div class="col s6 right-align">
-                                <a href="{{url('job/'.$item->jobid)}}">
-                                    View Details 
+                                <a href="{{url('managejob/'.$item->jobid)}}">
+                                    Manage job
                                     <i class="material-icons right">arrow_forward</i>
                                 </a>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
                 @endforeach

@@ -6,7 +6,8 @@ $(document).ready(function(){
     });
     $('input#input_text, textarea#textarea2').characterCounter();
     $('.modal').modal();
-    
+    $('.tooltipped').tooltip();
+    $('.collapsible').collapsible();
 
     var today = new Date()
     var year = today.getFullYear()

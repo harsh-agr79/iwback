@@ -75,7 +75,7 @@
                      </div>
                      
                      <div class="col s12 inp-container">
-                        <div class="hide-block" id="salary-div">
+                        <div class="hide" id="salary-div">
                             <label class="inplbl">Salary </label>
                             <input type="number" placeholder="Salary" name="salary" id="salaryfld" class="salary-field inpfield browser-default"/>
                         </div>
@@ -372,11 +372,11 @@
     $('#wbs').change(() => {
         if($('#salaryfld').attr('required')){
             $('#salaryfld').removeAttr('required')
-            salaryDiv.classList.add('hide-block')
+            salaryDiv.classList.add('hide')
         }
         else{
             $('#salaryfld').attr('required','required')
-            salaryDiv.classList.remove('hide-block')
+            salaryDiv.classList.remove('hide')
         }
     })
 

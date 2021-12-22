@@ -74,7 +74,7 @@
                 </div>
                 <div class="col s6 right-align">
                   <a href=""><i class="material-icons right">share</i></a>
-                  <a href="{{url('job/edit/'.$job[0]->jobid)}}"><i class="material-icons right">edit</i></a>
+                  <a href=""><i class="material-icons right">turned_in_not</i></a>
                 </div>
               </div>
           </div>
@@ -135,20 +135,45 @@
           <div class="self-contain2" style="margin-top: 5vh;">
               <h5 class="left-align" style="font-weight: 600;">Number Of openings: {{$job[0]->openings}}</h5>
           </div>
-          <div class="center" style="margin-top: 5vh;">
-              <button class="btn-large waves-effect waves-light theme modal-trigger" href="#apply-modal" style="font-weight: 500; border-radius: 30px; font-size: 1.5rem;">Apply Now</button>
-          </div>
-        </div>
-    </div>
+          {{$dis=''}}
+          @foreach ($applied as $item)
+              @if ($item->candid == $user[0]->id)
+                  <span class="hide">{{$dis = 'disabled'}}</span>
+              @endif
+          @endforeach
 
-    <div id="apply-modal" class="modal">
-        <div class="modal-content">
-          <h4>Modal Header</h4>
-          <p>A bunch of text</p>
+          @if ($dis == 'disabled')
+          <div class="center" style="margin-top: 5vh;">
+            <button class="btn-large waves-effect waves-light grey modal-trigger" onclick="M.toast({html: 'You already applied to this job'})" style="font-weight: 500; border-radius: 30px; font-size: 1.5rem;">Apply Now</button>
         </div>
-        <div class="modal-footer">
-          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+      </div>
+  </div>
+          @else
+          <div class="center" style="margin-top: 5vh;">
+            <button class="btn-large waves-effect waves-light theme modal-trigger tooltipped" href="#apply-modal" style="font-weight: 500; border-radius: 30px; font-size: 1.5rem;">Apply Now</button>
         </div>
+      </div>
+  </div>
+
+  <div id="apply-modal" class="modal">
+      <div class="modal-content">
+        <h4 class="center">
+          Write a Proposal
+        </h4>
+        <form action="{{route('apply')}}" method="POST" enctype="multipart/form-data">
+          @csrf
+          <input type="hidden" name="candid" value="{{$user[0]->id}}">
+          <input type="hidden" name="cmpyid" value="{{$company[0]->id}}">
+          <input type="hidden" name="jobid" value="{{$job[0]->jobid}}">
+            <textarea required name="proposal" id="proposal" maxlength="1500" style="height: 50px;" rows="30"></textarea>
+            <span style="font-size: 10px; text-align:center;">tip: make sure your prorfile is updated before applying, Organization's will see your profile as resume while veiwing your application</span>
+            <div class="center">
+              <button class="btn waves-effect waves-light theme">Apply</button>
+            </div>
+        </form>
+      </div>
+          @endif
+          
       </div>
 
 

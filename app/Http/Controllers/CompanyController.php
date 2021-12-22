@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\Job;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Crypt;
@@ -423,6 +424,11 @@ class CompanyController extends Controller
         else{
             echo 'The Link has already expired';
         }
+    }
+    public function candprofile(Request $request,$username)
+    {
+        $result['cand'] = Employee::where('username',$username)->first();
+        return view('company/candidate', $result);
     }
     
     /**

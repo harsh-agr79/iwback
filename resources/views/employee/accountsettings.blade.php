@@ -249,7 +249,7 @@
                 <p class="menu-text">Account Profile</p>
             </a>
             <div class="divider"></div>
-            <a class="tab-menu" href="applied_jobs.html">
+            <a class="tab-menu" href="{{url('candidate/appliedjobs')}}">
                 <i class="material-icons">business_center</i>
                 <p class="menu-text">Jobs Applied</p>
             </a>

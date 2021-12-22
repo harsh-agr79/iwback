@@ -305,11 +305,11 @@
 $('#wbs').change(() => {
     if($('#salaryfld').attr('required')){
         $('#salaryfld').removeAttr('required')
-        salaryDiv.classList.add('hide-block')
+        salaryDiv.classList.add('hide')
     }
     else{
         $('#salaryfld').attr('required','required')
-        salaryDiv.classList.remove('hide-block')
+        salaryDiv.classList.remove('hide')
     }
 })
 

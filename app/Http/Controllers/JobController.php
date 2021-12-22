@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Job;
 use App\Models\Company;
 use App\Models\Sector;
+use App\Models\Application;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
@@ -162,7 +163,38 @@ class JobController extends Controller
     }
     public function candjobdet(Request $request, $jobid){
         $result['job']=Job::where('jobid',$jobid)->get();
+        $result['applied']=Application::where('jobid', $jobid)->get();
         return view('employee/jobdet', $result);
+    }
+    public function managejob(Request $request, $jobid){
+        $result['job']=Job::where('jobid',$jobid)->get();
+        $id=Job::where('jobid',$jobid)->first();
+        $result['applicants'] =Application::where('jobid',$jobid)->get();
+        if(session()->get('CMPY_ID') == $id->cmpyid){
+            return view('company/managejob', $result);
+        }
+        else
+        {
+        return redirect('company/jobsmanager');
+        }
+    }
+    public function shortlist(Request $request)
+    {
+        $id = $request->post('id');
+        $sl = $request->post('sl');
+        Application::where('id',$id)->update([
+            'shortlist'=>$sl
+        ]);
+        return ['pw'=>$sl];
+    }
+    public function hire(Request $request)
+    {
+        $id = $request->post('id');
+        $hired = $request->post('hire');
+        Application::where('id',$id)->update([
+            'hired'=>$hired
+        ]);
+        return back();
     }
 
     /**

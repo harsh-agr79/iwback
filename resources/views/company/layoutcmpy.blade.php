@@ -28,9 +28,20 @@
                     <a class="right hide-on-large-only" style="margin-right:10px;">
                         <i class="material-icons black-text">message</i>
                     </a>
-                    <a href="#" data-target="mobile-demo" class="sidenav-trigger">
-                         <i class="material-icons" style="color: #0082cc">account_circle</i>
-                    </a>
+                    <span class="hide-on-large-only">
+                        @if ($user[0]->cmpydp == NULL)
+                        <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+                            <i class="material-icons" style="color: #0082cc">account_circle</i>
+                       </a>
+                        @else
+                        <a href="#" data-target="mobile-demo" class="valign-wrapper sidenav-trigger">
+                            <img height="40" style="border-radius: 50%" src="{{asset('company/dp/'.$user[0]->cmpydp)}}" alt="">
+                       </a>
+                            
+                        @endif
+                        
+                    </span>
+                    
                     <ul class="right hide-on-med-and-down">
                         <li>
                             <a class="black-text" href="{{url('/')}}">Home</a>
@@ -51,7 +62,11 @@
                         </li>
                         <li>
                             <a href="#" data-target="accountdrop" class="btn-floating dropdown-trigger white">
+                                @if ($user[0]->cmpydp == NULL)
                                 <i class="material-icons" style="color: #0082cc">account_circle</i>
+                                @else
+                                <img height="40" src="{{asset('company/dp/'.$user[0]->cmpydp)}}" alt="">
+                                @endif
                             </a>
                             <ul id='accountdrop' class='dropdown-content'>
                                 <li><a href="{{url('company/profile')}}" class="black-text"><i class="material-icons theme-text">account_circle</i>Profile</a></li>

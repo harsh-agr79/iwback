@@ -165,6 +165,9 @@
       <div id="main" style="min-height: 100vh; z-index:0;">
         <div class="row self-contain">
               @foreach ($jobs as $item)
+              @php
+                $company = DB::table('companies')->where('id',$item->cmpyid)->first()   
+              @endphp
           <div class="col s12 m6" style="margin-top: 20px;">
               <div class="jobbox z-depth-1">
                   <div class="row">
@@ -173,12 +176,12 @@
                               <h4 class="title">{{$item->title}}</h4>
                           </div>
                           <div class="col s2 m2">
-                              {{-- <img class="cmpimg" src="{{asset('company/dp/'.$company[0]->cmpydp)}}" alt=""> --}}
+                              <img class="cmpimg" src="{{asset('company/dp/'.$company->cmpydp)}}" alt="">
                           </div>
                       </div>
                       <div class="col s12 row" style="margin-top: 0;margin-bottom: 0;">
                           <div class="col s12" style="margin-bottom: 0;">
-                              <h6 class="companyname" style="font-weight: 600;">{{$item->cmpyname}}</h6>
+                              <h6 class="companyname" style="font-weight: 600;">{{$company->cmpyname}}</h6>
                           </div>    
                       </div>
                       <div class="col s12" style="margin-top: 0px;">

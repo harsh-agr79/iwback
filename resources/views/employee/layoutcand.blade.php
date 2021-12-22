@@ -28,9 +28,19 @@
                     <a class="right hide-on-large-only" style="margin-right:10px;">
                         <i class="material-icons black-text">message</i>
                     </a>
-                    <a href="#" data-target="mobile-demo" class="sidenav-trigger">
-                         <i class="material-icons" style="color: #0082cc">account_circle</i>
-                    </a>
+                    <span class="hide-on-large-only">
+                        @if ($user[0]->canddp == NULL)
+                        <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+                            <i class="material-icons" style="color: #0082cc">account_circle</i>
+                       </a>
+                        @else
+                        <a href="#" data-target="mobile-demo" class="valign-wrapper sidenav-trigger">
+                            <img height="40" style="border-radius: 50%" src="{{asset('candidate/dp/'.$user[0]->canddp)}}" alt="">
+                       </a>
+                            
+                        @endif
+                        
+                    </span>
                     <ul class="right hide-on-med-and-down">
                         <li>
                             <a class="black-text" href="{{url('/')}}">Home</a>
@@ -51,11 +61,15 @@
                         </li>
                         <li>
                             <a href="#" data-target="accountdrop" class="btn-floating dropdown-trigger white">
+                                @if ($user[0]->canddp == NULL)
                                 <i class="material-icons" style="color: #0082cc">account_circle</i>
+                                @else
+                                <img height="40" src="{{asset('candidate/dp/'.$user[0]->canddp)}}" alt="">
+                                @endif
                             </a>
                             <ul id='accountdrop' class='dropdown-content'>
                                 <li><a href="{{url('/candidate/profile')}}" class="black-text"><i class="material-icons theme-text">account_circle</i>Profile</a></li>
-                                <li><a href="{{url('/candidate/jobsmanager')}}" class="black-text"><i class="material-icons theme-text">business_center</i>Jobs Applied</a></li>
+                                <li><a href="{{url('candidate/appliedjobs')}}" class="black-text"><i class="material-icons theme-text">business_center</i>Jobs Applied</a></li>
                                 <li><a href="#!" class="black-text"><i class="material-icons theme-text">groups</i>Saved Companies</a></li>
                                 <li><a href="{{url('/candidate/settings')}}" class="black-text"><i class="material-icons theme-text">settings</i>Account Settings</a></li>
                                 <li><a href="{{url('/candidate/logout')}}" class="black-text"><i class="material-icons theme-text">logout</i>Logout</a></li>
@@ -81,7 +95,7 @@
                     <i class="material-icons">notifications</i>
                     <p>Notifications</p>
                 </a>
-                <a class="bottom-tab final-tab" href="">
+                <a class="bottom-tab final-tab" href="{{url('candidate/appliedjobs')}}">
                     <i class="material-icons">business_center</i>
                     <p>Jobs Applied</p>
                 </a>
@@ -95,7 +109,7 @@
                     <p class="menu-text">{{$user['0']->firstname}}</p>
                 </a>
                 <div class="divider"></div>
-                <a class="tab-menu" href="">
+                <a class="tab-menu" href="{{url('candidate/appliedjobs')}}">
                     <i class="material-icons">business_center</i>
                     <p class="menu-text">Jobs Applied</p>
                 </a>

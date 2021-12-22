@@ -12,6 +12,7 @@ use App\Mail\cmpreactivate;
 use Illuminate\Support\Facades\File;
 use Crypt;
 use Image;
+use App\Models\Application;
 
 class EmployeeController extends Controller
 {
@@ -470,5 +471,10 @@ class EmployeeController extends Controller
                 File::delete($path);
             }
         }
+    }
+    public function appliedjobs(Request $request)
+    {
+        $result['appliedjobs']=Application::where('candid', session()->get('CAND_ID'))->get();
+        return view('employee/appliedjobs', $result);
     }
 }

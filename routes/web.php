@@ -10,6 +10,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\ApplicationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -94,6 +95,8 @@ Route::group(['middleware'=>'employee_auth'], function(){
     //employee job application
     Route::get('candidate/findjobs', [JobController::class,'findjobs']);
     Route::get('candidate/job/{id}', [JobController::class, 'candjobdet']);
+    Route::post('candidate/job/apply', [ApplicationController::class, 'apply'])->name('apply');
+    Route::get('candidate/appliedjobs', [EmployeeController::class, 'appliedjobs']);
 });
 
 //company middleware group and crud
@@ -104,6 +107,7 @@ Route::group(['middleware'=>'company_auth'], function(){
     Route::get('/company/postajob', [JobController::class, 'index']);
     Route::get('/company/jobsmanager', [JobController::class, 'jobmanager']);
     Route::get('/job/{id}', [JobController::class, 'jobdetail']);
+    Route::get('/managejob/{id}', [JobController::class, 'managejob']);
     Route::get('/job/edit/{id}', [JobController::class, 'jobedit']);
     Route::post('/addjob', [JobController::class, 'postjob'])->name('postjob');
     Route::post('/editjob', [JobController::class, 'editjob']);
@@ -120,6 +124,9 @@ Route::group(['middleware'=>'company_auth'], function(){
     Route::post('/company/updateemail', [CompanyController::class, 'cmpupdateemail'])->name('upemail');
     Route::post('/company/deactivate', [CompanyController::class, 'cmpdeactivate']);
     Route::post('/company/reactivate', [CompanyController::class, 'cmpreactivate']);
+    Route::post('/company/shortlist', [JobController::class, 'shortlist']);
+    Route::post('/company/hire', [JobController::class, 'hire'])->name('hire');
+    Route::get('company/candidate/{id}',[CompanyController::class, 'candprofile']);
 });
 
 //admin middleware group nad crud
