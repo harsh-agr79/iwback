@@ -12,6 +12,7 @@ use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\SavecmpyController;
+use App\Http\Controllers\SavecandController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -134,6 +135,12 @@ Route::group(['middleware'=>'company_auth'], function(){
     Route::post('/company/shortlist', [JobController::class, 'shortlist']);
     Route::post('/company/hire', [JobController::class, 'hire'])->name('hire');
     Route::get('/company/candidate/{id}',[CompanyController::class, 'candprofile']);
+    
+
+    //
+    Route::post('/company/savecand',[SavecandController::class, 'savecand']);
+    Route::get('/company/savedcandidates',[SavecandController::class, 'savedcand']);
+    Route::post('/company/unsavecand',[SavecandController::class, 'unsavecand'])->name('unsavecand');
 });
 
 //admin middleware group nad crud

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\Job;
 use App\Models\Employee;
+use App\Models\Savecand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Crypt;
@@ -428,6 +429,8 @@ class CompanyController extends Controller
     public function candprofile(Request $request,$username)
     {
         $result['cand'] = Employee::where('username',$username)->first();
+        $candi = Employee::where('username',$username)->first();
+        $result['saved'] = Savecand::where('cmpyid',session()->get('CMPY_ID'))->where('candid',$candi->id)->get();
         return view('company/candidate', $result);
     }
     

@@ -1,6 +1,6 @@
 @extends('company/layoutcmpy')
-
 @section('main')
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 @php
   $skills = explode('|', $cand->skills);
   $eduorg = explode('|', $cand->eduorganization);
@@ -31,6 +31,13 @@
                             <p class="location">{{$cand->title}}</p>
                         </div>
                     </div>
+                    <span class="avatar-edit-btn hide-on-large-only" onclick="saveformsub()">                    
+                    @if (count($saved)>0)
+                        <i class="material-icons" id="iconsave2">turned_in</i>
+                    @else
+                        <i class="material-icons" id="iconsave2">turned_in_not</i>
+                    @endif                           
+                    </span>
                 </div>
                 @if ($cand->about == NULL)
                     
@@ -155,10 +162,19 @@
    
     <section class="profile-sidebar">
         <div class="job-poster section-card">
-            <a onclick="shortlistBtn()">
+            <form id="saveform">
+                <input type="hidden" name="candid" value="{{$cand->id}}">
+                <input type="hidden" name="cmpyid" value="{{$user[0]->id}}">
+            </form>
+           
+            <span  onclick="saveformsub()">
                 <h5>Save Candidate</h5>
-                <i class="material-icons stlist-icon">turned_in_not</i>
-            </a>
+                @if (count($saved)>0)
+                    <i class="material-icons" id="iconsave">turned_in</i>
+                @else
+                    <i class="material-icons" id="iconsave">turned_in_not</i>
+                @endif
+            </span>
         </div>
         <div class="job-poster section-card" style="margin-top: 10px;">
             <a>
@@ -168,15 +184,35 @@
         </div>
     </section>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-     let shortlist = document.querySelector('.stlist-icon')
-    var shortlistBtn = () => {
-        if(shortlist.innerHTML == 'turned_in_not'){
-            shortlist.innerHTML = 'turned_in'
-        }
-        else{
-            shortlist.innerHTML = 'turned_in_not'
-        }
+    function saveformsub(){
+        $('#saveform').submit();
     }
+    $(document).ready(function(){
+        $('#saveform').submit(function(e){
+            e.preventDefault();
+            let formData = new FormData($('#saveform')[0]);
+            $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            url:'/company/savecand',
+            data: formData,
+            contentType: false,
+            processData: false,
+            type:'POST',
+            success:function(result){
+                // M.toast({html: result.pw})
+                if (result.pw == 'Candidate Saved!') {
+                    $('#iconsave').html('turned_in')
+                    $('#iconsave2').html('turned_in')
+                } else {
+                    $('#iconsave').html('turned_in_not')
+                    $('#iconsave2').html('turned_in_not')
+                }
+                }
+            })
+        })
+    })
+    
 </script>
 @endsection

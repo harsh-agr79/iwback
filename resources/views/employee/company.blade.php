@@ -18,9 +18,13 @@
                             <a class="contact-toggle modal-trigger" href="#modal1" data-target="modal1">Contact Info</a>
                         </div>
                     </div>
-                    <span class="avatar-edit-btn hide-on-large-only">                    
-                        <i class="material-icons theme-text">turned_in_not</i>                            
-                    </span>
+                    <span class="avatar-edit-btn hide-on-large-only" onclick="saveformsub()">                    
+                        @if (count($saved)>0)
+                            <i class="material-icons" id="iconsave2">turned_in</i>
+                        @else
+                            <i class="material-icons" id="iconsave2">turned_in_not</i>
+                        @endif                           
+                        </span>
                 </div>
                 @if ($company->about == NULL)
                     
@@ -230,8 +234,10 @@
                 // M.toast({html: result.pw})
                 if (result.pw == 'Company Saved!') {
                     $('#iconsave').html('turned_in')
+                    $('#iconsave2').html('turned_in')
                 } else {
                     $('#iconsave').html('turned_in_not')
+                    $('#iconsave2').html('turned_in_not')
                 }
                 }
             })

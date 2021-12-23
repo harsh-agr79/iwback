@@ -263,13 +263,13 @@
     </section>
     <section class="profile-sidebar">
         <div class="job-poster section-card">
-            @if($company[0]->adminverification === 'verified')
+            @if($user[0]->adminverification === 'verified')
             <a href="{{url('company/postajob')}}">
                 <h5>Post a job</h5>
                 <i class="material-icons">add_circle</i>
             </a>
             @else
-            <a href="{{url('company/postajob')}}" class="tooltipped" data-position="bottom" data-tooltip="You cannot post a job yet">
+            <a href="#" class="tooltipped" data-position="bottom" data-tooltip="You cannot post a job yet">
                 <h5 class="grey-text">Post a job</h5>
                 <i class="material-icons grey-text">add_circle</i>
             </a>
@@ -286,7 +286,7 @@
                 <p class="menu-text">Jobs Posted</p>
             </a>
             <div class="divider"></div>
-            <a class="tab-menu" href="saved-candidates.html">
+            <a class="tab-menu" href="{{url('company/savedcandidates')}}">
                 <i class="material-icons">groups</i>
                 <p class="menu-text">Saved Candidates</p>
             </a>

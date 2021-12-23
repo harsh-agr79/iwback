@@ -71,14 +71,14 @@
                             <ul id='accountdrop' class='dropdown-content'>
                                 <li><a href="{{url('company/profile')}}" class="black-text"><i class="material-icons theme-text">account_circle</i>Profile</a></li>
                                 <li><a href="{{url('company/jobsmanager')}}" class="black-text"><i class="material-icons theme-text">business_center</i>Jobs posted</a></li>
-                                <li><a href="#!" class="black-text"><i class="material-icons theme-text">groups</i>Saved Candidates</a></li>
+                                <li><a href="{{url('company/savedcandidates')}}" class="black-text"><i class="material-icons theme-text">groups</i>Saved Candidates</a></li>
                                 <li><a href="{{url('company/settings')}}" class="black-text"><i class="material-icons theme-text">settings</i>Account Settings</a></li>
                                 <li><a href="{{url('company/logout')}}" class="black-text"><i class="material-icons theme-text">logout</i>Logout</a></li>
                               </ul>
                               <ul id='accountdrop2' class='dropdown-content'>
                                 <li><a href="{{url('company/profile')}}" class="black-text"><i class="material-icons theme-text">account_circle</i>Profile</a></li>
                                 <li><a href="{{url('company/jobsmanager')}}" class="black-text"><i class="material-icons theme-text">business_center</i>Jobs posted</a></li>
-                                <li><a href="#!" class="black-text"><i class="material-icons theme-text">groups</i>Saved Candidates</a></li>
+                                <li><a href="{{url('company/savedcandidates')}}" class="black-text"><i class="material-icons theme-text">groups</i>Saved Candidates</a></li>
                                 <li><a href="{{url('company/settings')}}" class="black-text"><i class="material-icons theme-text">settings</i>Account Settings</a></li>
                                 <li><a href="{{url('company/logout')}}" class="black-text"><i class="material-icons theme-text">logout</i>Logout</a></li>
                               </ul>
@@ -91,9 +91,9 @@
                     <i class="material-icons">home</i>
                     <p>Home</p>
                 </a>
-                <a class="bottom-tab" href="#">
+                <a class="bottom-tab" href="{{url('company/savedcandidates')}}">
                     <i class="material-icons">group</i>
-                    <p>Saved</p>
+                    <p>Saved Candidates</p>
                 </a>
                 <a class="bottom-tab active" href="{{url('company/postajob')}}">
                     <i class="material-icons">add_box</i>
@@ -122,7 +122,7 @@
                     <p class="menu-text">Jobs Posted</p>
                 </a>
                 <div class="divider"></div>
-                <a class="tab-menu" href="saved-candidates.html">
+                <a class="tab-menu" href="{{url('company/savedcandidates')}}">
                     <i class="material-icons">groups</i>
                     <p class="menu-text">Saved Candidates</p>
                 </a>

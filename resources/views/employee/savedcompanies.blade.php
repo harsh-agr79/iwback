@@ -4,7 +4,7 @@
 <div class="main-content">
     <section class="left-section cd-list">
         <div class='cd-search-section'>
-            <h1>Companies Shortlist</h1>
+            <h1>Saved Companies</h1>
         </div>
         <div class="section-card">
            
