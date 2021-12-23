@@ -25,7 +25,11 @@
                 </div>
                 <div class="avatar">
                     <div class="avatar-pic">
+                        @if ($cand->canddp == NULL)
+                        <img class="avatar-img" src="{{asset('assets/pngs/candidate.png')}}">
+                        @else
                         <img class="avatar-img" src="{{asset('candidate/dp/'.$cand->canddp)}}">
+                        @endif
                         <div class="avatar-title">
                             <h4>{{$cand->firstname}} {{$cand->lastname}}</h4>
                             <p class="location">{{$cand->title}}</p>

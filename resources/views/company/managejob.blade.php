@@ -104,7 +104,11 @@
                         <div class="valign-wrapper row collapsible-header" style="border-top:1px solid rgb(230, 230, 230);">
                             <div class="col s1">
                                 <span style="margin: 0; padding: 0;">
+                                    @if ($aplt->canddp == NULL)
+                                    <img style="border-radius: 50%;" height="35" src="{{asset('assets/pngs/candidate.png')}}" alt="">
+                                    @else
                                     <img style="border-radius: 50%;" height="35" src="{{asset('candidate/dp/'.$aplt->canddp)}}" alt="">
+                                    @endif
                                 </span>
                             </div>
                             <div class="col s4 center-align">

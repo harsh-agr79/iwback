@@ -13,7 +13,11 @@
                     $cand = DB::table('employees')->where('id',$item->candid)->first();
                 @endphp
                 <div class="cd-item">
+                    @if ($cand->canddp == NULL)
+                    <img class="cd-avatar" src="{{asset('assets/pngs/candidate.png')}}" alt="Avatar" style="height:60px;">
+                    @else
                     <img class="cd-avatar" src="{{asset('/candidate/dp/'.$cand->canddp)}}" alt="Avatar" style="height:60px;">
+                    @endif
                     <div class="user-info-cd">
                         <h6><a href="{{url('/company/candidate/'.$cand->username)}}" class="black-text" style="font-weight:600;">{{$cand->firstname}} {{$cand->lastname}}</a></h6>
                         <div class="verify-stamp" style="margin-top:3px; ">

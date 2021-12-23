@@ -69,7 +69,7 @@
                 <div class="avatar">
                     <div class="avatar-pic">
                         @if ($cand->canddp == null)
-                        <img class="avatar-img modal-trigger" href="#dp" src="{{asset('assets/images/icon.png')}}">   
+                        <img class="avatar-img modal-trigger" href="#dp" src="{{asset('assets/pngs/candidate.png')}}">   
                         @else
                         <img class="avatar-img modal-trigger" href="#dp" id="profilepic"  src="{{asset('assets/images/icon.png')}}">
                         @endif
