@@ -116,7 +116,7 @@
                 <div class="divider"></div>
                 <a class="tab-menu" href="{{url('/candidate/savedcompanies')}}">
                     <i class="material-icons">groups</i>
-                    <p class="menu-text">Saved Jobs</p>
+                    <p class="menu-text">Saved Companies</p>
                 </a>
                 <div class="divider"></div>
                 <a class="tab-menu" href="{{'/candidate/settings'}}">

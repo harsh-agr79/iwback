@@ -82,7 +82,7 @@
                 <div class="avatar">
                     <div class="avatar-pic">
                         @if ($company['0']->cmpydp == null)
-                        <img class="avatar-img modal-trigger" href="#dp" src="{{asset('assets/images/icon.png')}}">   
+                        <img class="avatar-img modal-trigger" href="#dp" src="{{asset('assets/pngs/company.png')}}">   
                         @else
                         <img class="avatar-img modal-trigger" href="#dp" id="profilepic"  src="{{asset('assets/images/icon.png')}}">
                         @endif
@@ -188,7 +188,11 @@
                                 <h4 class="title">{{$item->title}}</h4>
                             </div>
                             <div class="col s2 m2">
+                                @if ($company[0]->cmpydp == NULL)
+                                <img class="cmpimg" src="{{asset('assets/pngs/company.png')}}" alt="">
+                                @else
                                 <img class="cmpimg" src="{{asset('company/dp/'.$company[0]->cmpydp)}}" alt="">
+                                @endif
                             </div>
                         </div>
                         <div class="col s12 row" style="margin-top: 0;margin-bottom: 0;">

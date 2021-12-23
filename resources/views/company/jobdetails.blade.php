@@ -12,7 +12,11 @@
                       <h4 class="title">{{$job[0]->title}}</h4>
                   </div>
                   <div class="col s2 m2">
-                      <img class="cmpimg" src="{{asset('company/dp/'.$company[0]->cmpydp)}}" alt="">
+                    @if ($company[0]->cmpydp == NULL)
+                    <img class="cmpimg" src="{{asset('assets/pngs/company.png')}}" alt="">
+                    @else
+                    <img class="cmpimg" src="{{asset('company/dp/'.$company[0]->cmpydp)}}" alt="">
+                    @endif
                   </div>
               </div>
               <div class="col s12 row" style="margin-top: 0;margin-bottom: 0;">

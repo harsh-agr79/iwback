@@ -9,7 +9,11 @@
                 </div>
                 <div class="avatar">
                     <div class="avatar-pic">
-                        <img class="avatar-img" src="{{asset('company/dp/'.$company->cmpydp)}}">
+                        @if ($company->cmpydp == NULL)
+                        <img class="avatar-img" src="{{asset('assets/pngs/company.png')}}" alt="">
+                      @else
+                      <img class="avatar-img" src="{{asset('company/dp/'.$company->cmpydp)}}">
+                      @endif
                         <div class="avatar-title">
                            
                             <h4>{{$company->cmpyname}}</h4>
@@ -45,7 +49,6 @@
                 <div class="divider"></div>
                 <div class="contact-edit">
                     <h6>Contact Info</h6>
-                    <i class="material-icons">edit</i>
                 </div>
                 <ul class="contact-list">
                     <li>
@@ -122,7 +125,11 @@
                                 <h4 class="title">{{$item->title}}</h4>
                             </div>
                             <div class="col s2 m2">
+                              @if ($company->cmpydp == NULL)
+                                <img class="cmpimg" src="{{asset('assets/pngs/company.png')}}" alt="">
+                              @else
                                 <img class="cmpimg" src="{{asset('company/dp/'.$company->cmpydp)}}" alt="">
+                              @endif
                             </div>
                         </div>
                         <div class="col s12 row" style="margin-top: 0;margin-bottom: 0;">

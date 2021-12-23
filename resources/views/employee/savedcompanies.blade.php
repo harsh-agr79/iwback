@@ -13,7 +13,11 @@
                     $cmpy = DB::table('companies')->where('id',$item->cmpyid)->first();
                 @endphp
                 <div class="cd-item">
-                    <img class="cd-avatar" src="{{asset('company/dp/'.$cmpy->cmpydp)}}" alt="Avatar" style="height:60px;">
+                    @if ($cmpy->cmpydp == NULL)
+                    <img class="cd-avatar" src="{{asset('assets/pngs/company.png')}}" alt="Avatar" style="height:60px;">
+                  @else
+                  <img class="cd-avatar" src="{{asset('company/dp/'.$cmpy->cmpydp)}}" alt="Avatar" style="height:60px;">
+                  @endif
                     <div class="user-info-cd">
                         <h6><a href="{{url('/candidate/company/'.$cmpy->username)}}" class="black-text" style="font-weight:600;">{{$cmpy->cmpyname}}</a></h6>
                         @if ($cmpy->adminverification == 'verified')
