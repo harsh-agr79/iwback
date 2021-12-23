@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Company;
+use App\Models\Savecmpy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\emailcdverify;
@@ -25,6 +27,7 @@ class EmployeeController extends Controller
     {
         if(session()->has('CAND_LOGIN')){
             $result['cand'] = Employee::where('id',session()->get('CAND_ID'))->first();
+            $result['applied'] = Application::where('candid',session()->get('CAND_ID'))->get(); 
             return view('employee/candprofile', $result);
         }
         else{
@@ -476,5 +479,12 @@ class EmployeeController extends Controller
     {
         $result['appliedjobs']=Application::where('candid', session()->get('CAND_ID'))->get();
         return view('employee/appliedjobs', $result);
+    }
+    public function cmpyprofile(Request $request,$username)
+    {
+        $result['company'] = Company::where('username',$username)->first();
+        $cmpy = Company::where('username',$username)->first();
+        $result['saved'] = Savecmpy::where('candid',session()->get('CAND_ID'))->where('cmpyid',$cmpy->id)->get();
+        return view('employee/company',$result);
     }
 }

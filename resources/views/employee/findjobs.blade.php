@@ -181,7 +181,7 @@
                       </div>
                       <div class="col s12 row" style="margin-top: 0;margin-bottom: 0;">
                           <div class="col s12" style="margin-bottom: 0;">
-                              <h6 class="companyname" style="font-weight: 600;">{{$company->cmpyname}}</h6>
+                              <h6 class="companyname" style="font-weight: 600;"><a href="{{url('/candidate/company/'.$company->username)}}" class="theme-text">{{$company->cmpyname}}</a></h6>
                           </div>    
                       </div>
                       <div class="col s12" style="margin-top: 0px;">

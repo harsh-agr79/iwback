@@ -788,142 +788,90 @@
         <div class="recent-jobs section-card">
             <h1>Jobs Applied</h1>
             <div class="recent-job-box">
-                <div class="jobbox z-depth-1">
-                    <div class="row">
-                        <div class="col s12 row valign-wrapper" style="margin-bottom:0">
-                            <div class="col s10 m10">
-                                <h4 class="title">Laravel Developer</h4>
-                            </div>
-                            <div class="col s2 m2">
-                                <img class="cmpimg" src="../../assets/images/short-transparent.png" alt="">
-                            </div>
-                        </div>
-                        <div class="col s12 row" style="margin-top: 0;margin-bottom: 0;">
-                            <div class="col s12" style="margin-bottom: 0;">
-                                <h6 class="companyname" style="font-weight: 600;">My Power</h6>
-                            </div>    
-                        </div>
-                        <div class="col s12" style="margin-top: 0px;">
-                            <div class="center" style="margin-top: 0;">
-                                <span class="text" class="center-align">Work On site</span>
-                            </div>
-                        </div>
-                        <div class="col s12 row hide-on-med-and-down" style="margin-top: 15px;">
-                            <div class="col s3 center-align">
-                                <span class="text"><i class="material-icons inline-icon theme-text">play_circle_filled</i>Start date</span>
-                               <br>
-                               <span class="text2">Immidiately</span>
-                            </div>
-                            <div class="col s3 center-align"> 
-                                <span class="text"><i class="material-icons inline-icon theme-text">date_range</i>Duration</span>
-                                <br>
-                                <span class="text2">2 Months</span></div>
-                            <div class="col s3 center-align">
-                                <span class="text"><i class="material-icons inline-icon theme-text">attach_money</i>Stipend</span>
-                                <br>
-                                <span class="text2">Work Based</span>
-                            </div>
-                            <div class="col s3 center-align">
-                                <span class="text"><i class="material-icons inline-icon theme-text">access_time</i>Apply by</span>
-                                <br>
-                                <span class="text2">Dec 5</span>
-                            </div>
-                        </div>
-                        <div class="col s12 row hide-on-large-only" style="margin-top: 15px;">
-                            <div class="col s6 left-align">
-                                <span class="text2"><i class="material-icons inline-icon theme-text">play_circle_filled</i>Immidiately</span>
-                            </div>
-                            <div class="col s6 left-align"> 
-                                <span class="text2"><i class="material-icons inline-icon theme-text">date_range</i>2 Months</span>
+                @foreach ($applied as $item)
+                    @php
+                        $job = DB::table('jobs')->where('jobid',$item->jobid)->first();
+                        $company = DB::table('companies')->where('id',$item->cmpyid)->first();
+                    @endphp
+                     <div class="jobbox z-depth-1">
+                        <div class="row">
+                            <div class="col s12 row valign-wrapper" style="margin-bottom:0">
+                                <div class="col s10 m10">
+                                    <h4 class="title">{{$job->title}}</h4>
                                 </div>
-                            <div class="col s6 left-align">
-                                <span class="text2"><i class="material-icons inline-icon theme-text">attach_money</i>work based</span>
+                                <div class="col s2 m2">
+                                    <img class="cmpimg" src="{{asset('company/dp/'.$company->cmpydp)}}" alt="">
+                                </div>
                             </div>
-                            <div class="col s6 left-align">
-                                <span class="text2"><i class="material-icons inline-icon theme-text">access_time</i>Dec 5</span>
+                            <div class="col s12 row" style="margin-top: 0;margin-bottom: 0;">
+                                <div class="col s12" style="margin-bottom: 0;">
+                                    <h6 class="companyname" style="font-weight: 600;"><a href="{{url('/candidate/company/'.$company->username)}}" class="theme-text">{{$company->cmpyname}}</a></h6>
+                                </div>    
                             </div>
-                        </div>
-                        <div class="col s12 row" style="margin-top: 10px; margin-bottom: 0;">
-                            <div class="col s6 left-align">
-                                <span class="jobtype">Internship</span>
+                            <div class="col s12" style="margin-top: 0px;">
+                                <div class="center" style="margin-top: 0;">
+                                    <span class="text" class="center-align">{{$job->orientation}}</span>
+                                </div>
                             </div>
-                            <div class="col s6 right-align">
-                                <a href="../../jobdetail.html">
-                                    View Details 
-                                    <i class="material-icons right">arrow_forward</i>
-                                </a>
+                            <div class="col s12 row hide-on-med-and-down" style="margin-top: 15px;">
+                                <div class="col s3 center-align">
+                                    <span class="text"><i class="material-icons inline-icon theme-text">play_circle_filled</i>Start date</span>
+                                   <br>
+                                   <span class="text2">Immidiately</span>
+                                </div>
+                                <div class="col s3 center-align"> 
+                                    <span class="text"><i class="material-icons inline-icon theme-text">date_range</i>Duration</span>
+                                    <br>
+                                    <span class="text2">{{$job->duration}}</span></div>
+                                <div class="col s3 center-align">
+                                    <span class="text"><i class="material-icons inline-icon theme-text">attach_money</i>Stipend</span>
+                                    <br>
+                                    <span class="text2">@if ($job->stipend == 'on')
+                                        Work Based
+                                    @else
+                                    {{$job->stipend}}
+                                    @endif</span>
+                                </div>
+                                <div class="col s3 center-align">
+                                    <span class="text"><i class="material-icons inline-icon theme-text">access_time</i>Apply by</span>
+                                    <br>
+                                    <span class="text2">{{$job->deadline}}</span>
+                                </div>
+                            </div>
+                            <div class="col s12 row hide-on-large-only" style="margin-top: 15px;">
+                                <div class="col s6 left-align">
+                                    <span class="text2"><i class="material-icons inline-icon theme-text">play_circle_filled</i>Immidiately</span>
+                                </div>
+                                <div class="col s6 left-align"> 
+                                    <span class="text2"><i class="material-icons inline-icon theme-text">date_range</i>{{$job->duration}}</span>
+                                    </div>
+                                <div class="col s6 left-align">
+                                    <span class="text2"><i class="material-icons inline-icon theme-text">attach_money</i>@if ($job->stipend == 'on')
+                                        Work Based
+                                    @else
+                                    {{$job->stipend}}</span>
+                                    @endif
+                                </div>
+                                <div class="col s6 left-align">
+                                    <span class="text2"><i class="material-icons inline-icon theme-text">access_time</i>{{$item->deadline}}</span>
+                                </div>
+                            </div>
+                            <div class="col s12 row" style="margin-top: 10px; margin-bottom: 0;">
+                                <div class="col s6 left-align">
+                                    <span class="jobtype">{{$job->type}}</span>
+                                </div>
+                                <div class="col s6 right-align">
+                                    <a href="{{url('/candidate/job/'.$job->jobid)}}">
+                                        View Details 
+                                        <i class="material-icons right">arrow_forward</i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="jobbox z-depth-1">
-                    <div class="row">
-                        <div class="col s12 row valign-wrapper" style="margin-bottom:0">
-                            <div class="col s10 m10">
-                                <h4 class="title">Laravel Developer</h4>
-                            </div>
-                            <div class="col s2 m2">
-                                <img class="cmpimg" src="../../assets/images/short-transparent.png" alt="">
-                            </div>
-                        </div>
-                        <div class="col s12 row" style="margin-top: 0;margin-bottom: 0;">
-                            <div class="col s12" style="margin-bottom: 0;">
-                                <h6 class="companyname" style="font-weight: 600;">My Power</h6>
-                            </div>    
-                        </div>
-                        <div class="col s12" style="margin-top: 0px;">
-                            <div class="center" style="margin-top: 0;">
-                                <span class="text" class="center-align">Work On site</span>
-                            </div>
-                        </div>
-                        <div class="col s12 row hide-on-med-and-down" style="margin-top: 15px;">
-                            <div class="col s3 center-align">
-                                <span class="text"><i class="material-icons inline-icon theme-text">play_circle_filled</i>Start date</span>
-                               <br>
-                               <span class="text2">Immidiately</span>
-                            </div>
-                            <div class="col s3 center-align"> 
-                                <span class="text"><i class="material-icons inline-icon theme-text">date_range</i>Duration</span>
-                                <br>
-                                <span class="text2">2 Months</span></div>
-                            <div class="col s3 center-align">
-                                <span class="text"><i class="material-icons inline-icon theme-text">attach_money</i>Stipend</span>
-                                <br>
-                                <span class="text2">Work Based</span>
-                            </div>
-                            <div class="col s3 center-align">
-                                <span class="text"><i class="material-icons inline-icon theme-text">access_time</i>Apply by</span>
-                                <br>
-                                <span class="text2">Dec 5</span>
-                            </div>
-                        </div>
-                        <div class="col s12 row hide-on-large-only" style="margin-top: 15px;">
-                            <div class="col s6 left-align">
-                                <span class="text2"><i class="material-icons inline-icon theme-text">play_circle_filled</i>Immidiately</span>
-                            </div>
-                            <div class="col s6 left-align"> 
-                                <span class="text2"><i class="material-icons inline-icon theme-text">date_range</i>2 Months</span>
-                                </div>
-                            <div class="col s6 left-align">
-                                <span class="text2"><i class="material-icons inline-icon theme-text">attach_money</i>work based</span>
-                            </div>
-                            <div class="col s6 left-align">
-                                <span class="text2"><i class="material-icons inline-icon theme-text">access_time</i>Dec 5</span>
-                            </div>
-                        </div>
-                        <div class="col s12 row" style="margin-top: 10px; margin-bottom: 0;">
-                            <div class="col s6 left-align">
-                                <span class="jobtype">Internship</span>
-                            </div>
-                            <div class="col s6 right-align">
-                                <a href="../../jobdetail.html">
-                                    View Details 
-                                    <i class="material-icons right">arrow_forward</i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+               
+                
             </div>
         </div>
     </section>
@@ -945,7 +893,7 @@
                 <p class="menu-text">Jobs Applied</p>
             </a>
             <div class="divider"></div>
-            <a class="tab-menu" href="saved_companies.html">
+            <a class="tab-menu" href="{{url('/candidate/savedcompanies')}}">
                 <i class="material-icons">groups</i>
                 <p class="menu-text">Saved Companies</p>
             </a>

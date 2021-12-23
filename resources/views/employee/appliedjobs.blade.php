@@ -8,6 +8,7 @@
                 @foreach ($appliedjobs as $item)
                     @php
                         $job = DB::table('jobs')->where('jobid',$item->jobid)->first();   
+                        $company = DB::table('companies')->where('id',$item->cmpyid)->first();   
                     @endphp
               <div class="jobbox z-depth-1">
                   <div class="row">
@@ -16,12 +17,12 @@
                               <h4 class="title">{{$job->title}}</h4>
                           </div>
                           <div class="col s2 m2">
-                              {{-- <img class="cmpimg" src="{{asset('company/dp/'.$company[0]->cmpydp)}}" alt=""> --}}
+                              <img class="cmpimg" src="{{asset('company/dp/'.$company->cmpydp)}}" alt="">
                           </div>
                       </div>
                       <div class="col s12 row" style="margin-top: 0;margin-bottom: 0;">
                           <div class="col s12" style="margin-bottom: 0;">
-                              <h6 class="companyname" style="font-weight: 600;">{{$job->cmpyname}}</h6>
+                              <h6 class="companyname" style="font-weight: 600;"><a href="{{url('/candidate/company/'.$company->username)}}" class="theme-text">{{$company->cmpyname}}</a></h6>
                           </div>    
                       </div>
                       <div class="col s12" style="margin-top: 0px;">
@@ -61,7 +62,7 @@
     </section>
     <section class="profile-sidebar">
         <div class="job-poster section-card">
-            <a href="{{url('/candidate/findjobs')}}">
+            <a href="{{url('candidate/findjobs')}}">
                 <h5>Look For Jobs</h5>
                 <i class="material-icons">business_center</i>
             </a>
@@ -77,7 +78,7 @@
                 <p class="menu-text">Jobs Applied</p>
             </a>
             <div class="divider"></div>
-            <a class="tab-menu" href="saved_companies.html">
+            <a class="tab-menu" href="{{url('/candidate/savedcompanies')}}">
                 <i class="material-icons">groups</i>
                 <p class="menu-text">Saved Companies</p>
             </a>

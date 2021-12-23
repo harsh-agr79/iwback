@@ -17,7 +17,7 @@
               </div>
               <div class="col s12 row" style="margin-top: 0;margin-bottom: 0;">
                   <div class="col s12" style="margin-bottom: 0;">
-                      <h6 class="companyname" style="font-weight: 600;">{{$company[0]->cmpyname}}</h6>
+                      <h6 class="companyname" style="font-weight: 600;"><a href="{{url('/candidate/company/'.$company[0]->username)}}" class="theme-text">{{$company[0]->cmpyname}}</a></h6>
                   </div>    
               </div>
               <div class="col s12" style="margin-top: 0px;">
@@ -74,7 +74,7 @@
                 </div>
                 <div class="col s6 right-align">
                   <a href=""><i class="material-icons right">share</i></a>
-                  <a href=""><i class="material-icons right">turned_in_not</i></a>
+                  {{-- <a href=""><i class="material-icons right">turned_in_not</i></a> --}}
                 </div>
               </div>
           </div>

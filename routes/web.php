@@ -11,6 +11,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\SavecmpyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -97,6 +98,12 @@ Route::group(['middleware'=>'employee_auth'], function(){
     Route::get('candidate/job/{id}', [JobController::class, 'candjobdet']);
     Route::post('candidate/job/apply', [ApplicationController::class, 'apply'])->name('apply');
     Route::get('candidate/appliedjobs', [EmployeeController::class, 'appliedjobs']);
+    Route::get('/candidate/company/{id}',[EmployeeController::class, 'cmpyprofile']);
+
+    //save company crud
+    Route::post('/candidate/savecmpy',[SavecmpyController::class, 'savecmpy']);
+    Route::get('/candidate/savedcompanies',[SavecmpyController::class, 'savedcmpy']);
+    Route::post('/candidate/unsavecmpy',[SavecmpyController::class, 'unsavecmpy'])->name('unsavecmpy');
 });
 
 //company middleware group and crud
@@ -126,7 +133,7 @@ Route::group(['middleware'=>'company_auth'], function(){
     Route::post('/company/reactivate', [CompanyController::class, 'cmpreactivate']);
     Route::post('/company/shortlist', [JobController::class, 'shortlist']);
     Route::post('/company/hire', [JobController::class, 'hire'])->name('hire');
-    Route::get('company/candidate/{id}',[CompanyController::class, 'candprofile']);
+    Route::get('/company/candidate/{id}',[CompanyController::class, 'candprofile']);
 });
 
 //admin middleware group nad crud

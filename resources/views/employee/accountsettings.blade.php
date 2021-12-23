@@ -238,7 +238,7 @@
     </section>
     <section class="profile-sidebar">
         <div class="job-poster section-card">
-            <a href="{{url('/candidate/findjobs')}}">
+            <a href="{{url('candidate/findjobs')}}">
                 <h5>Look For Jobs</h5>
                 <i class="material-icons">business_center</i>
             </a>
@@ -254,7 +254,7 @@
                 <p class="menu-text">Jobs Applied</p>
             </a>
             <div class="divider"></div>
-            <a class="tab-menu" href="saved_companies.html">
+            <a class="tab-menu" href="{{url('/candidate/savedcompanies')}}">
                 <i class="material-icons">groups</i>
                 <p class="menu-text">Saved Companies</p>
             </a>
