@@ -36,7 +36,11 @@
             @endphp
             <a href="{{url('/company/notification/'.$notification->id.'/'.$notification->data['job'])}}">
             <div class="notification-item unread">
-                <img class="notif-img" src="{{asset('candidate/dp/'.$cand->canddp)}}">
+                @if ($cand->canddp == NULL)
+            <img class="notif-img" src="{{asset('assets/pngs/candidate.png')}}">
+            @else
+            <img class="notif-img" src="{{asset('candidate/dp/'.$cand->canddp)}}">
+            @endif
                 <span class="notif-detail">
                     <h2>{{$cand->firstname}} {{$cand->lastname}}</h2>
                     <p>{{$notification->data['msg']}} <span style="font-weight: 600;">{{$job->title}}</span></p>
@@ -53,7 +57,11 @@
             @endphp
             <a href="{{url('managejob/'.$notification->data['job'])}}" class="black-text">
             <div class="notification-item">
-                <img class="notif-img" src="{{asset('candidate/dp/'.$cand->canddp)}}">
+                @if ($cand->canddp == NULL)
+            <img class="notif-img" src="{{asset('assets/pngs/candidate.png')}}">
+            @else
+            <img class="notif-img" src="{{asset('candidate/dp/'.$cand->canddp)}}">
+            @endif
                 <span class="notif-detail">
                     <h2>{{$cand->firstname}} {{$cand->lastname}}</h2>
                     <p>{{$notification->data['msg']}} <span style="font-weight: 600;">{{$job->title}}</span></p>
