@@ -120,6 +120,7 @@
                                 <span>
                                     <form class="shortlist">
                                         <input type="hidden" name="id" value="{{$item->id}}">
+                                        <input type="hidden" name="candid" value="{{$aplt->id}}">
                                         <label>
                                             @if ($item->shortlist == 'on')
                                                 <input class="slbtn" name="sl" onclick="if(this.parentNode.querySelector('.sllbl').innerHTML == 'Shortlist')
@@ -153,6 +154,7 @@
                                     @csrf
                                 <span>
                                     <input type="hidden" name="id" value="{{$item->id}}">
+                                    <input type="hidden" name="candid" value="{{$aplt->id}}">
                                     <label>
                                         @if ($item->hired == 'on' && $dis == 'disabled')
                                         <input name="hire" checked onclick="this.parentNode.parentNode.parentNode.submit()" type="checkbox"/>

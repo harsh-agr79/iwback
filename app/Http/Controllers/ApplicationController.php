@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Application;
+use App\Models\Company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\applied;
 
 class ApplicationController extends Controller
 {
@@ -31,7 +34,10 @@ class ApplicationController extends Controller
             'date'=>$date,
             'proposal'=>$proposal,
         ]);
+        $user = Company::find($cmpyid);
+        Notification::send($user, new applied($candid,$cmpyid,$jobid));
         return redirect('candidate/appliedjobs');
+        
     }
 
     /**

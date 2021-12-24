@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use App\Models\Company;
+use App\Models\Employee;
 use App\Models\Sector;
 use App\Models\Application;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
+// use Illuminate\Contracts\Pagination\Presenter;
+use App\Notifications\shortlisted;
+use App\Notifications\hired;
 
 class JobController extends Controller
 {
@@ -182,18 +187,34 @@ class JobController extends Controller
     {
         $id = $request->post('id');
         $sl = $request->post('sl');
+        $candid = $request->post('candid');
+        $apli = Application::where('id',$id)->first();
+        $jobid = $apli->jobid;
         Application::where('id',$id)->update([
             'shortlist'=>$sl
         ]);
+        if($sl == 'on'){
+            $cmpyid = session()->get('CMPY_ID');
+            $user = Employee::find($candid);
+            Notification::send($user, new shortlisted($candid,$cmpyid,$jobid));
+        }
         return ['pw'=>$sl];
     }
     public function hire(Request $request)
     {
         $id = $request->post('id');
         $hired = $request->post('hire');
+        $candid = $request->post('candid');
+        $apli = Application::where('id',$id)->first();
+        $jobid = $apli->jobid;
         Application::where('id',$id)->update([
             'hired'=>$hired
         ]);
+        if($hired == 'on'){
+            $cmpyid = session()->get('CMPY_ID');
+            $user = Employee::find($candid);
+            Notification::send($user, new hired($candid,$cmpyid,$jobid));
+        }
         return back();
     }
 

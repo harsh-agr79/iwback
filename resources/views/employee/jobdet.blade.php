@@ -154,7 +154,7 @@
   </div>
           @else
           <div class="center" style="margin-top: 5vh;">
-            <button class="btn-large waves-effect waves-light theme modal-trigger tooltipped" href="#apply-modal" style="font-weight: 500; border-radius: 30px; font-size: 1.5rem;">Apply Now</button>
+            <button class="btn-large waves-effect waves-light theme modal-trigger" href="#apply-modal" style="font-weight: 500; border-radius: 30px; font-size: 1.5rem;">Apply Now</button>
         </div>
       </div>
   </div>

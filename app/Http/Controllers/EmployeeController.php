@@ -487,4 +487,26 @@ class EmployeeController extends Controller
         $result['saved'] = Savecmpy::where('candid',session()->get('CAND_ID'))->where('cmpyid',$cmpy->id)->get();
         return view('employee/company',$result);
     }
+    public function notifread(Request $request, $notifid, $jobid){
+        $userid = $request->session()->get('CAND_ID');
+        $cand = Employee::find($userid);
+        $cand->unreadNotifications->where('id',$notifid)->markAsRead();
+        return redirect('candidate/job/'.$jobid);
+    }
+    public function notifmar(Request $request){
+        $userid = $request->session()->get('CAND_ID');
+        $cand = Employee::find($userid);
+        $cand->unreadNotifications->markAsRead();
+        return back();
+    }
+    public function notifdel(Request $request){
+        $userid = $request->session()->get('CAND_ID');
+        $cand = Employee::find($userid);
+        $cand->notifications()->delete();
+        return back();
+    }
+    public function notifpage(Request $request)
+    {
+        return view('employee/notification');
+    }
 }

@@ -23,6 +23,57 @@
 @endif
 <body>
 @if (session()->has('CMPY_LOGIN'))
+<div class="notification-drop">
+  <div style="padding: 10px; font-weight: 600;">
+      <span class="right btn-flat dropdown-trigger" data-target="dropdown1">
+          <i class="material-icons">
+              more_vert
+          </i>
+      </span>
+      <h6>Notifications</h6>
+      <ul id='dropdown1' class='dropdown-content'>
+          <li><a href="{{url('company/notifmar')}}" class="black-text"><i class="material-icons theme-text">visibility</i>Mark All as Read</a></li>
+          <li><a href="{{url('company/notifdel')}}" class="black-text"><i class="material-icons red-text">delete</i>Clear Notifications</a></li>
+        </ul>
+  </div>
+  <div class="notification-inner">
+      @foreach ($user[0]->unReadNotifications as $notification)
+      @php
+          $cand = DB::table('employees')->where('id', $notification->data['cand'])->first();   
+          $job = DB::table('jobs')->where('jobid', $notification->data['job'])->first();
+      @endphp
+      <a href="{{url('/company/notification/'.$notification->id.'/'.$notification->data['job'])}}">
+      <div class="notification-item unread">
+          <img class="notif-img" src="{{asset('candidate/dp/'.$cand->canddp)}}">
+          <span class="notif-detail">
+              <h2  style="font-weight: 600;">{{$cand->firstname}} {{$cand->lastname}}</h2>
+              <p>{{$notification->data['msg']}} <span style="font-weight: 600;">{{$job->title}}</span></p>
+              <p style="font-size: 10px; margin-top:2px;"><span class="hide">{{$start = $notification->created_at}}</span>
+                  {{date('Y-m-d H:i',strtotime('+5 hour +45 minutes',strtotime($start)));}}</p>
+          </span>
+      </div>
+      </a>
+      @endforeach
+      @foreach ($user[0]->ReadNotifications as $notification)
+      @php
+          $cand = DB::table('employees')->where('id', $notification->data['cand'])->first();   
+          $job = DB::table('jobs')->where('jobid', $notification->data['job'])->first();
+      @endphp
+      <a href="{{url('managejob/'.$notification->data['job'])}}" class="black-text">
+      <div class="notification-item">
+          <img class="notif-img" src="{{asset('candidate/dp/'.$cand->canddp)}}">
+          <span class="notif-detail">
+              <h2 style="font-weight: 600;">{{$cand->firstname}} {{$cand->lastname}}</h2>
+              <p>{{$notification->data['msg']}} <span style="font-weight: 600;">{{$job->title}}</span></p>
+              <p style="font-size: 10px; margin-top:2px;"><span class="hide">{{$start = $notification->created_at}}</span>
+                  {{date('Y-m-d H:i',strtotime('+5 hour +45 minutes',strtotime($start)));}}</p>
+          </span>
+      </div>
+      </a>
+      @endforeach
+
+  </div>
+</div> 
   <div class="navbar-fixed">
     <nav class="grey lighten-5">
         <div class="nav-wrapper">
@@ -61,11 +112,26 @@
                 <li>
                     <a class="black-text" href="">Contact Us</a>
                 </li>
-                <li>
-                    <a href="#" class="btn-floating white">
-                        <i class="material-icons" style="color: #0082cc;">notifications</i>
-                    </a>
-                </li>
+                <li onclick="notif()">
+                  <a href="#" class="btn-floating white">
+                      @if($user[0]->unReadNotifications->count() > 0)
+                      <i class="material-icons red-text">notifications_active</i>
+                      @else
+                      <i class="material-icons" style="color: #0082cc">notifications</i>               
+                      @endif
+                  </a>
+                  <script>
+                    const notificationDrop = document.querySelector('.notification-drop')
+                
+                    const notif = (e) => {
+                        notificationDrop.classList.toggle('show')
+                
+                        if(!e.target.classList.contains('notification-drop')){
+                            notificationDrop.classList.remove('show')
+                        }
+                    }
+                </script>
+              </li>
                 <li>
                   <a href="#" data-target="accountdrop" class="btn-floating dropdown-trigger white">
                     @if ($user[0]->cmpydp == NULL)
@@ -105,10 +171,14 @@
             <i class="material-icons">add_box</i>
             <p>Post Job</p>
         </a>
-        <a class="bottom-tab" href="#">
-            <i class="material-icons">notifications</i>
-            <p>Notifications</p>
-        </a>
+        <a class="bottom-tab" href="{{url('company/notif')}}">
+          @if($user[0]->unReadNotifications->count() > 0)
+          <i class="material-icons red-text">notifications_active</i>
+          @else
+          <i class="material-icons">notifications</i>               
+          @endif
+          <p>Notifications</p>
+      </a>
         <a class="bottom-tab final-tab" href="{{url('company/jobsmanager')}}">
             <i class="material-icons">business_center</i>
             <p>Jobs Posted</p>
@@ -228,7 +298,56 @@
     @endif
     </main>
     @elseif(session()->has('CAND_LOGIN'))
-
+    <div class="notification-drop">
+      <div style="padding: 10px; font-weight: 600;">
+          <span class="right btn-flat dropdown-trigger" data-target="dropdown1">
+              <i class="material-icons">
+                  more_vert
+              </i>
+          </span>
+          <h6>Notifications</h6>
+          <ul id='dropdown1' class='dropdown-content'>
+              <li><a href="{{url('candidate/notifmar')}}" class="black-text"><i class="material-icons theme-text">visibility</i>Mark All as Read</a></li>
+              <li><a href="{{url('candidate/notifdel')}}" class="black-text"><i class="material-icons red-text">delete</i>Clear Notifications</a></li>
+            </ul>
+      </div>
+      <div class="notification-inner">
+          @foreach ($user[0]->unReadNotifications as $notification)
+          @php
+              $cmpy = DB::table('companies')->where('id', $notification->data['cmpy'])->first();   
+              $job = DB::table('jobs')->where('jobid', $notification->data['job'])->first();
+          @endphp
+          <a href="{{url('/candidate/notification/'.$notification->id.'/'.$notification->data['job'])}}">
+          <div class="notification-item unread">
+              <img class="notif-img" src="{{asset('company/dp/'.$cmpy->cmpydp)}}">
+              <span class="notif-detail">
+                  <h2  style="font-weight: 600;">{{$cmpy->cmpyname}}</h2>
+                  <p>{{$notification->data['msg']}} <span style="font-weight: 600;">{{$job->title}}</span></p>
+                  <p style="font-size: 10px; margin-top:2px;"><span class="hide">{{$start = $notification->created_at}}</span>
+                      {{date('Y-m-d H:i',strtotime('+5 hour +45 minutes',strtotime($start)));}}</p>
+              </span>
+          </div>
+          </a>
+          @endforeach
+          @foreach ($user[0]->ReadNotifications as $notification)
+          @php
+              $cmpy = DB::table('companies')->where('id', $notification->data['cmpy'])->first();   
+              $job = DB::table('jobs')->where('jobid', $notification->data['job'])->first();   
+          @endphp
+          <a href="{{url('/candidate/job/'.$notification->data['job'])}}" class="black-text">
+              <div class="notification-item">
+                  <img class="notif-img" src="{{asset('company/dp/'.$cmpy->cmpydp)}}">
+                  <span class="notif-detail">
+                      <h2  style="font-weight: 600;">{{$cmpy->cmpyname}}</h2>
+                      <p>{{$notification->data['msg']}} <span style="font-weight: 600;">{{$job->title}}</span></p>
+                      <p style="font-size: 10px; margin-top:2px;"><span class="hide">{{$start = $notification->created_at}}</span>
+                          {{date('Y-m-d H:i',strtotime('+5 hour +45 minutes',strtotime($start)));}}</p>
+                  </span>
+              </div>
+          </a>
+          @endforeach
+      </div>
+  </div>
     <div class="navbar-fixed">
       <nav class="grey lighten-5">
           <div class="nav-wrapper">
@@ -268,9 +387,24 @@
                       <a class="black-text" href="">Contact Us</a>
                   </li>
                   <li>
-                      <a href="#" class="btn-floating white">
-                          <i class="material-icons" style="color: #0082cc;">notifications</i>
+                      <a href="#" class="btn-floating white" onclick="notif()">
+                        @if($user[0]->unReadNotifications->count() > 0)
+                        <i class="material-icons red-text">notifications_active</i>
+                        @else
+                        <i class="material-icons" style="color: #0082cc">notifications</i>               
+                        @endif
                       </a>
+                      <script>
+                        const notificationDrop = document.querySelector('.notification-drop')
+                    
+                        const notif = (e) => {
+                            notificationDrop.classList.toggle('show')
+                    
+                            if(!e.target.classList.contains('notification-drop')){
+                                notificationDrop.classList.remove('show')
+                            }
+                        }
+                    </script>
                   </li>
                   <li>
                     <a href="#" data-target="accountdrop" class="btn-floating dropdown-trigger white">
@@ -304,10 +438,14 @@
               <i class="material-icons">work</i>
               <p>Find Job</p>
           </a>
-          <a class="bottom-tab" href="#">
-              <i class="material-icons">notifications</i>
-              <p>Notifications</p>
-          </a>
+          <a class="bottom-tab" href="{{url('candidate/notif')}}">
+            @if($user[0]->unReadNotifications->count() > 0)
+            <i class="material-icons red-text">notifications_active</i>
+            @else
+            <i class="material-icons">notifications</i>               
+            @endif
+            <p>Notifications</p>
+        </a>
           <a class="bottom-tab final-tab" href="{{url('candidate/appliedjobs')}}">
               <i class="material-icons">business_center</i>
               <p>Jobs Applied</p>
@@ -411,6 +549,7 @@
   });
         });
   </script>
+ 
   </div>
 @elseif ($user['0']->emailverification == 'verified')
 

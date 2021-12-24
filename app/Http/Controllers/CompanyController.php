@@ -433,6 +433,28 @@ class CompanyController extends Controller
         $result['saved'] = Savecand::where('cmpyid',session()->get('CMPY_ID'))->where('candid',$candi->id)->get();
         return view('company/candidate', $result);
     }
+    public function notifread(Request $request, $notifid, $jobid){
+        $userid = $request->session()->get('CMPY_ID');
+        $cmpy = Company::find($userid);
+        $cmpy->unreadNotifications->where('id',$notifid)->markAsRead();
+        return redirect('managejob/'.$jobid);
+    }
+    public function notifmar(Request $request){
+        $userid = $request->session()->get('CMPY_ID');
+        $cmpy = Company::find($userid);
+        $cmpy->unreadNotifications->markAsRead();
+        return back();
+    }
+    public function notifdel(Request $request){
+        $userid = $request->session()->get('CMPY_ID');
+        $cmpy = Company::find($userid);
+        $cmpy->notifications()->delete();
+        return back();
+    }
+    public function notifpage(Request $request)
+    {
+        return view('company/notification');
+    }
     
     /**
      * Show the form for creating a new resource.

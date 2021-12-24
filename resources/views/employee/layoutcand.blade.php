@@ -15,6 +15,57 @@
     <title>Internwheel | Dashboard</title>
 </head>
 <body>
+    <div class="notification-drop">
+        <div style="padding: 10px; font-weight: 600;">
+            <span class="right btn-flat dropdown-trigger" data-target="dropdown1">
+                <i class="material-icons">
+                    more_vert
+                </i>
+            </span>
+            <h6>Notifications</h6>
+            <ul id='dropdown1' class='dropdown-content'>
+                <li><a href="{{url('candidate/notifmar')}}" class="black-text"><i class="material-icons theme-text">visibility</i>Mark All as Read</a></li>
+                <li><a href="{{url('candidate/notifdel')}}" class="black-text"><i class="material-icons red-text">delete</i>Clear Notifications</a></li>
+              </ul>
+        </div>
+        <div class="notification-inner">
+            @foreach ($user[0]->unReadNotifications as $notification)
+            @php
+                $cmpy = DB::table('companies')->where('id', $notification->data['cmpy'])->first();   
+                $job = DB::table('jobs')->where('jobid', $notification->data['job'])->first();
+            @endphp
+            <a href="{{url('/candidate/notification/'.$notification->id.'/'.$notification->data['job'])}}">
+            <div class="notification-item unread">
+                <img class="notif-img" src="{{asset('company/dp/'.$cmpy->cmpydp)}}">
+                <span class="notif-detail">
+                    <h2>{{$cmpy->cmpyname}}</h2>
+                    <p>{{$notification->data['msg']}} <span style="font-weight: 600;">{{$job->title}}</span></p>
+                    <p style="font-size: 10px; margin-top:2px;"><span class="hide">{{$start = $notification->created_at}}</span>
+                        {{date('Y-m-d H:i',strtotime('+5 hour +45 minutes',strtotime($start)));}}</p>
+                </span>
+            </div>
+            </a>
+            @endforeach
+            @foreach ($user[0]->ReadNotifications as $notification)
+            @php
+                $cmpy = DB::table('companies')->where('id', $notification->data['cmpy'])->first();   
+                $job = DB::table('jobs')->where('jobid', $notification->data['job'])->first();   
+            @endphp
+            <a href="{{url('/candidate/job/'.$notification->data['job'])}}" class="black-text">
+                <div class="notification-item">
+                    <img class="notif-img" src="{{asset('company/dp/'.$cmpy->cmpydp)}}">
+                    <span class="notif-detail">
+                        <h2>{{$cmpy->cmpyname}}</h2>
+                        <p>{{$notification->data['msg']}} <span style="font-weight: 600;">{{$job->title}}</span></p>
+                        <p style="font-size: 10px; margin-top:2px;"><span class="hide">{{$start = $notification->created_at}}</span>
+                            {{date('Y-m-d H:i',strtotime('+5 hour +45 minutes',strtotime($start)));}}</p>
+                    </span>
+                </div>
+            </a>
+            @endforeach
+
+        </div>
+    </div> 
     <div class="main-container">
         <div class="navbar-fixed">
             <nav class="grey lighten-5">
@@ -55,8 +106,13 @@
                             <a class="black-text" href="">Contact Us</a>
                         </li>
                         <li>
-                            <a href="#" class="btn-floating white">
-                                <i class="material-icons" style="color: #0082cc;">notifications</i>
+                            <a href="#" class="btn-floating white" onclick="notif()">
+                                @if($user[0]->unReadNotifications->count() > 0)
+                                <i class="material-icons red-text">notifications_active</i>
+                                @else
+                                <i class="material-icons" style="color: #0082cc">notifications</i>               
+                                @endif
+                                
                             </a>
                         </li>
                         <li>
@@ -91,8 +147,12 @@
                     <i class="material-icons">work</i>
                     <p>Find Job</p>
                 </a>
-                <a class="bottom-tab" href="#">
-                    <i class="material-icons">notifications</i>
+                <a class="bottom-tab" href="{{url('candidate/notif')}}">
+                    @if($user[0]->unReadNotifications->count() > 0)
+                    <i class="material-icons red-text">notifications_active</i>
+                    @else
+                    <i class="material-icons">notifications</i>               
+                    @endif
                     <p>Notifications</p>
                 </a>
                 <a class="bottom-tab final-tab" href="{{url('candidate/appliedjobs')}}">
@@ -319,4 +379,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="{{asset('assets/dashboard.js')}}"></script>
 <script src="{{asset('assets/script.js')}}"></script>
+<script>
+    const notificationDrop = document.querySelector('.notification-drop')
+
+    const notif = (e) => {
+        notificationDrop.classList.toggle('show')
+
+        if(!e.target.classList.contains('notification-drop')){
+            notificationDrop.classList.remove('show')
+        }
+    }
+</script>
 </html>

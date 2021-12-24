@@ -105,6 +105,12 @@ Route::group(['middleware'=>'employee_auth'], function(){
     Route::post('/candidate/savecmpy',[SavecmpyController::class, 'savecmpy']);
     Route::get('/candidate/savedcompanies',[SavecmpyController::class, 'savedcmpy']);
     Route::post('/candidate/unsavecmpy',[SavecmpyController::class, 'unsavecmpy'])->name('unsavecmpy');
+
+    //notif crud
+    Route::get('candidate/notif',[EmployeeController::class, 'notifpage']);
+    Route::get('/candidate/notification/{id}/{id2}', [EmployeeController::class, 'notifread']);
+    Route::get('/candidate/notifmar', [EmployeeController::class, 'notifmar']);
+    Route::get('/candidate/notifdel', [EmployeeController::class, 'notifdel']);
 });
 
 //company middleware group and crud
@@ -141,6 +147,12 @@ Route::group(['middleware'=>'company_auth'], function(){
     Route::post('/company/savecand',[SavecandController::class, 'savecand']);
     Route::get('/company/savedcandidates',[SavecandController::class, 'savedcand']);
     Route::post('/company/unsavecand',[SavecandController::class, 'unsavecand'])->name('unsavecand');
+
+    //
+    Route::get('company/notif',[CompanyController::class, 'notifpage']);
+    Route::get('/company/notification/{id}/{id2}', [CompanyController::class, 'notifread']);
+    Route::get('/company/notifmar', [CompanyController::class, 'notifmar']);
+    Route::get('/company/notifdel', [CompanyController::class, 'notifdel']);
 });
 
 //admin middleware group nad crud
