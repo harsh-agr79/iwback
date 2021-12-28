@@ -84,7 +84,23 @@
                     <a href="{{url('/')}}" class="brand-logo hide-on-large-only">
                         <img src="{{asset('assets/images/short-transparent.png')}}" height="50" alt="">
                     </a>
-                    <a class="right hide-on-large-only" style="margin-right:10px;">
+                    @php
+                         $lastmsg = DB::table('chats')->where(['sid'=>$user[0]->id])->orwhere(['rid'=>$user[0]->id])->orderBy('id', 'desc')->first();
+                         if($lastmsg==NULL){
+                          $chatid = '0';
+                         }
+                         else{
+                          if($lastmsg->sid == $user[0]->id)
+                            {
+                                $chatid = $lastmsg->rid;
+                            }   
+                            else{
+                               $chatid = $lastmsg->sid;
+                            }
+                         }
+                         
+                    @endphp
+                    <a class="right hide-on-large-only" href="{{url('company/chatlist')}}" style="margin-right:10px;">
                         <i class="material-icons black-text">message</i>
                     </a>
                     <span class="hide-on-large-only">
@@ -113,6 +129,11 @@
                         </li>
                         <li>
                             <a class="black-text" href="">Contact Us</a>
+                        </li>
+                        <li>
+                            <a href="{{url('company/messages/'.$chatid)}}" class="btn-floating white">
+                                <i class="material-icons" style="color: #0082cc">message</i>               
+                            </a>
                         </li>
                         <li onclick="notif()">
                             <a href="#" class="btn-floating white">
@@ -391,8 +412,7 @@
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="{{asset('assets/dashboard.js')}}"></script>
-<script src="../assets/dashboard.js"></script>
+<script src="{{asset('/assets/dashboard.js')}}"></script>
 <script>
     const notificationDrop = document.querySelector('.notification-drop')
 

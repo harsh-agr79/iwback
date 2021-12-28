@@ -84,7 +84,7 @@
                     <a href="{{url('/')}}" class="brand-logo hide-on-large-only">
                         <img src="{{asset('assets/images/short-transparent.png')}}" height="50" alt="">
                     </a>
-                    <a class="right hide-on-large-only" style="margin-right:10px;">
+                    <a class="right hide-on-large-only" href="{{url('candidate/chatlist')}}" style="margin-right:10px;">
                         <i class="material-icons black-text">message</i>
                     </a>
                     <span class="hide-on-large-only">
@@ -112,6 +112,27 @@
                         </li>
                         <li>
                             <a class="black-text" href="">Contact Us</a>
+                        </li>
+                        @php
+                         $lastmsg = DB::table('chats')->where(['sid'=>$user[0]->id])->orwhere(['rid'=>$user[0]->id])->orderBy('id', 'desc')->first();
+                         if($lastmsg==NULL){
+                          $chatid = '0';
+                         }
+                         else{
+                          if($lastmsg->sid == $user[0]->id)
+                            {
+                                $chatid = $lastmsg->rid;
+                            }   
+                            else{
+                               $chatid = $lastmsg->sid;
+                            }
+                         }
+                         
+                        @endphp
+                        <li>
+                            <a href="{{url('candidate/messages/'.$chatid)}}" class="btn-floating white">
+                                <i class="material-icons" style="color: #0082cc">message</i>               
+                            </a>
                         </li>
                         <li>
                             <a href="#" class="btn-floating white" onclick="notif()">

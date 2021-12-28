@@ -13,6 +13,7 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\SavecmpyController;
 use App\Http\Controllers\SavecandController;
+use App\Http\Controllers\ChatController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -111,6 +112,13 @@ Route::group(['middleware'=>'employee_auth'], function(){
     Route::get('/candidate/notification/{id}/{id2}', [EmployeeController::class, 'notifread']);
     Route::get('/candidate/notifmar', [EmployeeController::class, 'notifmar']);
     Route::get('/candidate/notifdel', [EmployeeController::class, 'notifdel']);
+
+    //chats crud
+    Route::get('/candidate/messages/{id}', [Chatcontroller::class, 'candmsgs']);
+    Route::get('/candidate/msgs/{id}', [Chatcontroller::class, 'candmsgphone']);
+    Route::post('/addchatcand', [ChatController::class, 'addchatcand']);
+    Route::get('/candidate/chatlist', [ChatController::class, 'chatlistcand']);
+    
 });
 
 //company middleware group and crud
@@ -153,6 +161,11 @@ Route::group(['middleware'=>'company_auth'], function(){
     Route::get('/company/notification/{id}/{id2}', [CompanyController::class, 'notifread']);
     Route::get('/company/notifmar', [CompanyController::class, 'notifmar']);
     Route::get('/company/notifdel', [CompanyController::class, 'notifdel']);
+     //Chat Crud
+     Route::get('/company/messages/{id}', [ChatController::class, 'cmpymsgs']);
+    Route::get('/company/msgs/{id}', [ChatController::class, 'cmpymsgphone']);
+    Route::get('/company/chatlist', [ChatController::class, 'chatlistcmpy']);
+    Route::post('/addchatcmpy', [ChatController::class, 'addchatcmpy']);
 });
 
 //admin middleware group nad crud
