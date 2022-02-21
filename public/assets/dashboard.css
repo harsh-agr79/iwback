@@ -1113,10 +1113,10 @@ textarea{
 /* Chat page end */
 
 /* Home Page start */
-/* .main-content{ */
-    /* margin:0; */
-    /* z-index:-1; */
-/* } */
+/* .main-content{
+    margin:0;
+    z-index:-1;
+} */
 .hero-section{
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(400px,1fr));
@@ -1207,19 +1207,7 @@ textarea{
     font-size:1rem!important;
 }
 .chip-section{
-    display:grid;
-    grid-template-rows:1fr 1fr;
-    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-    grid-column-gap: 0.3rem;
-    grid-auto-rows: 0;
-    overflow-y:hidden;
-}
-.chip-section.jp{
-    display:block;
-}
-.chip-section.show{
-    grid-auto-rows: auto;
-    overflow-y:auto
+    width:100%;
 }
 .chip-item{
     font-size:1.2rem!important;
@@ -1240,6 +1228,21 @@ textarea{
 }
 .chip-item:hover{
     text-decoration: underline;
+}
+.hidden-chips{
+    display:none;
+    animation:chipShow 0.6s;
+}
+.hidden-chips.show-chips{
+    display:inline;
+}
+@keyframes chipShow{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
 }
 .see-more-btn{
     display: flex;
@@ -1273,7 +1276,6 @@ textarea{
 }
 .slide-item{
     display:flex;
-    /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
     justify-content: space-around;
     align-items: center;
     padding:0 5rem;
@@ -1359,3 +1361,28 @@ textarea{
     }
 }
 /* Contact Us end */
+
+/* Privacy Conditions start */
+.privacy-section{
+    margin:2rem;
+    width:calc(100vw - 4rem);
+    padding:1rem 2rem;
+    margin-bottom:5rem;
+}
+.agree-btn{
+    text-align: right;
+}
+.btn-agree{
+    background-color: var(--skin-color);
+    border-radius:20px;
+}
+.btn-close{
+    border-radius:20px;
+    background-color: rgb(221, 21, 21);
+}
+@media(max-width:768px){
+    .privacy-section{
+        border-radius:10px;
+    }
+}
+/* Privacy Conditions end */
