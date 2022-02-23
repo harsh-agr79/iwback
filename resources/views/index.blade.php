@@ -3,7 +3,7 @@
 @section('main')
    
 <div class="main-content-home">
-    <div class="hero-section">
+    <div>
         <div class="row white hide-on-med-and-down">
             <div class="col s12 l6 m12" style="padding: 30px; margin-top: 30px;">
                 <img src="./assets/images/Main-light-transparent.png" class="responsive-img" alt="">
@@ -22,10 +22,9 @@
         </div>
         <div class="row white hide-on-large-only">
             <div class="col s12 l6 m12" style="padding: 30px; margin-top: 30px;">
-                <img src="{{asset('assets/images/Main-light-transparent.png" class="responsive-img')}}" alt="">
+                <img src="{{asset('assets/images/Main-light-transparent.png')}}" class="responsive-img" alt="">
                 <h4 class="center-align theme-text">Welcome To Your Professional community</h4>
                 <p  style="font-size: 1.3rem; text-align:justify;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus illo architecto accusantium atque facere commodi quo itaque, error suscipit quia.</p>
-               
             </div>
             <div class="col s12 l6 m12">
                 <div class="center">
@@ -39,74 +38,75 @@
         </div>
     </div>
 </div>
-<div class="interest-section">
-    <div class="title-section">
-        <h3>Explore sectors you are interested in</h3>
-    </div>
-    <div class="sector-select-div">
-        <div class="title">
-            job sectors
+    <div class="interest-section row">
+        <div class="title-section col s12 m6">
+            <h3>Explore sectors you are interested in</h3>
         </div>
-        <ul class="chip-section chip-section-1">
-            <li class="chip-item active">All Sectors</li>
-            <li class="chip-item">Marketing</li>
-            <li class="chip-item">Programming</li>
-            <li class="chip-item">Finance</li>
-            <li class="chip-item">Health & Medicine</li>
-            <li class="chip-item">Business</li>
-            <li class="chip-item">Technology</li>
-            <div class="hidden-chips hidChips-1">
-                <li class="chip-item">Food</li>
-                <li class="chip-item">Education</li>
-                <li class="chip-item">Stage Performance</li>
-                <li class="chip-item">Show Host</li>
+        <div class="sector-select-div col s12 m6">
+            <div class="title">
+                job sectors
             </div>
-        </ul>
-        <div class="see-more-btn see-more-btn-1" onclick="seeMore1()">
-            See More
-            <i class="material-icons">expand_more</i>
-        </div>
-    </div>
-</div>
-<div class="interest-section suggest-section">
-    <div class="title-section">
-        <h3>Find the right job or internship for you</h3>
-    </div>
-    <div class="sector-select-div">
-        <div class="title">
-            suggested searches
-        </div>
-        <ul class="chip-section chip-section-2">
-            <li class="chip-item active">All Sectors</li>
-            <li class="chip-item">Marketing</li>
-            <li class="chip-item">Programming</li>
-            <li class="chip-item">Finance</li>
-            <li class="chip-item">Health</li>
-            <li class="chip-item">Business</li>
-            <li class="chip-item">Technology</li>
-            <div class="hidden-chips hidChips-2">
-                <li class="chip-item">Food</li>
-                <li class="chip-item">Education</li>
-                <li class="chip-item">Stage Performance</li>
-                <li class="chip-item">Show Host</li>
+            <ul class="chip-section chip-section-1">
+                <li class="chip-item active">All Sectors</li>
+                <li class="chip-item">Marketing</li>
+                <li class="chip-item">Programming</li>
+                <li class="chip-item">Finance</li>
+                <li class="chip-item">Health & Medicine</li>
+                <li class="chip-item">Business</li>
+                <li class="chip-item">Technology</li>
+                <div class="hidden-chips hidChips-1">
+                    <li class="chip-item">Food</li>
+                    <li class="chip-item">Education</li>
+                    <li class="chip-item">Stage Performance</li>
+                    <li class="chip-item">Show Host</li>
+                </div>
+            </ul>
+            <div class="see-more-btn see-more-btn-1" onclick="seeMore1()">
+                See More
+                <i class="material-icons">expand_more</i>
             </div>
-        </ul>
-        <div class="see-more-btn see-more-btn-2" onclick="seeMore2()">
-            See More
-            <i class="material-icons">expand_more</i>
         </div>
     </div>
-</div>
-<div class="interest-section post-section">
-    <div class="title-section">
-        <h3>Post your job for millions of people to see</h3>
+    <div class="interest-section suggest-section row">
+        <div class="title-section col s12 m6">
+            <h3>Find the right job or internship for you</h3>
+        </div>
+        <div class="sector-select-div col s12 m6">
+            <div class="title">
+                suggested searches
+            </div>
+            <ul class="chip-section chip-section-2">
+                <li class="chip-item active">All Sectors</li>
+                <li class="chip-item">Marketing</li>
+                <li class="chip-item">Programming</li>
+                <li class="chip-item">Finance</li>
+                <li class="chip-item">Health</li>
+                <li class="chip-item">Business</li>
+                <li class="chip-item">Technology</li>
+                <div class="hidden-chips hidChips-2">
+                    <li class="chip-item">Food</li>
+                    <li class="chip-item">Education</li>
+                    <li class="chip-item">Stage Performance</li>
+                    <li class="chip-item">Show Host</li>
+                </div>
+            </ul>
+            <div class="see-more-btn see-more-btn-2" onclick="seeMore2()">
+                See More
+                <i class="material-icons">expand_more</i>
+            </div>
+        </div>
     </div>
-    <div class="sector-select-div">
-        <ul class="chip-section jp">
-            <li class="chip-item active">Post a Job</li>
-        </ul>
+    <div class="interest-section post-section row">
+        <div class="title-section col s12 m6">
+            <h3>Post your job for millions of people to see</h3>
+        </div>
+        <div class="sector-select-div col s12 m6">
+            <ul class="chip-section jp">
+                <li class="chip-item active">Post a Job</li>
+            </ul>
+        </div>
     </div>
-</div>
+
 <div class="about-slider">
     <div class="slide-nav">
         <span class="prev-slide" onclick="plusSlides(-1)">

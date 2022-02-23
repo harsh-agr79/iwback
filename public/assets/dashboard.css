@@ -1118,8 +1118,8 @@ textarea{
     z-index:-1;
 } */
 .hero-section{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px,1fr));
+    /* display:grid; */
+    /* grid-template-columns: repeat(auto-fit, minmax(400px,1fr)); */
     width:100vw;
     min-height:70vh;
     background:white;
@@ -1193,10 +1193,11 @@ textarea{
     display:block;
 }    
 .interest-section{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    padding:4rem 2rem;
-    margin:3rem 0;
+    /* display:grid; */
+    /* grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); */
+    /* width: 100vw; */
+    padding:3rem 2rem;
+    /* margin:3rem 0; */
 }
 .title-section{
     font-weight:100;
@@ -1206,9 +1207,9 @@ textarea{
     text-transform: uppercase;
     font-size:1rem!important;
 }
-.chip-section{
+/* .chip-section{
     width:100%;
-}
+} */
 .chip-item{
     font-size:1.2rem!important;
     background: var(--mainGrey);
@@ -1253,9 +1254,9 @@ textarea{
 .suggest-section{
     background:white;
 }
-.post-section{
+/* .post-section{
     align-items: center;
-}
+} */
 .about-slider{
     background:white;
     padding:3rem 0;
