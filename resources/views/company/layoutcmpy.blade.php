@@ -45,7 +45,7 @@
                     <h2>{{$cand->firstname}} {{$cand->lastname}}</h2>
                     <p>{{$notification->data['msg']}} <span style="font-weight: 600;">{{$job->title}}</span></p>
                     <p style="font-size: 10px; margin-top:2px;"><span class="hide">{{$start = $notification->created_at}}</span>
-                        {{date('Y-m-d H:i',strtotime('+5 hour +45 minutes',strtotime($start)));}}</p>
+                        {{date('Y-m-d H:i',strtotime($start));}}</p>
                 </span>
             </div>
             </a>
@@ -66,7 +66,7 @@
                     <h2>{{$cand->firstname}} {{$cand->lastname}}</h2>
                     <p>{{$notification->data['msg']}} <span style="font-weight: 600;">{{$job->title}}</span></p>
                     <p style="font-size: 10px; margin-top:2px;"><span class="hide">{{$start = $notification->created_at}}</span>
-                        {{date('Y-m-d H:i',strtotime('+5 hour +45 minutes',strtotime($start)));}}</p>
+                        {{date('Y-m-d H:i',strtotime($start));}}</p>
                 </span>
             </div>
             </a>

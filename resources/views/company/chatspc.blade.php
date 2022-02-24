@@ -108,16 +108,16 @@
         <img src="{{asset('candidate/dp/'.$cand2->canddp)}}" class="cd-dp-set">
         @endif
         <div class="chat-set-search-div">
-            <i class="material-icons">search</i>
-            <p>Search in Conversation</p>
+            {{-- <i class="material-icons">search</i> --}}
+            <a href="{{url('company/candidate/'.$cand2->username)}}">{{$cand2->firstname}} {{$cand2->lastname}}</a>
         </div>
-        <div class="chat-set-searchBox">
+        {{-- <div class="chat-set-searchBox">
             <input type="search" name="chat-search" placeholder="Search" class="browser-default" id="search-msgs">
-        </div>
-        <div class="report-btn">
+        </div> --}}
+        {{-- <div class="report-btn">
             <i class="material-icons">report_problem</i>
             <p>Report Candidate</p>
-        </div>
+        </div> --}}
         @endif
         
     </div>

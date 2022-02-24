@@ -455,6 +455,22 @@ class CompanyController extends Controller
     {
         return view('company/notification');
     }
+    public function cmpyget($id)
+    {
+        $cmpy = Company::find($id);
+        // if($cmpy){
+            return response()->json([
+                'status'=>200,
+                'company'=>$cmpy
+            ]);
+        // }
+        // else{
+        //     return response()->json([
+        //         'status'=>404,
+        //         'message'=>'cmpy not found'
+        //     ]);
+        // } 
+    }
     
     /**
      * Show the form for creating a new resource.

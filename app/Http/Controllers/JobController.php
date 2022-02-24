@@ -9,6 +9,7 @@ use App\Models\Sector;
 use App\Models\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\DB;
 // use Illuminate\Contracts\Pagination\Presenter;
 use App\Notifications\shortlisted;
 use App\Notifications\hired;
@@ -84,6 +85,7 @@ class JobController extends Controller
             'perks'=>implode('|',$perks),
             'openings'=>$openings,
             'experience'=>$experience,
+            'created_at'=>now(),
         ]);
     }
     public function editjob(Request $request)
@@ -162,10 +164,62 @@ class JobController extends Controller
     }
     public function findjobs(Request $request){
         $result['title']='Find Jobs';
-        $result['jobs']=Job::all();
+        $result['jobs']=Job::orderby('id', 'DESC')->get();
         $result['sector'] = Sector::all();
         return view('employee/findjobs', $result);
     }
+    public function guestjobs(){
+        $result['title'] = 'Jobs/Internships';
+        $result['jobs']=Job::orderby('id', 'DESC')->get();
+        $result['sector'] = Sector::all();
+        if(session()->has('CMPY_LOGIN')){
+            $result['user'] = Company::where('id',session()->get('CMPY_ID'))->get();
+        }
+        if(session()->has('CAND_LOGIN')){
+            $result['user'] = Employee::where('id',session()->get('CAND_ID'))->get();
+        }
+        return view('jobs', $result);
+    }
+    public function jobfilter(Request $request)
+    {
+        $types = '';
+        $sectors = '';
+        $query = DB::table('jobs');
+        $query = $query->orderBy('jobs.id','desc');
+        if($request->get('type', []))
+        {
+            $types = $request->post('type', []);
+            $query = $query->whereIn('jobs.type',$types);
+        }
+
+        if($request->get('sector', []))
+        {
+            $sectors = $request->post('sector', []);
+            $query = $query->whereIn('jobs.sector',$sectors);
+        }
+        if($request->get('time',[]))
+        {
+            $times = $request->post('time', []);
+            $mintime = min($times);
+            $query = $query->where('jobs.created_at','>=',$mintime);
+        }
+        if($request->get('ori',[]))
+        {
+            $ori = $request->post('ori', []);
+            $query = $query->whereIn    ('jobs.orientation',$ori);
+        }
+        
+        $query = $query->get();
+        $result=$query;
+        return response()->json(['success'=>$result, 'query'=>$request->post()]);
+    }
+
+
+
+
+
+
+
     public function candjobdet(Request $request, $jobid){
         $result['job']=Job::where('jobid',$jobid)->get();
         $result['applied']=Application::where('jobid', $jobid)->get();

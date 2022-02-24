@@ -1,4 +1,4 @@
-@extends('employee/layoutcand')
+@extends('layout')
 
 @section('main')
   <div class="row">
@@ -184,7 +184,7 @@
                               <span class="jobtype">{{$item->type}}</span>
                           </div>
                           <div class="col s6 right-align">
-                              <a href="{{url('/candidate/job/'.$item->jobid)}}">
+                              <a href="{{url('/login')}}">
                                   View Details 
                                   <i class="material-icons right">arrow_forward</i>
                               </a>
@@ -515,7 +515,7 @@
                                               <span class="jobtype">'+item.type+'</span>\
                                           </div>\
                                           <div class="col s6 right-align">\
-                                              <a href="/candidate/job/'+item.jobid+'">\
+                                              <a href="/login">\
                                                   View Details \
                                                   <i class="material-icons right">arrow_forward</i>\
                                               </a>\

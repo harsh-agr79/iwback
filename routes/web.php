@@ -29,6 +29,11 @@ use App\Http\Controllers\ContactController;
 Route::get('/', [FirstController::class, 'index']);
 Route::get('/contact', [ContactController::class, 'contactform']);
 Route::post('/contactmsg', [ContactController::class, 'contactmsg'])->name('contactmsg');
+Route::get('/findjobs', [JobController::class, 'guestjobs']);
+Route::get('/cmpyget/{id}', [CompanyController::class, 'cmpyget']);
+Route::post('/filterjob', [JobController::class,'jobfilter'])->name('checkfilter');
+
+
 
 //login routes
 
@@ -121,6 +126,8 @@ Route::group(['middleware'=>'employee_auth'], function(){
     Route::get('/candidate/msgs/{id}', [Chatcontroller::class, 'candmsgphone']);
     Route::post('/addchatcand', [ChatController::class, 'addchatcand']);
     Route::get('/candidate/chatlist', [ChatController::class, 'chatlistcand']);
+
+    //jobs page
     
 });
 

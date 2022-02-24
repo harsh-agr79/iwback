@@ -109,16 +109,16 @@
         <img src="{{asset('company/dp/'.$cmpy2->cmpydp)}}" class="cd-dp-set">
         @endif
         <div class="chat-set-search-div">
-            <i class="material-icons">search</i>
-            <p>Search in Conversation</p>
+            {{-- <i class="material-icons">search</i> --}}
+            <a href="{{url('/candidate/company/'.$cmpy2->username)}}">{{$cmpy2->cmpyname}}</a>
         </div>
-        <div class="chat-set-searchBox">
+        {{-- <div class="chat-set-searchBox">
             <input type="search" name="chat-search" placeholder="Search" class="browser-default" id="search-msgs">
         </div>
         <div class="report-btn">
             <i class="material-icons">report_problem</i>
             <p>Report Candidate</p>
-        </div>
+        </div> --}}
         @endif
         
     </div>

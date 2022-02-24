@@ -37,15 +37,13 @@
                             <option value="" disabled selected>Select Job Type</option>
                             <option value="Fresher">Fresher</option>
                             <option value="Internship">Internship</option>
-                            <option value="Part Time">Part Time</option>
-                            <option value="Full Time">Full Time</option>
                           </select>
                      </div>
                      <div class="col s12 m6 inp-container">
                         <label class="inplbl">Orientation</label>
                         <select name="orientation" class="browser-default inpfield">
                             <option value="" disabled selected>Work in Home/Office</option>
-                            <option value="Work Form Home">Work Form Home</option>
+                            <option value="Work From Home">Work From Home</option>
                             <option value="Work On Site">Work On Site</option>
                           </select>
                      </div>

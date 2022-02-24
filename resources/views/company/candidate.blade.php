@@ -33,6 +33,9 @@
                         <div class="avatar-title">
                             <h4>{{$cand->firstname}} {{$cand->lastname}}</h4>
                             <p class="location">{{$cand->title}}</p>
+                            <a href="{{url('/company/msgs/'.$cand->id)}}" class="hide-on-large-only right" style="padding: 6px; cursor: pointer;">                    
+                                <i class="material-icons theme-text" id="iconsave2">send</i>                      
+                            </a>
                         </div>
                     </div>
                     <span class="avatar-edit-btn hide-on-large-only" onclick="saveformsub()">                    
@@ -42,6 +45,7 @@
                         <i class="material-icons" id="iconsave2">turned_in_not</i>
                     @endif                           
                     </span>
+                    
                 </div>
                 @if ($cand->about == NULL)
                     
@@ -181,7 +185,7 @@
             </span>
         </div>
         <div class="job-poster section-card" style="margin-top: 10px;">
-            <a>
+            <a href="{{url('/company/messages/'.$cand->id)}}">
                 <h5>Send Message</h5>
                 <i class="material-icons stlist-icon">send</i>
             </a>

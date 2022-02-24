@@ -45,7 +45,7 @@
                     <h2>{{$cmpy->cmpyname}}</h2>
                     <p>{{$notification->data['msg']}} <span style="font-weight: 600;">{{$job->title}}</span></p>
                     <p style="font-size: 10px; margin-top:2px;"><span class="hide">{{$start = $notification->created_at}}</span>
-                        {{date('Y-m-d H:i',strtotime('+5 hour +45 minutes',strtotime($start)));}}</p>
+                        {{date('Y-m-d H:i',strtotime($start));}}</p>
                 </span>
             </div>
             </a>
@@ -66,7 +66,7 @@
                         <h2>{{$cmpy->cmpyname}}</h2>
                         <p>{{$notification->data['msg']}} <span style="font-weight: 600;">{{$job->title}}</span></p>
                         <p style="font-size: 10px; margin-top:2px;"><span class="hide">{{$start = $notification->created_at}}</span>
-                            {{date('Y-m-d H:i',strtotime('+5 hour +45 minutes',strtotime($start)));}}</p>
+                            {{date('Y-m-d H:i',strtotime($start));}}</p>
                     </span>
                 </div>
             </a>
@@ -111,7 +111,7 @@
                             <a class="black-text" href="{{url('candidate/findjobs')}}">Find Jobs</a>
                         </li>
                         <li>
-                            <a class="black-text" href="">Contact Us</a>
+                            <a class="black-text" href="{{url('/contact')}}">Contact Us</a>
                         </li>
                         @php
                          $lastmsg = DB::table('chats')->where(['sid'=>$user[0]->id])->orwhere(['rid'=>$user[0]->id])->orderBy('id', 'desc')->first();

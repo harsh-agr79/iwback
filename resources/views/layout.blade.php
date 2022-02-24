@@ -357,7 +357,7 @@
                   <h2  style="font-weight: 600;">{{$cmpy->cmpyname}}</h2>
                   <p>{{$notification->data['msg']}} <span style="font-weight: 600;">{{$job->title}}</span></p>
                   <p style="font-size: 10px; margin-top:2px;"><span class="hide">{{$start = $notification->created_at}}</span>
-                      {{date('Y-m-d H:i',strtotime('+5 hour +45 minutes',strtotime($start)));}}</p>
+                      {{date('Y-m-d H:i',strtotime($start));}}</p>
               </span>
           </div>
           </a>
@@ -378,7 +378,7 @@
                       <h2  style="font-weight: 600;">{{$cmpy->cmpyname}}</h2>
                       <p>{{$notification->data['msg']}} <span style="font-weight: 600;">{{$job->title}}</span></p>
                       <p style="font-size: 10px; margin-top:2px;"><span class="hide">{{$start = $notification->created_at}}</span>
-                          {{date('Y-m-d H:i',strtotime('+5 hour +45 minutes',strtotime($start)));}}</p>
+                          {{date('Y-m-d H:i',strtotime($start));}}</p>
                   </span>
               </div>
           </a>
@@ -656,9 +656,7 @@
              
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons black-text">menu</i></a>
             <ul class="right hide-on-med-and-down">
-              <li><a class="black-text" href="jobs.html">Internships</a></li>
-              <li><a class="black-text" href="jobs.html">Freshers Jobs</a></li>
-              <li><a class="black-text" href="jobs.html">Jobs</a></li>
+              <li><a class="black-text" href="{{url('/findjobs')}}">Find Internships / Freshers Jobs</a></li>
               <li><a class="black-text" href="{{url('/contact')}}">Contact Us</a></li>
               @if($usercu == 'admin')
               <li><a class="btn-small theme-text white loginbtn" href="{{url('admin/logout')}}"><i class="material-icons">exit_to_app</i></a></li>
@@ -672,9 +670,7 @@
     </div>
   
     <ul class="sidenav" id="mobile-demo">
-      <li><a class="black-text" href="jobs.html">Internships</a></li>
-      <li><a class="black-text" href="jobs.html">Freshers Jobs</a></li>
-      <li><a class="black-text" href="jobs.html">Jobs</a></li>
+      <li><a class="black-text" href="{{url('/findjobs')}}">Find Internships / Freshers Jobs</a></li>
       <li><a class="black-text" href="{{url('/contact')}}">Contact Us</a></li>
       <li><div class="divider"></div></li>
       <li><a class="black-text" href="{{url('registeremployer')}}">Register as a Employer</a></li>
