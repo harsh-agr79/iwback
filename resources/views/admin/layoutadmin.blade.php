@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="{{asset('assets/sastyle.css')}}">
-    <link rel="icon" href="{{asset('assets/images/title.png')}}">
+    <link rel="icon" href="{{asset('assets/images/icon.png')}}">
     <title>Super Admin</title>
 </head>
 <body>
@@ -37,7 +37,7 @@
         <li><a href="{{url('admin/skills')}}" class="white-text">Skills</a></li>
         <li><a href="{{url('admin/edithome')}}" class="white-text">Edit Home page</a></li>
         @endif
-        <li><a href="#!" class="white-text">Contact Messages</a></li>
+        <li><a href="{{url('/admin/contact')}}" class="white-text">Contact Messages</a></li>
       </ul>
         <main>
             @yield('main')

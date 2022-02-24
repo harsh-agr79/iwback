@@ -14,6 +14,7 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\SavecmpyController;
 use App\Http\Controllers\SavecandController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\ContactController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +27,8 @@ use App\Http\Controllers\ChatController;
 */
 
 Route::get('/', [FirstController::class, 'index']);
+Route::get('/contact', [ContactController::class, 'contactform']);
+Route::post('/contactmsg', [ContactController::class, 'contactmsg'])->name('contactmsg');
 
 //login routes
 
@@ -218,4 +221,7 @@ Route::group(['middleware'=>'admin_auth'], function(){
     Route::post('/sliderupdate',[HomeController::class, 'updateslider']);
     Route::post('/deleteslider',[HomeController::class, 'deleteslider']);
 
+
+    //ADMIN SIDE CONTACT CRUD
+    Route::get('/admin/contact', [ContactController::class, 'index']);
 });

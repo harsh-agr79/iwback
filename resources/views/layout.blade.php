@@ -134,7 +134,7 @@
                     <a class="black-text" href="{{url('company/postajob')}}">Post Jobs</a>
                 </li>
                 <li>
-                    <a class="black-text" href="">Contact Us</a>
+                    <a class="black-text" href="{{url('/contact')}}">Contact Us</a>
                 </li>
                 <li>
                   <a href="{{url('company/messages/'.$chatid)}}" class="btn-floating white">
@@ -437,7 +437,7 @@
                       <a class="black-text" href="{{url('/candidate/findjobs')}}">Find Jobs</a>
                   </li>
                   <li>
-                      <a class="black-text" href="">Contact Us</a>
+                      <a class="black-text" href="{{url('/contact')}}">Contact Us</a>
                   </li>
                   <li>
                     <a href="{{url('candidate/messages/'.$chatid)}}" class="btn-floating white">
@@ -659,7 +659,7 @@
               <li><a class="black-text" href="jobs.html">Internships</a></li>
               <li><a class="black-text" href="jobs.html">Freshers Jobs</a></li>
               <li><a class="black-text" href="jobs.html">Jobs</a></li>
-              <li><a class="black-text" href="mobile.html">Contact Us</a></li>
+              <li><a class="black-text" href="{{url('/contact')}}">Contact Us</a></li>
               @if($usercu == 'admin')
               <li><a class="btn-small theme-text white loginbtn" href="{{url('admin/logout')}}"><i class="material-icons">exit_to_app</i></a></li>
               @else
@@ -675,7 +675,7 @@
       <li><a class="black-text" href="jobs.html">Internships</a></li>
       <li><a class="black-text" href="jobs.html">Freshers Jobs</a></li>
       <li><a class="black-text" href="jobs.html">Jobs</a></li>
-      <li><a class="black-text" href="mobile.html">Contact Us</a></li>
+      <li><a class="black-text" href="{{url('/contact')}}">Contact Us</a></li>
       <li><div class="divider"></div></li>
       <li><a class="black-text" href="{{url('registeremployer')}}">Register as a Employer</a></li>
       <li><a class="black-text" href="{{url('registeremployee')}}">Register as A Employee</a></li>

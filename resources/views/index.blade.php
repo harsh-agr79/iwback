@@ -10,7 +10,8 @@
                 <h4 style="margin-left: 20px;" class="theme-text">Welcome To Your Professional community</h4>
                 <p  style="margin-left: 20px; font-size: 1.3rem">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus illo architecto accusantium atque facere commodi quo itaque, error suscipit quia.</p>
                 <div class="center" style="margin-top: 8vh;">
-                    <button class="btn-large waves-effect waves-light theme" style="border-radius: 30px;  margin-top:20px;">Sign Up Now!</button><button class="btn-large waves-effect waves-light theme" style="border-radius: 30px; margin-left: 20px; margin-top:20px;">Log In</button>
+                    <a class="btn-large waves-effect waves-light theme" style="border-radius: 30px;  margin-top:20px;" href="{{url('/login')}}">Sign Up Now!</a>
+                    <a class="btn-large waves-effect waves-light theme" href="{{url('/login')}}" style="border-radius: 30px; margin-left: 20px; margin-top:20px;">Log In</a>
                 </div>
             </div>
             <div class="col s12 l6 m12">
@@ -30,7 +31,8 @@
                 <div class="center">
                     <img src="{{asset('assets/pngs/concept-of-remote-team-2112518.png')}}" class="responsive-img" alt="">
                     <div class="center">
-                        <button class="btn-large waves-effect waves-light theme" style="border-radius: 30px;  margin-top:20px; margin-bottom: 20px;">Sign Up Now!</button><br><button class="btn-large waves-effect waves-light theme" style="border-radius: 30px; margin-top:20px; margin-bottom: 20px;">Log In</button>
+                        <a class="btn-large waves-effect waves-light theme" href="{{url('/login')}}" style="border-radius: 30px;  margin-top:20px; margin-bottom: 20px;">Sign Up Now!</a><br>
+                        <a href="{{url('/login')}}" class="btn-large waves-effect waves-light theme" style="border-radius: 30px; margin-top:20px; margin-bottom: 20px;">Log In</a>
                     </div>
                 </div>
                 
