@@ -28,7 +28,46 @@ class FirstController extends Controller
         }
         return view('index', $result);
     }
-    
+    public function about(Request $request){
+        $result['title'] = 'Internwheel';
+        if(session()->has('CMPY_LOGIN')){
+            $result['user'] = Company::where('id',session()->get('CMPY_ID'))->get();
+        }
+        if(session()->has('CAND_LOGIN')){
+            $result['user'] = Employee::where('id',session()->get('CAND_ID'))->get();
+        }
+        return view('about', $result);
+    }
+    public function privacy(Request $request){
+        $result['title'] = 'Internwheel';
+        if(session()->has('CMPY_LOGIN')){
+            $result['user'] = Company::where('id',session()->get('CMPY_ID'))->get();
+        }
+        if(session()->has('CAND_LOGIN')){
+            $result['user'] = Employee::where('id',session()->get('CAND_ID'))->get();
+        }
+        return view('privacy', $result);
+    }
+    public function tnc(Request $request){
+        $result['title'] = 'Internwheel';
+        if(session()->has('CMPY_LOGIN')){
+            $result['user'] = Company::where('id',session()->get('CMPY_ID'))->get();
+        }
+        if(session()->has('CAND_LOGIN')){
+            $result['user'] = Employee::where('id',session()->get('CAND_ID'))->get();
+        }
+        return view('terms', $result);
+    }
+    public function guide(Request $request){
+        $result['title'] = 'Internwheel';
+        if(session()->has('CMPY_LOGIN')){
+            $result['user'] = Company::where('id',session()->get('CMPY_ID'))->get();
+        }
+        if(session()->has('CAND_LOGIN')){
+            $result['user'] = Employee::where('id',session()->get('CAND_ID'))->get();
+        }
+        return view('guide', $result);
+    }
     public function login(Request $request){
         $result['title'] = 'Login';
         if(session()->has('ADMIN_LOGIN')){

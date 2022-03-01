@@ -725,14 +725,12 @@
               <div class="col l3 s12">
                 <h5 class="white-text">About Internwheel</h5>
                 <ul>
-                  <li><a class="grey-text text-lighten-3" href="#!">About US</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Hire Interns From Us</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Team</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Blog</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Our services</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Terms & Conditions</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Privacy</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Contact us</a></li>
+                  <li><a class="grey-text text-lighten-3" href="{{url('/about')}}">About Us</a></li>
+                  <li><a class="grey-text text-lighten-3" href="{{url('/guide')}}">User Guide</a></li>
+                  {{-- <li><a class="grey-text text-lighten-3" href="#!">Our services</a></li> --}}
+                  <li><a class="grey-text text-lighten-3" href="{{url('/termsandconditions')}}">Terms & Conditions</a></li>
+                  <li><a class="grey-text text-lighten-3" href="{{url('/privacy')}}">Privacy</a></li>
+                  <li><a class="grey-text text-lighten-3" href="{{url('/contact')}}">Contact us</a></li>
                 </ul>
               </div>
           </div>

@@ -31,6 +31,10 @@ Route::get('/contact', [ContactController::class, 'contactform']);
 Route::post('/contactmsg', [ContactController::class, 'contactmsg'])->name('contactmsg');
 Route::get('/findjobs', [JobController::class, 'guestjobs']);
 Route::get('/cmpyget/{id}', [CompanyController::class, 'cmpyget']);
+Route::get('/about', [FirstController::class, 'about']);
+Route::get('/privacy', [FirstController::class, 'privacy']);
+Route::get('/guide', [FirstController::class, 'guide']);
+Route::get('/termsandconditions', [FirstController::class, 'tnc']);
 Route::post('/filterjob', [JobController::class,'jobfilter'])->name('checkfilter');
 
 
