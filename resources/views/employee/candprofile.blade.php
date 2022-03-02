@@ -98,7 +98,7 @@
             </div>
         </div>
 
-        <div class="user-dashboard-section section-card">
+        {{-- <div class="user-dashboard-section section-card">
             <h1>Your Dashboard</h1>
             <div class="article-count section-card">
                 <div class="article-col col-1">
@@ -114,7 +114,7 @@
                     <a href="#active-jobs">Active Applications</a>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <div class="overview-section skill-section section-card">
             <h3>

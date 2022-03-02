@@ -12,6 +12,13 @@
     <link rel="stylesheet" href="{{asset('assets/dashboard.css')}}">
     <link rel="stylesheet" href="{{asset('assets/style.css')}}">
     <link rel="icon" href="{{asset('assets/images/icon.png')}}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+    <meta name="theme-color" content="#0082cc"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('icons/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('icons/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('icons/favicon-16x16.png') }}">
+    <link rel="mask-icon" href="{{asset('icons/safari-pinned-tab.svg')}}" color="#0082cc">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
     <title>Internwheel | Dashboard</title>
 </head>
 <body>
@@ -382,7 +389,7 @@
             <div class="footer-copyright">
                 <div class="container">
                     © 2021 Copyright InternWheel
-                    <a class="grey-text text-lighten-4 right" href="#!">
+                    <a class="grey-text text-lighten-4 right" id="install" href="#!">
                         <span class="white black-text btn" style="border-radius: 20px;">
                             Install App
                         </span>
@@ -391,6 +398,50 @@
             </div>
         </footer>
     </div>
+    <script src="{{ asset('/sw.js') }}"></script>
+<script>
+    if (!navigator.serviceWorker.controller) {
+        navigator.serviceWorker.register("/sw.js").then(function (reg) {
+            console.log("Service worker has been registered for scope: " + reg.scope);
+        });
+    }
+</script>
+<script>
+    // document.addEventListener('contextmenu', event => event.preventDefault());
+    
+   let deferredPrompt;
+  const addBtn = document.querySelector('#install');
+  // const card = document.querySelector('#flash');
+  addBtn.style.display = 'none';
+  // card.style.display = 'none';
+  
+  window.addEventListener('beforeinstallprompt', (e) => {
+  // Prevent Chrome 67 and earlier from automatically showing the prompt
+  e.preventDefault();
+  // Stash the event so it can be triggered later.
+  deferredPrompt = e;
+  // Update UI to notify the user they can add to home screen
+  addBtn.style.display = 'block';
+  // card.style.display = 'block';
+  
+  addBtn.addEventListener('click', (e) => {
+   // hide our user interface that shows our A2HS button
+   addBtn.style.display = 'none';
+  // card.style.display = 'none';
+   // Show the prompt
+   deferredPrompt.prompt();
+   // Wait for the user to respond to the prompt
+   deferredPrompt.userChoice.then((choiceResult) => {
+       if (choiceResult.outcome === 'accepted') {
+         console.log('User accepted the A2HS prompt');
+       } else {
+         console.log('User dismissed the A2HS prompt');
+       }
+       deferredPrompt = null;
+     });
+  });
+  });
+  </script>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
